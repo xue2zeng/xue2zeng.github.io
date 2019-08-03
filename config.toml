@@ -1,0 +1,5 @@
+baseURL = "https://xue2zeng.github.io/"
+languageCode = "en-us"
+title = "My New Hugo Site"
+pygmentsCodeFences = true
+pygmentsUseClasses = true
