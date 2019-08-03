@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Categories on My New Hugo Site</title>
-    <link>https://xue2zeng.github.io/categories/</link>
-    <description>Recent content in Categories on My New Hugo Site</description>
+    <title>Categories on xue.zeng blog</title>
+    <link>http://localhost:1313/categories/</link>
+    <description>Recent content in Categories on xue.zeng blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <lastBuildDate>Sat, 03 Aug 2019 16:42:15 +0800</lastBuildDate>
     
-	<atom:link href="https://xue2zeng.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>“language”</title>
+      <link>http://localhost:1313/categories/language/</link>
+      <pubDate>Sat, 03 Aug 2019 16:42:15 +0800</pubDate>
+      
+      <guid>http://localhost:1313/categories/language/</guid>
+      <description></description>
+    </item>
     
   </channel>
 </rss>

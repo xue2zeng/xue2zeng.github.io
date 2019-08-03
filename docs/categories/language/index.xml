@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>xue.zeng blog</title>
-    <link>http://localhost:1313/</link>
-    <description>Recent content on xue.zeng blog</description>
+    <title>“language” on xue.zeng blog</title>
+    <link>http://localhost:1313/categories/language/</link>
+    <description>Recent content in “language” on xue.zeng blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 03 Aug 2019 16:42:15 +0800</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://localhost:1313/categories/language/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -28,15 +28,6 @@
       
       <guid>http://localhost:1313/post/language/go/overview/</guid>
       <description> 区别于其它语言  没有&amp;rdquo; 对象&amp;rdquo;，没有继承、多态，没有泛型，没有try/catch 有接口，函数式编程，CSP并发模型（goroutioe + channel）  </description>
-    </item>
-    
-    <item>
-      <title>About</title>
-      <link>http://localhost:1313/about/</link>
-      <pubDate>Thu, 01 Aug 2019 19:09:06 +0800</pubDate>
-      
-      <guid>http://localhost:1313/about/</guid>
-      <description></description>
     </item>
     
   </channel>
