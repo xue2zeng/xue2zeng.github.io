@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>xue.zeng blog</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content on xue.zeng blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 18 Aug 2019 09:56:38 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>程序结构</title>
+      <link>http://localhost:1313/post/language/go/structure/</link>
+      <pubDate>Sun, 18 Aug 2019 09:56:38 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/language/go/structure/</guid>
+      <description>条件语句 1、if&amp;hellip;else&amp;hellip;  条件内可以赋值
+ 条件内赋值的变量作用域就存在于这个if语句里
+  if contents, err := ioutil.</description>
+    </item>
+    
+    <item>
+      <title>Go 变量</title>
+      <link>http://localhost:1313/post/language/go/variable/</link>
+      <pubDate>Sat, 03 Aug 2019 16:42:15 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/language/go/variable/</guid>
+      <description>变量定义 1、使用var关键字(变量类型写在变量名之后)  var a, b, c bool
+ var s1, s2 string = &amp;ldquo;hello&amp;rdquo;, &amp;ldquo;world&amp;rdquo;</description>
+    </item>
+    
+    <item>
+      <title>GO 概述</title>
+      <link>http://localhost:1313/post/language/go/overview/</link>
+      <pubDate>Sat, 03 Aug 2019 10:49:44 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/language/go/overview/</guid>
+      <description> 区别于其它语言  没有&amp;rdquo; 对象&amp;rdquo;，没有继承、多态，没有泛型，没有try/catch 有接口，函数式编程，CSP并发模型（goroutioe + channel）  </description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>http://localhost:1313/about/</link>
+      <pubDate>Thu, 01 Aug 2019 19:09:06 +0800</pubDate>
+      
+      <guid>http://localhost:1313/about/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
