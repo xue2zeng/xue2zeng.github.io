@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Xue.Zeng</title>
-    <link>http://localhost:1313/categories/</link>
+    <link>https://xue2zeng.github.io/categories/</link>
     <description>Recent content in Categories on Xue.Zeng</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -10,15 +10,15 @@
     <webMaster>xue.zeng@outlook.com (xue.zeng)</webMaster>
     <lastBuildDate>Sat, 03 Aug 2019 16:42:15 +0800</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://xue2zeng.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>“language”</title>
-      <link>http://localhost:1313/categories/language/</link>
+      <link>https://xue2zeng.github.io/categories/language/</link>
       <pubDate>Sat, 03 Aug 2019 16:42:15 +0800</pubDate>
       <author>xue.zeng@outlook.com (xue.zeng)</author>
-      <guid>http://localhost:1313/categories/language/</guid>
+      <guid>https://xue2zeng.github.io/categories/language/</guid>
       <description></description>
     </item>
     

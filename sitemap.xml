@@ -3,63 +3,63 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://localhost:1313/post/</loc>
+    <loc>https://xue2zeng.github.io/post/</loc>
     <lastmod>2019-08-25T16:44:25+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>https://xue2zeng.github.io/tags/</loc>
     <lastmod>2019-08-25T16:44:25+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/</loc>
+    <loc>https://xue2zeng.github.io/</loc>
     <lastmod>2019-08-25T16:44:25+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/go/</loc>
+    <loc>https://xue2zeng.github.io/tags/go/</loc>
     <lastmod>2019-08-25T16:44:25+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/language/go/container/</loc>
+    <loc>https://xue2zeng.github.io/post/language/go/container/</loc>
     <lastmod>2019-08-25T16:44:25+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/language/go/structure/</loc>
+    <loc>https://xue2zeng.github.io/post/language/go/structure/</loc>
     <lastmod>2019-08-18T09:56:38+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>https://xue2zeng.github.io/categories/</loc>
     <lastmod>2019-08-03T16:42:15+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/language/go/variable/</loc>
+    <loc>https://xue2zeng.github.io/post/language/go/variable/</loc>
     <lastmod>2019-08-03T16:42:15+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/language/</loc>
+    <loc>https://xue2zeng.github.io/categories/language/</loc>
     <lastmod>2019-08-03T16:42:15+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/language/go/overview/</loc>
+    <loc>https://xue2zeng.github.io/post/language/go/overview/</loc>
     <lastmod>2019-08-03T10:49:44+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/about/</loc>
+    <loc>https://xue2zeng.github.io/about/</loc>
     <lastmod>2019-08-01T19:09:06+08:00</lastmod>
   </url>
   
