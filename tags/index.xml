@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on xue.zeng blog</title>
+    <title>Tags on Xue.Zeng</title>
     <link>http://localhost:1313/tags/</link>
-    <description>Recent content in Tags on xue.zeng blog</description>
+    <description>Recent content in Tags on Xue.Zeng</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 18 Aug 2019 09:56:38 +0800</lastBuildDate>
+    <managingEditor>xue.zeng@outlook.com (xue.zeng)</managingEditor>
+    <webMaster>xue.zeng@outlook.com (xue.zeng)</webMaster>
+    <lastBuildDate>Sun, 25 Aug 2019 16:44:25 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,8 +16,8 @@
     <item>
       <title>go</title>
       <link>http://localhost:1313/tags/go/</link>
-      <pubDate>Sun, 18 Aug 2019 09:56:38 +0800</pubDate>
-      
+      <pubDate>Sun, 25 Aug 2019 16:44:25 +0800</pubDate>
+      <author>xue.zeng@outlook.com (xue.zeng)</author>
       <guid>http://localhost:1313/tags/go/</guid>
       <description></description>
     </item>

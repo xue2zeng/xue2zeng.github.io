@@ -4,26 +4,31 @@
   
   <url>
     <loc>http://localhost:1313/post/</loc>
-    <lastmod>2019-08-18T09:56:38+08:00</lastmod>
+    <lastmod>2019-08-25T16:44:25+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://localhost:1313/tags/</loc>
-    <lastmod>2019-08-18T09:56:38+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/tags/go/</loc>
-    <lastmod>2019-08-18T09:56:38+08:00</lastmod>
+    <lastmod>2019-08-25T16:44:25+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://localhost:1313/</loc>
-    <lastmod>2019-08-18T09:56:38+08:00</lastmod>
+    <lastmod>2019-08-25T16:44:25+08:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/tags/go/</loc>
+    <lastmod>2019-08-25T16:44:25+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/post/language/go/container/</loc>
+    <lastmod>2019-08-25T16:44:25+08:00</lastmod>
   </url>
   
   <url>

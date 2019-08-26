@@ -7,9 +7,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>程序结构 - Xue.Zeng</title>
-  <meta property="og:title" content="程序结构" />
-  <meta name="twitter:title" content="程序结构" />
+  <title>容器 - Xue.Zeng</title>
+  <meta property="og:title" content="容器" />
+  <meta name="twitter:title" content="容器" />
   <meta name="description" content="Go学习笔记">
   <meta property="og:description" content="Go学习笔记">
   <meta name="twitter:description" content="Go学习笔记">
@@ -48,8 +48,8 @@
         "@type": "ListItem",
         "position": 3,
         "item": {
-          "@id": "http:\/\/localhost:1313\/post\/language\/go\/structure\/",
-          "name": "程序结构"
+          "@id": "http:\/\/localhost:1313\/post\/language\/go\/container\/",
+          "name": "容器"
         }
     }]
 }
@@ -60,15 +60,15 @@
   "author": {
     "name" : "xue.zeng"
   },
-  "headline": "程序结构",
-  "description" : "条件语句 1、if\x26hellip;else\x26hellip; 条件内可以赋值 条件内赋值的变量作用域就存在于这个if语句里 if contents, err := ioutil.ReadFile(filename); err == nil { fmt.Println(string(contents)) } else {",
+  "headline": "容器",
+  "description" : "数组 切片(Slice) 1、扩展 arry := [...]int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9} fmt.Println(\x26#34;arry = \x26#34;, arry) s1 = arry[2:6] s2 = s1[3:5] Slice可以向后扩展，不可用向前扩展 s[i]不可以超越len(s",
   "inLanguage" : "en",
-  "wordCount":  326 ,
-  "datePublished" : "2019-08-18T09:56:38",
-  "dateModified" : "2019-08-18T09:56:38",
+  "wordCount":  100 ,
+  "datePublished" : "2019-08-25T16:44:25",
+  "dateModified" : "2019-08-25T16:44:25",
   "image" : "http:\/\/localhost:1313\/images\/avatar-icon.png",
-  "keywords" : [ "go" ],
-  "mainEntityOfPage" : "http:\/\/localhost:1313\/post\/language\/go\/structure\/",
+  "keywords" : [ "“go”" ],
+  "mainEntityOfPage" : "http:\/\/localhost:1313\/post\/language\/go\/container\/",
   "publisher" : {
     "@type": "Organization",
     "name" : "http:\/\/localhost:1313\/",
@@ -82,14 +82,14 @@
 }
 </script>
 
-<meta property="og:title" content="程序结构" />
+<meta property="og:title" content="容器" />
 <meta property="og:description" content="Go学习笔记">
 <meta property="og:image" content="http://localhost:1313/images/avatar-icon.png" />
-<meta property="og:url" content="http://localhost:1313/post/language/go/structure/" />
+<meta property="og:url" content="http://localhost:1313/post/language/go/container/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Xue.Zeng" />
 
-  <meta name="twitter:title" content="程序结构" />
+  <meta name="twitter:title" content="容器" />
   <meta name="twitter:description" content="Go学习笔记">
   <meta name="twitter:image" content="http://localhost:1313/images/avatar-icon.png" />
   <meta name="twitter:card" content="summary" />
@@ -97,7 +97,7 @@
   <meta property="og:image" content="http://localhost:1313/images/avatar-icon.png" />
   <meta name="twitter:image" content="http://localhost:1313/images/avatar-icon.png" />
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="http://localhost:1313/post/language/go/structure/" />
+  <meta property="og:url" content="http://localhost:1313/post/language/go/container/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Xue.Zeng" />
 
@@ -224,7 +224,7 @@
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="post-heading">
               
-                <h1>程序结构</h1>
+                <h1>容器</h1>
               
               
               
@@ -236,13 +236,13 @@
                 <span class="post-meta">
   
   
-  <i class="fas fa-calendar"></i>&nbsp;Posted on 2019-08-18
+  <i class="fas fa-calendar"></i>&nbsp;Posted on 2019-08-25
   
   
     &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;1&nbsp;minutes
   
   
-    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;326&nbsp;words
+    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;100&nbsp;words
   
   
     &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;xue.zeng
@@ -267,90 +267,30 @@
       <article role="main" class="blog-post">
         
 
-<h4 id="条件语句">条件语句</h4>
+<h4 id="数组">数组</h4>
 
-<h6 id="1-if-else">1、if&hellip;else&hellip;</h6>
+<h4 id="切片-slice">切片(Slice)</h4>
 
-<ul>
-<li><p>条件内可以赋值</p></li>
+<h6 id="1-扩展">1、扩展</h6>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">arry</span> <span class="o">:=</span> <span class="p">[</span><span class="o">...</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">}</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;arry = &#34;</span><span class="p">,</span> <span class="nx">arry</span><span class="p">)</span>
+<span class="nx">s1</span> <span class="p">=</span> <span class="nx">arry</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span>
+<span class="nx">s2</span> <span class="p">=</span> <span class="nx">s1</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span></code></pre></div>
+<p><img src="image-20190825165300639.png" alt="image-20190825165300639" /></p>
 
-<li><p>条件内赋值的变量作用域就存在于这个if语句里</p></li>
-</ul>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go">  <span class="k">if</span> <span class="nx">contents</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">ioutil</span><span class="p">.</span><span class="nf">ReadFile</span><span class="p">(</span><span class="nx">filename</span><span class="p">);</span> <span class="nx">err</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
-    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nb">string</span><span class="p">(</span><span class="nx">contents</span><span class="p">))</span>
-  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;cannot print file contents: &#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
-  <span class="p">}</span></code></pre></div>
-<h6 id="2-switch">2、switch</h6>
+<p>Slice可以向后扩展，不可用向前扩展</p>
 
-<ul>
-<li><p>switch后可以没有表达式</p></li>
+<p>s[i]不可以超越len(s)，向后扩展不可以超越底层数组cap(s)</p>
 
-<li><p>不需要显示break，switch会自动break，除非使用fallthrough</p></li>
-</ul>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go">  <span class="kd">func</span> <span class="nf">grade</span><span class="p">(</span><span class="nx">score</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
-  	<span class="nx">g</span> <span class="o">:=</span> <span class="s">&#34;&#34;</span>
-  	<span class="k">switch</span>  <span class="p">{</span>
-  	<span class="k">case</span> <span class="nx">score</span> <span class="p">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="nx">score</span> <span class="p">&gt;</span> <span class="mi">100</span><span class="p">:</span>
-  		<span class="nb">panic</span><span class="p">(</span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;Wrong score: %d&#34;</span><span class="p">,</span> <span class="nx">score</span><span class="p">))</span>
-  	<span class="k">case</span> <span class="nx">score</span> <span class="p">&lt;</span> <span class="mi">60</span><span class="p">:</span>
-  		<span class="nx">g</span> <span class="p">=</span> <span class="s">&#34;F&#34;</span>
-  	<span class="k">case</span> <span class="nx">score</span> <span class="p">&lt;</span> <span class="mi">80</span><span class="p">:</span>
-  		<span class="nx">g</span> <span class="p">=</span> <span class="s">&#34;C&#34;</span>
-  	<span class="k">case</span> <span class="nx">score</span> <span class="p">&lt;</span> <span class="mi">90</span><span class="p">:</span>
-  		<span class="nx">g</span> <span class="p">=</span> <span class="s">&#34;B&#34;</span>
-  	<span class="k">case</span> <span class="nx">score</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">:</span>
-  		<span class="nx">g</span> <span class="p">=</span> <span class="s">&#34;A&#34;</span>
-  	<span class="p">}</span>
-  	<span class="k">return</span> <span class="nx">g</span>
-  <span class="p">}</span></code></pre></div>
-<h6 id="3-for">3、for</h6>
+<p><strong>Slice实现原理</strong></p>
 
-<ul>
-<li>表达式不需要括号</li>
-</ul>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go">  <span class="nx">result</span> <span class="o">:=</span> <span class="s">&#34;&#34;</span>
-  <span class="k">for</span> <span class="p">;</span> <span class="nx">n</span> <span class="p">&gt;</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">n</span> <span class="o">/=</span> <span class="mi">2</span> <span class="p">{</span>
-    <span class="nx">result</span> <span class="p">=</span> <span class="nx">strconv</span><span class="p">.</span><span class="nf">Itoa</span><span class="p">(</span><span class="nx">n</span><span class="o">%</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="nx">result</span>
-  <span class="p">}</span></code></pre></div>
-<ul>
-<li>表达式可以省略初始条件（相当于while），结束条件，递增条件</li>
-</ul>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go">  <span class="nx">scanner</span> <span class="o">:=</span> <span class="nx">bufio</span><span class="p">.</span><span class="nf">NewScanner</span><span class="p">(</span><span class="nx">file</span><span class="p">)</span>
-  <span class="k">for</span> <span class="nx">scanner</span><span class="p">.</span><span class="nf">Scan</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">scanner</span><span class="p">.</span><span class="nf">Text</span><span class="p">())</span>
-  <span class="p">}</span></code></pre></div>
-<ul>
-<li>无线循环</li>
-</ul>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go">  <span class="k">for</span> <span class="p">{</span>
-    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;abc&#34;</span><span class="p">)</span>
-  <span class="p">}</span></code></pre></div>
-<h6 id="4-函数">4、函数</h6>
-
-<ul>
-<li>返回类型写再最后面</li>
-<li>可返回多个值</li>
-<li>函数可作为参数</li>
-<li>没有默认参数，可选参数</li>
-</ul>
-
-<h6 id="5-指针">5、指针</h6>
-
-<ul>
-<li>不能运算</li>
-<li>只有值传递一种方式
-
-<br />
-
-<br /></li>
-</ul>
+<p><img src="image-20190825174041113.png" alt="image-20190825174041113" /></p>
 
 
         
           <div class="blog-tags">
             
-              <a href="http://localhost:1313//tags/go/">go</a>&nbsp;
+              <a href="http://localhost:1313//tags/go/">“go”</a>&nbsp;
             
           </div>
         
@@ -365,49 +305,49 @@
     <ul class="share">
       
       <li>
-        <a href="//twitter.com/share?url=http%3a%2f%2flocalhost%3a1313%2fpost%2flanguage%2fgo%2fstructure%2f&amp;text=%e7%a8%8b%e5%ba%8f%e7%bb%93%e6%9e%84&amp;via=" target="_blank" title="Share on Twitter">
+        <a href="//twitter.com/share?url=http%3a%2f%2flocalhost%3a1313%2fpost%2flanguage%2fgo%2fcontainer%2f&amp;text=%e5%ae%b9%e5%99%a8&amp;via=" target="_blank" title="Share on Twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//plus.google.com/share?url=http%3a%2f%2flocalhost%3a1313%2fpost%2flanguage%2fgo%2fstructure%2f" target="_blank" title="Share on Google Plus">
+        <a href="//plus.google.com/share?url=http%3a%2f%2flocalhost%3a1313%2fpost%2flanguage%2fgo%2fcontainer%2f" target="_blank" title="Share on Google Plus">
           <i class="fab fa-google-plus"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.facebook.com/sharer/sharer.php?u=http%3a%2f%2flocalhost%3a1313%2fpost%2flanguage%2fgo%2fstructure%2f" target="_blank" title="Share on Facebook">
+        <a href="//www.facebook.com/sharer/sharer.php?u=http%3a%2f%2flocalhost%3a1313%2fpost%2flanguage%2fgo%2fcontainer%2f" target="_blank" title="Share on Facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//reddit.com/submit?url=http%3a%2f%2flocalhost%3a1313%2fpost%2flanguage%2fgo%2fstructure%2f&amp;title=%e7%a8%8b%e5%ba%8f%e7%bb%93%e6%9e%84" target="_blank" title="Share on Reddit">
+        <a href="//reddit.com/submit?url=http%3a%2f%2flocalhost%3a1313%2fpost%2flanguage%2fgo%2fcontainer%2f&amp;title=%e5%ae%b9%e5%99%a8" target="_blank" title="Share on Reddit">
           <i class="fab fa-reddit"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.linkedin.com/shareArticle?url=http%3a%2f%2flocalhost%3a1313%2fpost%2flanguage%2fgo%2fstructure%2f&amp;title=%e7%a8%8b%e5%ba%8f%e7%bb%93%e6%9e%84" target="_blank" title="Share on LinkedIn">
+        <a href="//www.linkedin.com/shareArticle?url=http%3a%2f%2flocalhost%3a1313%2fpost%2flanguage%2fgo%2fcontainer%2f&amp;title=%e5%ae%b9%e5%99%a8" target="_blank" title="Share on LinkedIn">
           <i class="fab fa-linkedin"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.stumbleupon.com/submit?url=http%3a%2f%2flocalhost%3a1313%2fpost%2flanguage%2fgo%2fstructure%2f&amp;title=%e7%a8%8b%e5%ba%8f%e7%bb%93%e6%9e%84" target="_blank" title="Share on StumbleUpon">
+        <a href="//www.stumbleupon.com/submit?url=http%3a%2f%2flocalhost%3a1313%2fpost%2flanguage%2fgo%2fcontainer%2f&amp;title=%e5%ae%b9%e5%99%a8" target="_blank" title="Share on StumbleUpon">
           <i class="fab fa-stumbleupon"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.pinterest.com/pin/create/button/?url=http%3a%2f%2flocalhost%3a1313%2fpost%2flanguage%2fgo%2fstructure%2f&amp;description=%e7%a8%8b%e5%ba%8f%e7%bb%93%e6%9e%84" target="_blank" title="Share on Pinterest">
+        <a href="//www.pinterest.com/pin/create/button/?url=http%3a%2f%2flocalhost%3a1313%2fpost%2flanguage%2fgo%2fcontainer%2f&amp;description=%e5%ae%b9%e5%99%a8" target="_blank" title="Share on Pinterest">
           <i class="fab fa-pinterest"></i>
         </a>
       </li>
@@ -421,15 +361,6 @@
         
           
           
-          <h4 class="see-also">See also</h4>
-          <ul>
-          
-            <li><a href="/post/language/go/variable/">Go 变量</a></li>
-          
-            <li><a href="/post/language/go/overview/">GO 概述</a></li>
-          
-          </ul>
-          
         
       </article>
 
@@ -437,13 +368,9 @@
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="http://localhost:1313/post/language/go/variable/" data-toggle="tooltip" data-placement="top" title="Go 变量">&larr; Previous Post</a>
+              <a href="http://localhost:1313/post/language/go/structure/" data-toggle="tooltip" data-placement="top" title="程序结构">&larr; Previous Post</a>
             </li>
           
-          
-            <li class="next">
-              <a href="http://localhost:1313/post/language/go/container/" data-toggle="tooltip" data-placement="top" title="容器">Next Post &rarr;</a>
-            </li>
           
         </ul>
       
