@@ -2,32 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>“language” on Xue.Zeng</title>
-    <link>https://xue2zeng.github.io/categories/language/</link>
+    <link>http://localhost:1313/categories/language/</link>
     <description>Recent content in “language” on Xue.Zeng</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <managingEditor>xue.zeng@outlook.com (xue.zeng)</managingEditor>
-    <webMaster>xue.zeng@outlook.com (xue.zeng)</webMaster>
     <lastBuildDate>Sat, 03 Aug 2019 16:42:15 +0800</lastBuildDate>
     
-	<atom:link href="https://xue2zeng.github.io/categories/language/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://localhost:1313/categories/language/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Go 变量</title>
-      <link>https://xue2zeng.github.io/post/language/go/variable/</link>
+      <link>http://localhost:1313/post/language/go/variable/</link>
       <pubDate>Sat, 03 Aug 2019 16:42:15 +0800</pubDate>
-      <author>xue.zeng@outlook.com (xue.zeng)</author>
-      <guid>https://xue2zeng.github.io/post/language/go/variable/</guid>
+      
+      <guid>http://localhost:1313/post/language/go/variable/</guid>
       <description>变量定义 1、使用var关键字(变量类型写在变量名之后) var a, b, c bool var s1, s2 string = &amp;ldquo;hello&amp;rdquo;, &amp;ldquo;world&amp;rdquo; 可定义在函数体内或直接定义在包内 使用var()集中定义变量 var (</description>
     </item>
     
     <item>
       <title>GO 概述</title>
-      <link>https://xue2zeng.github.io/post/language/go/overview/</link>
+      <link>http://localhost:1313/post/language/go/overview/</link>
       <pubDate>Sat, 03 Aug 2019 10:49:44 +0800</pubDate>
-      <author>xue.zeng@outlook.com (xue.zeng)</author>
-      <guid>https://xue2zeng.github.io/post/language/go/overview/</guid>
+      
+      <guid>http://localhost:1313/post/language/go/overview/</guid>
       <description>区别于其它语言 没有&amp;rdquo; 对象&amp;rdquo;，没有继承、多态，没有泛型，没有try/catch 有接口，函数式编程，CSP并发模型（go</description>
     </item>
     
