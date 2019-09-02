@@ -2,48 +2,48 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Go on Xue.Zeng</title>
-    <link>http://localhost:1313/tags/go/</link>
+    <link>https://xue2zeng.github.io/tags/go/</link>
     <description>Recent content in Go on Xue.Zeng</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 25 Aug 2019 16:44:25 +0800</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/tags/go/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://xue2zeng.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>容器</title>
-      <link>http://localhost:1313/post/language/go/container/</link>
+      <link>https://xue2zeng.github.io/post/language/go/container/</link>
       <pubDate>Sun, 25 Aug 2019 16:44:25 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/language/go/container/</guid>
+      <guid>https://xue2zeng.github.io/post/language/go/container/</guid>
       <description>数组 切片(Slice) 1、扩展 arry := [...]int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9} fmt.Println(&amp;#34;arry = &amp;#34;, arry) s1 = arry[2:6] s2 = s1[3:5] Slice可以向后扩展，不可用向前扩展 s[i]不可以超越len(s</description>
     </item>
     
     <item>
       <title>程序结构</title>
-      <link>http://localhost:1313/post/language/go/structure/</link>
+      <link>https://xue2zeng.github.io/post/language/go/structure/</link>
       <pubDate>Sun, 18 Aug 2019 09:56:38 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/language/go/structure/</guid>
+      <guid>https://xue2zeng.github.io/post/language/go/structure/</guid>
       <description>条件语句 1、if&amp;hellip;else&amp;hellip; 条件内可以赋值 条件内赋值的变量作用域就存在于这个if语句里 if contents, err := ioutil.ReadFile(filename); err == nil { fmt.Println(string(contents)) } else {</description>
     </item>
     
     <item>
       <title>Go 变量</title>
-      <link>http://localhost:1313/post/language/go/variable/</link>
+      <link>https://xue2zeng.github.io/post/language/go/variable/</link>
       <pubDate>Sat, 03 Aug 2019 16:42:15 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/language/go/variable/</guid>
+      <guid>https://xue2zeng.github.io/post/language/go/variable/</guid>
       <description>变量定义 1、使用var关键字(变量类型写在变量名之后) var a, b, c bool var s1, s2 string = &amp;ldquo;hello&amp;rdquo;, &amp;ldquo;world&amp;rdquo; 可定义在函数体内或直接定义在包内 使用var()集中定义变量 var (</description>
     </item>
     
     <item>
       <title>GO 概述</title>
-      <link>http://localhost:1313/post/language/go/overview/</link>
+      <link>https://xue2zeng.github.io/post/language/go/overview/</link>
       <pubDate>Sat, 03 Aug 2019 10:49:44 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/language/go/overview/</guid>
+      <guid>https://xue2zeng.github.io/post/language/go/overview/</guid>
       <description>区别于其它语言 没有&amp;rdquo; 对象&amp;rdquo;，没有继承、多态，没有泛型，没有try/catch 有接口，函数式编程，CSP并发模型（go</description>
     </item>
     
