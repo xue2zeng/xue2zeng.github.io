@@ -3,6 +3,45 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://xue2zeng.github.io/tags/go/</loc>
+    <lastmod>2019-09-08T14:15:09+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://xue2zeng.github.io/post/</loc>
+    <lastmod>2019-09-08T14:15:09+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://xue2zeng.github.io/tags/</loc>
+    <lastmod>2019-09-08T14:15:09+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://xue2zeng.github.io/</loc>
+    <lastmod>2019-09-08T14:15:09+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://xue2zeng.github.io/post/language/go/functional/</loc>
+    <lastmod>2019-09-08T14:15:09+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://xue2zeng.github.io/post/language/go/interfaceoriented/</loc>
+    <lastmod>2019-09-07T21:11:31+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://xue2zeng.github.io/post/language/go/objectoriented/</loc>
+    <lastmod>2019-09-07T10:28:18+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://xue2zeng.github.io/tags/hugo/</loc>
     <lastmod>2019-08-26T18:36:09+08:00</lastmod>
     <priority>0</priority>
@@ -11,30 +50,6 @@
   <url>
     <loc>https://xue2zeng.github.io/post/toolkit/hugo%E7%BB%93%E5%90%88github/</loc>
     <lastmod>2019-08-26T18:36:09+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://xue2zeng.github.io/post/</loc>
-    <lastmod>2019-08-26T18:36:09+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://xue2zeng.github.io/tags/</loc>
-    <lastmod>2019-08-26T18:36:09+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://xue2zeng.github.io/</loc>
-    <lastmod>2019-08-26T18:36:09+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://xue2zeng.github.io/tags/go/</loc>
-    <lastmod>2019-08-25T16:44:25+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>

@@ -6,10 +6,37 @@
     <description>Recent content on Xue.Zeng</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 26 Aug 2019 18:36:09 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 08 Sep 2019 14:15:09 +0800</lastBuildDate>
     
 	<atom:link href="https://xue2zeng.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>函数式编程</title>
+      <link>https://xue2zeng.github.io/post/language/go/functional/</link>
+      <pubDate>Sun, 08 Sep 2019 14:15:09 +0800</pubDate>
+      
+      <guid>https://xue2zeng.github.io/post/language/go/functional/</guid>
+      <description>函数式编程 &amp;ldquo;正统&amp;rdquo;函数式编程 不可变性：不能有状态，只有常量和函数 函数只能有一个参数 // 正统函数式编程 type iAdder func(int) (int, iAdder) func adder(base int) iAdder</description>
+    </item>
+    
+    <item>
+      <title>面向接口</title>
+      <link>https://xue2zeng.github.io/post/language/go/interfaceoriented/</link>
+      <pubDate>Sat, 07 Sep 2019 21:11:31 +0800</pubDate>
+      
+      <guid>https://xue2zeng.github.io/post/language/go/interfaceoriented/</guid>
+      <description>Duck Typing（鸭子类型） 在维基百科中是这样定义的： 鸭子类型（英语：duck typing）是动态类型的一种风格。在这种风格中，一个对象有效的</description>
+    </item>
+    
+    <item>
+      <title>面向对象</title>
+      <link>https://xue2zeng.github.io/post/language/go/objectoriented/</link>
+      <pubDate>Sat, 07 Sep 2019 10:28:18 +0800</pubDate>
+      
+      <guid>https://xue2zeng.github.io/post/language/go/objectoriented/</guid>
+      <description>Go语言仅支持封装，不支持继承和多态 Go语言没有class，只有struct 结构体和方法 创建 type Node struct { Value int Left, Right *Node } 定义方法 func CreateNode(value int) *Node { return &amp;amp;Node{Value: value} } func</description>
+    </item>
     
     <item>
       <title>Hugo结合Github搭建博客</title>
