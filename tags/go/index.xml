@@ -6,10 +6,28 @@
     <description>Recent content in Go on Xue.Zeng</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 08 Sep 2019 14:15:09 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 16 Sep 2019 21:02:52 +0800</lastBuildDate>
     
 	<atom:link href="https://xue2zeng.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>性能调优</title>
+      <link>https://xue2zeng.github.io/post/language/go/performance/</link>
+      <pubDate>Mon, 16 Sep 2019 21:02:52 +0800</pubDate>
+      
+      <guid>https://xue2zeng.github.io/post/language/go/performance/</guid>
+      <description>Pprof pprof 是用于可视化和分析性能分析数据的工具，以 profile.proto 读取分析样本的集合，并生成报告以可视化并帮助分析数据（支持文本和图形报告） profile.proto 是一个 Protocol Buffer v3 的描述</description>
+    </item>
+    
+    <item>
+      <title>调试与测试</title>
+      <link>https://xue2zeng.github.io/post/language/go/testing/</link>
+      <pubDate>Mon, 16 Sep 2019 20:22:23 +0800</pubDate>
+      
+      <guid>https://xue2zeng.github.io/post/language/go/testing/</guid>
+      <description>传统测试 测试数据与测试逻辑混在一起 出错信息不明确 一旦一个数据出错，测试全部结束 @Test public void testAdd() { assertEquals(3, add(1, 2)); assertEquals(2, add(0, 2)); assertEquals(0, add(0, 0)); assertEquals(0, add(-1, 1)); assertEquals(Integer.MIN_VALUE, add(1, Integer.MAX_VALUE)); } 表格驱动测试 测试数据</description>
+    </item>
     
     <item>
       <title>函数式编程</title>
@@ -17,7 +35,7 @@
       <pubDate>Sun, 08 Sep 2019 14:15:09 +0800</pubDate>
       
       <guid>https://xue2zeng.github.io/post/language/go/functional/</guid>
-      <description>函数式编程 &amp;ldquo;正统&amp;rdquo;函数式编程 不可变性：不能有状态，只有常量和函数 函数只能有一个参数 // 正统函数式编程 type iAdder func(int) (int, iAdder) func adder(base int) iAdder</description>
+      <description>&amp;ldquo;正统&amp;rdquo;函数式编程 不可变性：不能有状态，只有常量和函数 函数只能有一个参数 // 正统函数式编程 type iAdder func(int) (int, iAdder) func adder(base int) iAdder { return func(v int) (int,</description>
     </item>
     
     <item>
