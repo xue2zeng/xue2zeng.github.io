@@ -12,12 +12,12 @@
     
     
     <item>
-      <title>性能调优</title>
+      <title>性能调优-PProf</title>
       <link>https://xue2zeng.github.io/post/language/go/performance/</link>
       <pubDate>Mon, 16 Sep 2019 21:02:52 +0800</pubDate>
       
       <guid>https://xue2zeng.github.io/post/language/go/performance/</guid>
-      <description>Pprof pprof 是用于可视化和分析性能分析数据的工具，以 profile.proto 读取分析样本的集合，并生成报告以可视化并帮助分析数据（支持文本和图形报告） profile.proto 是一个 Protocol Buffer v3 的描述</description>
+      <description>PProf pprof 是用于可视化和分析性能分析数据的工具，以 profile.proto 读取分析样本的集合，并生成报告以可视化并帮助分析数据（支持文本和图形报告） profile.proto 是一个 Protocol Buffer v3 的描述</description>
     </item>
     
     <item>
