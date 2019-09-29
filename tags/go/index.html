@@ -10,9 +10,9 @@
   <title>Overview of all pages with the tag #Go - Xue.Zeng</title>
   <meta property="og:title" content="Overview of all pages with the tag #Go" />
   <meta name="twitter:title" content="Overview of all pages with the tag #Go" />
-  <meta name="description" content="Overview of all pages with the tag #Go, such as: 性能调优-PProf">
-  <meta property="og:description" content="Overview of all pages with the tag #Go, such as: 性能调优-PProf">
-  <meta name="twitter:description" content="Overview of all pages with the tag #Go, such as: 性能调优-PProf"><script type="application/ld+json">
+  <meta name="description" content="Overview of all pages with the tag #Go, such as: 并发-传统同步机制">
+  <meta property="og:description" content="Overview of all pages with the tag #Go, such as: 并发-传统同步机制">
+  <meta name="twitter:description" content="Overview of all pages with the tag #Go, such as: 并发-传统同步机制"><script type="application/ld+json">
 {
     "@context": "http://schema.org",
     "@type": "WebSite",
@@ -202,6 +202,198 @@
         <div class="posts-list">
           
             <article class="post-preview">
+              <a href="https://xue2zeng.github.io/post/language/go/sync/">
+                <h2 class="post-title">并发-传统同步机制</h2>
+
+                
+                  <h3 class="post-subtitle">
+                    Go学习笔记
+                  </h3>
+                
+              </a>
+
+              <p class="post-meta">
+                <span class="post-meta">
+  
+  
+  <i class="fas fa-calendar"></i>&nbsp;Posted on 2019-09-29
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;1&nbsp;minutes
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;244&nbsp;words
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;
+  
+  
+</span>
+
+
+              </p>
+              <div class="post-entry">
+                
+                  在CSP模型下尽量少用传统同步机制，尽量使用chanel进行通信。Go语言中原子操作由内置的标准库sync/atomic提供。 sync.Mutex 互斥量是一种
+                  <a href="https://xue2zeng.github.io/post/language/go/sync/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <div class="blog-tags">
+                  
+                    <a href="https://xue2zeng.github.io//tags/go/">Go</a>&nbsp;
+                  
+                </div>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://xue2zeng.github.io/post/language/go/select/">
+                <h2 class="post-title">并发-Select</h2>
+
+                
+                  <h3 class="post-subtitle">
+                    Go学习笔记
+                  </h3>
+                
+              </a>
+
+              <p class="post-meta">
+                <span class="post-meta">
+  
+  
+  <i class="fas fa-calendar"></i>&nbsp;Posted on 2019-09-29
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;4&nbsp;minutes
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;1809&nbsp;words
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;
+  
+  
+</span>
+
+
+              </p>
+              <div class="post-entry">
+                
+                  官方文档有关select的描述 A &ldquo;select&rdquo; statement chooses which of a set of possible send or receive operations will proceed. It looks similar to a &ldquo;switch&rdquo; statement but with the cases all referring to communication operations. 一个select语句用来选择哪个case中的发
+                  <a href="https://xue2zeng.github.io/post/language/go/select/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <div class="blog-tags">
+                  
+                    <a href="https://xue2zeng.github.io//tags/go/">Go</a>&nbsp;
+                  
+                </div>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://xue2zeng.github.io/post/language/go/channel/">
+                <h2 class="post-title">并发-Channel</h2>
+
+                
+                  <h3 class="post-subtitle">
+                    Go学习笔记
+                  </h3>
+                
+              </a>
+
+              <p class="post-meta">
+                <span class="post-meta">
+  
+  
+  <i class="fas fa-calendar"></i>&nbsp;Posted on 2019-09-28
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;4&nbsp;minutes
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;1647&nbsp;words
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;
+  
+  
+</span>
+
+
+              </p>
+              <div class="post-entry">
+                
+                  Channel主要被用来在多个Goroutione之间传递数据，并且还会保证其过程的同步。总是遵循先入先出（First In First Out）的规则，保
+                  <a href="https://xue2zeng.github.io/post/language/go/channel/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <div class="blog-tags">
+                  
+                    <a href="https://xue2zeng.github.io//tags/go/">Go</a>&nbsp;
+                  
+                </div>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://xue2zeng.github.io/post/language/go/goroutine/">
+                <h2 class="post-title">并发-Goroutine(协程)</h2>
+
+                
+                  <h3 class="post-subtitle">
+                    Go学习笔记
+                  </h3>
+                
+              </a>
+
+              <p class="post-meta">
+                <span class="post-meta">
+  
+  
+  <i class="fas fa-calendar"></i>&nbsp;Posted on 2019-09-28
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;3&nbsp;minutes
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;1056&nbsp;words
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;
+  
+  
+</span>
+
+
+              </p>
+              <div class="post-entry">
+                
+                  轻量级&rdquo;线程&rdquo; 线程（Thread）：有时被称为轻量级进程(Lightweight Process，LWP），是程序执行
+                  <a href="https://xue2zeng.github.io/post/language/go/goroutine/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <div class="blog-tags">
+                  
+                    <a href="https://xue2zeng.github.io//tags/go/">Go</a>&nbsp;
+                  
+                </div>
+              
+
+            </article>
+          
+            <article class="post-preview">
               <a href="https://xue2zeng.github.io/post/language/go/performance/">
                 <h2 class="post-title">性能调优-PProf</h2>
 
@@ -284,6 +476,54 @@
                 
                   传统测试 测试数据与测试逻辑混在一起 出错信息不明确 一旦一个数据出错，测试全部结束 @Test public void testAdd() { assertEquals(3, add(1, 2)); assertEquals(2, add(0, 2)); assertEquals(0, add(0, 0)); assertEquals(0, add(-1, 1)); assertEquals(Integer.MIN_VALUE, add(1, Integer.MAX_VALUE)); } 表格驱动测试 测试数据
                   <a href="https://xue2zeng.github.io/post/language/go/testing/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <div class="blog-tags">
+                  
+                    <a href="https://xue2zeng.github.io//tags/go/">Go</a>&nbsp;
+                  
+                </div>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://xue2zeng.github.io/post/language/go/resourceerror/">
+                <h2 class="post-title">资源管理与错误处理</h2>
+
+                
+                  <h3 class="post-subtitle">
+                    Go学习笔记
+                  </h3>
+                
+              </a>
+
+              <p class="post-meta">
+                <span class="post-meta">
+  
+  
+  <i class="fas fa-calendar"></i>&nbsp;Posted on 2019-09-08
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;1&nbsp;minutes
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;452&nbsp;words
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;
+  
+  
+</span>
+
+
+              </p>
+              <div class="post-entry">
+                
+                  Defer 调用特点 确保调用在函数结束时发生 defer列表为后进先出，参数在defer语句时才计算 func tryDefer() { defer fmt.Println(1) defer fmt.Println(2) fmt.Println(3) //return panic(&#34;error occurred&#34;) fmt.Println(4) } --------- 3 2 1 常见使用defer
+                  <a href="https://xue2zeng.github.io/post/language/go/resourceerror/" class="post-read-more">[Read More]</a>
                 
               </div>
 
@@ -441,199 +681,16 @@
 
             </article>
           
-            <article class="post-preview">
-              <a href="https://xue2zeng.github.io/post/language/go/container/">
-                <h2 class="post-title">容器</h2>
-
-                
-                  <h3 class="post-subtitle">
-                    Go学习笔记
-                  </h3>
-                
-              </a>
-
-              <p class="post-meta">
-                <span class="post-meta">
-  
-  
-  <i class="fas fa-calendar"></i>&nbsp;Posted on 2019-08-25
-  
-  
-    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;1&nbsp;minutes
-  
-  
-    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;405&nbsp;words
-  
-  
-    &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;
-  
-  
-</span>
-
-
-              </p>
-              <div class="post-entry">
-                
-                  数组 切片(Slice) 1、扩展 arry := [...]int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9} fmt.Println(&#34;arry = &#34;, arry) s1 = arry[2:6] s2 = s1[3:5] Slice可以向后扩展，不可以向前扩展 s[i]不可以超越len(s
-                  <a href="https://xue2zeng.github.io/post/language/go/container/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <div class="blog-tags">
-                  
-                    <a href="https://xue2zeng.github.io//tags/go/">“Go”</a>&nbsp;
-                  
-                </div>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://xue2zeng.github.io/post/language/go/structure/">
-                <h2 class="post-title">程序结构</h2>
-
-                
-                  <h3 class="post-subtitle">
-                    Go学习笔记
-                  </h3>
-                
-              </a>
-
-              <p class="post-meta">
-                <span class="post-meta">
-  
-  
-  <i class="fas fa-calendar"></i>&nbsp;Posted on 2019-08-18
-  
-  
-    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;1&nbsp;minutes
-  
-  
-    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;390&nbsp;words
-  
-  
-    &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;
-  
-  
-</span>
-
-
-              </p>
-              <div class="post-entry">
-                
-                  条件语句 1、if&hellip;else&hellip; 条件内可以赋值 条件内赋值的变量作用域就存在于这个if语句里 if contents, err := ioutil.ReadFile(filename); err == nil { fmt.Println(string(contents)) } else {
-                  <a href="https://xue2zeng.github.io/post/language/go/structure/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <div class="blog-tags">
-                  
-                    <a href="https://xue2zeng.github.io//tags/go/">Go</a>&nbsp;
-                  
-                </div>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://xue2zeng.github.io/post/language/go/variable/">
-                <h2 class="post-title">Go 变量</h2>
-
-                
-                  <h3 class="post-subtitle">
-                    Go学习笔记
-                  </h3>
-                
-              </a>
-
-              <p class="post-meta">
-                <span class="post-meta">
-  
-  
-  <i class="fas fa-calendar"></i>&nbsp;Posted on 2019-08-03
-  
-  
-    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;2&nbsp;minutes
-  
-  
-    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;515&nbsp;words
-  
-  
-    &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;
-  
-  
-</span>
-
-
-              </p>
-              <div class="post-entry">
-                
-                  变量定义 1、使用var关键字(变量类型写在变量名之后) var a, b, c bool var s1, s2 string = &ldquo;hello&rdquo;, &ldquo;world&rdquo; 可定义在函数体内或直接定义在包内 使用var()集中定义变量 var (
-                  <a href="https://xue2zeng.github.io/post/language/go/variable/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <div class="blog-tags">
-                  
-                    <a href="https://xue2zeng.github.io//tags/go/">Go</a>&nbsp;
-                  
-                </div>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://xue2zeng.github.io/post/language/go/overview/">
-                <h2 class="post-title">GO 概述</h2>
-
-                
-                  <h3 class="post-subtitle">
-                    Go学习笔记
-                  </h3>
-                
-              </a>
-
-              <p class="post-meta">
-                <span class="post-meta">
-  
-  
-  <i class="fas fa-calendar"></i>&nbsp;Posted on 2019-08-03
-  
-  
-    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;1&nbsp;minutes
-  
-  
-    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;86&nbsp;words
-  
-  
-    &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;
-  
-  
-</span>
-
-
-              </p>
-              <div class="post-entry">
-                
-                  区别于其它语言 没有&rdquo; 对象&rdquo;，没有继承、多态，没有泛型，没有try/catch 有接口，函数式编程，CSP并发模型（go
-                  <a href="https://xue2zeng.github.io/post/language/go/overview/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <div class="blog-tags">
-                  
-                    <a href="https://xue2zeng.github.io//tags/go/">Go</a>&nbsp;
-                  
-                </div>
-              
-
-            </article>
-          
         </div>
+        
+          <ul class="pager main-pager">
+            
+            
+              <li class="next">
+                <a href="https://xue2zeng.github.io/tags/go/page/2/">Older Posts &rarr;</a>
+              </li>
+            
+          </ul>
         
       </div>
     </div>

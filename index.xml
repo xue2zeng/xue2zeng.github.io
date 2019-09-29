@@ -6,10 +6,46 @@
     <description>Recent content on Xue.Zeng</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 16 Sep 2019 21:02:52 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 29 Sep 2019 13:06:38 +0800</lastBuildDate>
     
 	<atom:link href="https://xue2zeng.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>并发-传统同步机制</title>
+      <link>https://xue2zeng.github.io/post/language/go/sync/</link>
+      <pubDate>Sun, 29 Sep 2019 13:06:38 +0800</pubDate>
+      
+      <guid>https://xue2zeng.github.io/post/language/go/sync/</guid>
+      <description>在CSP模型下尽量少用传统同步机制，尽量使用chanel进行通信。Go语言中原子操作由内置的标准库sync/atomic提供。 sync.Mutex 互斥量是一种</description>
+    </item>
+    
+    <item>
+      <title>并发-Select</title>
+      <link>https://xue2zeng.github.io/post/language/go/select/</link>
+      <pubDate>Sun, 29 Sep 2019 11:43:05 +0800</pubDate>
+      
+      <guid>https://xue2zeng.github.io/post/language/go/select/</guid>
+      <description>官方文档有关select的描述 A &amp;ldquo;select&amp;rdquo; statement chooses which of a set of possible send or receive operations will proceed. It looks similar to a &amp;ldquo;switch&amp;rdquo; statement but with the cases all referring to communication operations. 一个select语句用来选择哪个case中的发</description>
+    </item>
+    
+    <item>
+      <title>并发-Channel</title>
+      <link>https://xue2zeng.github.io/post/language/go/channel/</link>
+      <pubDate>Sat, 28 Sep 2019 15:56:51 +0800</pubDate>
+      
+      <guid>https://xue2zeng.github.io/post/language/go/channel/</guid>
+      <description>Channel主要被用来在多个Goroutione之间传递数据，并且还会保证其过程的同步。总是遵循先入先出（First In First Out）的规则，保</description>
+    </item>
+    
+    <item>
+      <title>并发-Goroutine(协程)</title>
+      <link>https://xue2zeng.github.io/post/language/go/goroutine/</link>
+      <pubDate>Sat, 28 Sep 2019 09:57:11 +0800</pubDate>
+      
+      <guid>https://xue2zeng.github.io/post/language/go/goroutine/</guid>
+      <description>轻量级&amp;rdquo;线程&amp;rdquo; 线程（Thread）：有时被称为轻量级进程(Lightweight Process，LWP），是程序执行</description>
+    </item>
     
     <item>
       <title>性能调优-PProf</title>
@@ -27,6 +63,15 @@
       
       <guid>https://xue2zeng.github.io/post/language/go/testing/</guid>
       <description>传统测试 测试数据与测试逻辑混在一起 出错信息不明确 一旦一个数据出错，测试全部结束 @Test public void testAdd() { assertEquals(3, add(1, 2)); assertEquals(2, add(0, 2)); assertEquals(0, add(0, 0)); assertEquals(0, add(-1, 1)); assertEquals(Integer.MIN_VALUE, add(1, Integer.MAX_VALUE)); } 表格驱动测试 测试数据</description>
+    </item>
+    
+    <item>
+      <title>资源管理与错误处理</title>
+      <link>https://xue2zeng.github.io/post/language/go/resourceerror/</link>
+      <pubDate>Sun, 08 Sep 2019 18:32:51 +0800</pubDate>
+      
+      <guid>https://xue2zeng.github.io/post/language/go/resourceerror/</guid>
+      <description>Defer 调用特点 确保调用在函数结束时发生 defer列表为后进先出，参数在defer语句时才计算 func tryDefer() { defer fmt.Println(1) defer fmt.Println(2) fmt.Println(3) //return panic(&amp;#34;error occurred&amp;#34;) fmt.Println(4) } --------- 3 2 1 常见使用defer</description>
     </item>
     
     <item>
