@@ -7,16 +7,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>程序结构 - Xue.Zeng</title>
-  <meta property="og:title" content="程序结构" />
-  <meta name="twitter:title" content="程序结构" />
+  <title>程序结构 - 闲人码语</title>
   <meta name="description" content="Go学习笔记">
-  <meta property="og:description" content="Go学习笔记">
-  <meta name="twitter:description" content="Go学习笔记"><script type="application/ld+json">
+  <meta name="author" content="xue.zeng"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
     "@type": "WebSite",
-    "name": "Xue.Zeng",
+    "name": "闲人码语",
     
     "url": "https:\/\/xue2zeng.github.io\/"
 }
@@ -57,12 +54,12 @@
   "@context": "http://schema.org",
   "@type": "Article",
   "author": {
-    "name" : ""
+    "name" : "xue.zeng"
   },
   "headline": "程序结构",
-  "description" : "条件语句 1、if\x26hellip;else\x26hellip; 条件内可以赋值 条件内赋值的变量作用域就存在于这个if语句里 if contents, err := ioutil.ReadFile(filename); err == nil { fmt.Println(string(contents)) } else {",
+  "description" : "条件语句 1、if\u0026hellip;else\u0026hellip;   条件内可以赋值\n  条件内赋值的变量作用域就存在于这个if语句里\nif contents, err := ioutil.ReadFile(filename); err == nil { fmt.Println(string(contents)) } else { fmt.Println(\u0026#34;cannot print file contents: \u0026#34;, err) }   2、switch   switch后可以没有表达式\n  不需要显示break，switch会自动break，除非使用fallthrough\nfunc grade(score int) string { g := \u0026#34;\u0026#34; switch { case score \u0026lt; 0 || score \u0026gt; 100: panic(fmt.Sprintf(\u0026#34;Wrong score: %d\u0026#34;, score)) case score \u0026lt; 60: g = \u0026#34;F\u0026#34; case score \u0026lt; 80: g = \u0026#34;C\u0026#34; case score \u0026lt; 90: g = \u0026#34;B\u0026#34; case score \u0026lt;= 100: g = \u0026#34;A\u0026#34; } return g }   3、for   表达式不需要括号",
   "inLanguage" : "en",
-  "wordCount":  390 ,
+  "wordCount":  127 ,
   "datePublished" : "2019-08-18T09:56:38",
   "dateModified" : "2019-08-18T09:56:38",
   "image" : "https:\/\/xue2zeng.github.io\/img\/avatar-icon.png",
@@ -86,22 +83,17 @@
 <meta property="og:image" content="https://xue2zeng.github.io/img/avatar-icon.png" />
 <meta property="og:url" content="https://xue2zeng.github.io/post/language/go/structure/" />
 <meta property="og:type" content="website" />
-<meta property="og:site_name" content="Xue.Zeng" />
+<meta property="og:site_name" content="闲人码语" />
 
   <meta name="twitter:title" content="程序结构" />
   <meta name="twitter:description" content="Go学习笔记">
   <meta name="twitter:image" content="https://xue2zeng.github.io/img/avatar-icon.png" />
   <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@username" />
+  <meta name="twitter:creator" content="@username" />
   <link href='https://xue2zeng.github.io/img/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta property="og:image" content="https://xue2zeng.github.io/img/avatar-icon.png" />
-  <meta name="twitter:image" content="https://xue2zeng.github.io/img/avatar-icon.png" />
-  <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://xue2zeng.github.io/post/language/go/structure/" />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Xue.Zeng" />
-
-  <meta name="generator" content="Hugo 0.55.6" />
-  <link rel="alternate" href="https://xue2zeng.github.io/index.xml" type="application/rss+xml" title="Xue.Zeng"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  <meta name="generator" content="Hugo 0.78.1" />
+  <link rel="alternate" href="https://xue2zeng.github.io/index.xml" type="application/rss+xml" title="闲人码语"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://xue2zeng.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
@@ -121,11 +113,17 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://xue2zeng.github.io/">Xue.Zeng</a>
+      <a class="navbar-brand" href="https://xue2zeng.github.io/">闲人码语</a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
       <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
         
           
             <li>
@@ -149,8 +147,8 @@
     
       <div class="avatar-container">
         <div class="avatar-img-border">
-          <a title="Xue.Zeng" href="https://xue2zeng.github.io/">
-            <img class="avatar-img" src="https://xue2zeng.github.io/img/avatar-icon.png" alt="Xue.Zeng" />
+          <a title="闲人码语" href="https://xue2zeng.github.io/">
+            <img class="avatar-img" src="https://xue2zeng.github.io/img/avatar-icon.png" alt="闲人码语" />
           </a>
         </div>
       </div>
@@ -241,16 +239,14 @@
                 <span class="post-meta">
   
   
-  <i class="fas fa-calendar"></i>&nbsp;Posted on 2019-08-18
+  <i class="fas fa-calendar"></i>&nbsp;
   
   
     &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;1&nbsp;minutes
   
   
-    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;390&nbsp;words
+    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;127&nbsp;words
   
-  
-    &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;
   
   
 </span>
@@ -270,100 +266,90 @@
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        
-
-<h4 id="条件语句">条件语句</h4>
-
-<h6 id="1-if-else">1、if&hellip;else&hellip;</h6>
-
+        <h4 id="条件语句">条件语句</h4>
+<h6 id="1ifelse">1、if&hellip;else&hellip;</h6>
 <ul>
-<li><p>条件内可以赋值</p></li>
-
-<li><p>条件内赋值的变量作用域就存在于这个if语句里</p></li>
+<li>
+<p>条件内可以赋值</p>
+</li>
+<li>
+<p>条件内赋值的变量作用域就存在于这个if语句里</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">if</span> <span class="nx">contents</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">ioutil</span><span class="p">.</span><span class="nf">ReadFile</span><span class="p">(</span><span class="nx">filename</span><span class="p">);</span> <span class="nx">err</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+  <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nb">string</span><span class="p">(</span><span class="nx">contents</span><span class="p">))</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;cannot print file contents: &#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></li>
 </ul>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go">  <span class="k">if</span> <span class="nx">contents</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">ioutil</span><span class="p">.</span><span class="nf">ReadFile</span><span class="p">(</span><span class="nx">filename</span><span class="p">);</span> <span class="nx">err</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
-    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nb">string</span><span class="p">(</span><span class="nx">contents</span><span class="p">))</span>
-  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;cannot print file contents: &#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
-  <span class="p">}</span></code></pre></div>
-<h6 id="2-switch">2、switch</h6>
-
+<h6 id="2switch">2、switch</h6>
 <ul>
-<li><p>switch后可以没有表达式</p></li>
-
-<li><p>不需要显示break，switch会自动break，除非使用fallthrough</p></li>
+<li>
+<p>switch后可以没有表达式</p>
+</li>
+<li>
+<p>不需要显示break，switch会自动break，除非使用fallthrough</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">grade</span><span class="p">(</span><span class="nx">score</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+  <span class="nx">g</span> <span class="o">:=</span> <span class="s">&#34;&#34;</span>
+  <span class="k">switch</span>  <span class="p">{</span>
+  <span class="k">case</span> <span class="nx">score</span> <span class="p">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="nx">score</span> <span class="p">&gt;</span> <span class="mi">100</span><span class="p">:</span>
+      <span class="nb">panic</span><span class="p">(</span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;Wrong score: %d&#34;</span><span class="p">,</span> <span class="nx">score</span><span class="p">))</span>
+  <span class="k">case</span> <span class="nx">score</span> <span class="p">&lt;</span> <span class="mi">60</span><span class="p">:</span>
+      <span class="nx">g</span> <span class="p">=</span> <span class="s">&#34;F&#34;</span>
+  <span class="k">case</span> <span class="nx">score</span> <span class="p">&lt;</span> <span class="mi">80</span><span class="p">:</span>
+      <span class="nx">g</span> <span class="p">=</span> <span class="s">&#34;C&#34;</span>
+  <span class="k">case</span> <span class="nx">score</span> <span class="p">&lt;</span> <span class="mi">90</span><span class="p">:</span>
+      <span class="nx">g</span> <span class="p">=</span> <span class="s">&#34;B&#34;</span>
+  <span class="k">case</span> <span class="nx">score</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">:</span>
+      <span class="nx">g</span> <span class="p">=</span> <span class="s">&#34;A&#34;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">g</span>
+<span class="p">}</span>
+</code></pre></div></li>
 </ul>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go">  <span class="kd">func</span> <span class="nf">grade</span><span class="p">(</span><span class="nx">score</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
-  	<span class="nx">g</span> <span class="o">:=</span> <span class="s">&#34;&#34;</span>
-  	<span class="k">switch</span>  <span class="p">{</span>
-  	<span class="k">case</span> <span class="nx">score</span> <span class="p">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="nx">score</span> <span class="p">&gt;</span> <span class="mi">100</span><span class="p">:</span>
-  		<span class="nb">panic</span><span class="p">(</span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;Wrong score: %d&#34;</span><span class="p">,</span> <span class="nx">score</span><span class="p">))</span>
-  	<span class="k">case</span> <span class="nx">score</span> <span class="p">&lt;</span> <span class="mi">60</span><span class="p">:</span>
-  		<span class="nx">g</span> <span class="p">=</span> <span class="s">&#34;F&#34;</span>
-  	<span class="k">case</span> <span class="nx">score</span> <span class="p">&lt;</span> <span class="mi">80</span><span class="p">:</span>
-  		<span class="nx">g</span> <span class="p">=</span> <span class="s">&#34;C&#34;</span>
-  	<span class="k">case</span> <span class="nx">score</span> <span class="p">&lt;</span> <span class="mi">90</span><span class="p">:</span>
-  		<span class="nx">g</span> <span class="p">=</span> <span class="s">&#34;B&#34;</span>
-  	<span class="k">case</span> <span class="nx">score</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">:</span>
-  		<span class="nx">g</span> <span class="p">=</span> <span class="s">&#34;A&#34;</span>
-  	<span class="p">}</span>
-  	<span class="k">return</span> <span class="nx">g</span>
-  <span class="p">}</span></code></pre></div>
-<h6 id="3-for">3、for</h6>
-
+<h6 id="3for">3、for</h6>
 <ul>
-<li>表达式不需要括号</li>
+<li>
+<p>表达式不需要括号</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">result</span> <span class="o">:=</span> <span class="s">&#34;&#34;</span>
+<span class="k">for</span> <span class="p">;</span> <span class="nx">n</span> <span class="p">&gt;</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">n</span> <span class="o">/=</span> <span class="mi">2</span> <span class="p">{</span>
+  <span class="nx">result</span> <span class="p">=</span> <span class="nx">strconv</span><span class="p">.</span><span class="nf">Itoa</span><span class="p">(</span><span class="nx">n</span><span class="o">%</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="nx">result</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li>
+<p>表达式可以省略初始条件（相当于while），结束条件，递增条件</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">scanner</span> <span class="o">:=</span> <span class="nx">bufio</span><span class="p">.</span><span class="nf">NewScanner</span><span class="p">(</span><span class="nx">file</span><span class="p">)</span>
+<span class="k">for</span> <span class="nx">scanner</span><span class="p">.</span><span class="nf">Scan</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">scanner</span><span class="p">.</span><span class="nf">Text</span><span class="p">())</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li>
+<p>无线循环</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">for</span> <span class="p">{</span>
+  <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;abc&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></li>
 </ul>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go">  <span class="nx">result</span> <span class="o">:=</span> <span class="s">&#34;&#34;</span>
-  <span class="k">for</span> <span class="p">;</span> <span class="nx">n</span> <span class="p">&gt;</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">n</span> <span class="o">/=</span> <span class="mi">2</span> <span class="p">{</span>
-    <span class="nx">result</span> <span class="p">=</span> <span class="nx">strconv</span><span class="p">.</span><span class="nf">Itoa</span><span class="p">(</span><span class="nx">n</span><span class="o">%</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="nx">result</span>
-  <span class="p">}</span></code></pre></div>
-<ul>
-<li>表达式可以省略初始条件（相当于while），结束条件，递增条件</li>
-</ul>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go">  <span class="nx">scanner</span> <span class="o">:=</span> <span class="nx">bufio</span><span class="p">.</span><span class="nf">NewScanner</span><span class="p">(</span><span class="nx">file</span><span class="p">)</span>
-  <span class="k">for</span> <span class="nx">scanner</span><span class="p">.</span><span class="nf">Scan</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">scanner</span><span class="p">.</span><span class="nf">Text</span><span class="p">())</span>
-  <span class="p">}</span></code></pre></div>
-<ul>
-<li>无线循环</li>
-</ul>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go">  <span class="k">for</span> <span class="p">{</span>
-    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;abc&#34;</span><span class="p">)</span>
-  <span class="p">}</span></code></pre></div>
-<h6 id="4-函数">4、函数</h6>
-
+<h6 id="4函数">4、函数</h6>
 <ul>
 <li>返回类型写再最后面</li>
 <li>可返回多个值</li>
 <li>函数可作为参数</li>
 <li>没有默认参数，可选参数</li>
 </ul>
-
-<h6 id="5-指针">5、指针</h6>
-
+<h6 id="5指针">5、指针</h6>
 <ul>
-<li><p>不能运算</p></li>
-
-<li><p>只有值传递一种方式</p></li>
+<li>
+<p>不能运算</p>
+</li>
+<li>
+<p>只有值传递一种方式</p>
+</li>
 </ul>
-
-<h6 id="6-包-文件">6、包/文件</h6>
-
+<h6 id="6包文件">6、包/文件</h6>
 <ul>
 <li>为了支持模块化、封装、单独编译、代码重用</li>
 <li>一个名字是大写字母开头，那么该名字是导出的</li>
-<li>每个包都是有一个全局唯一的导入路径
-
-
-
-
-
-<br />
-
-<br />
-
-<br /></li>
+<li>每个包都是有一个全局唯一的导入路径</li>
 </ul>
 
 
@@ -385,15 +371,8 @@
     <ul class="share">
       
       <li>
-        <a href="//twitter.com/share?url=https%3a%2f%2fxue2zeng.github.io%2fpost%2flanguage%2fgo%2fstructure%2f&amp;text=%e7%a8%8b%e5%ba%8f%e7%bb%93%e6%9e%84&amp;via=" target="_blank" title="Share on Twitter">
+        <a href="//twitter.com/share?url=https%3a%2f%2fxue2zeng.github.io%2fpost%2flanguage%2fgo%2fstructure%2f&amp;text=%e7%a8%8b%e5%ba%8f%e7%bb%93%e6%9e%84&amp;via=username" target="_blank" title="Share on Twitter">
           <i class="fab fa-twitter"></i>
-        </a>
-      </li>
-  
-      
-      <li>
-        <a href="//plus.google.com/share?url=https%3a%2f%2fxue2zeng.github.io%2fpost%2flanguage%2fgo%2fstructure%2f" target="_blank" title="Share on Google Plus">
-          <i class="fab fa-google-plus"></i>
         </a>
       </li>
   
@@ -434,21 +413,33 @@
     </ul>
   </div>
   
+
               </div>
             </section>
         
 
         
           
+            
           
-          <h4 class="see-also">See also</h4>
-          <ul>
+
           
-            <li><a href="/post/language/go/variable/">Go 变量</a></li>
-          
-            <li><a href="/post/language/go/overview/">GO 概述</a></li>
-          
-          </ul>
+                  <h4 class="see-also">See also</h4>
+                  <ul>
+                
+                
+                    <li><a href="/post/language/go/sync/">并发-传统同步机制</a></li>
+                
+                    <li><a href="/post/language/go/select/">并发-Select</a></li>
+                
+                    <li><a href="/post/language/go/channel/">并发-Channel</a></li>
+                
+                    <li><a href="/post/language/go/goroutine/">并发-Goroutine(协程)</a></li>
+                
+                    <li><a href="/post/language/go/performance/">性能调优-PProf</a></li>
+                
+              </ul>
+
           
         
       </article>
@@ -478,12 +469,221 @@
   </div>
 </div>
 
-    <footer>
+      
+<footer>
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
           
+              <li>
+                <a href="mailto:youremail@domain.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.facebook.com/username" title="Facebook">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-facebook fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/username" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://gitlab.com/username" title="GitLab">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-gitlab fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://bitbucket.org/username" title="Bitbucket">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-bitbucket fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/username" title="Twitter">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://username.slack.com/" title="Slack">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-slack fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://reddit.com/u/username" title="Reddit">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-reddit-alien fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://linkedin.com/in/username" title="LinkedIn">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.xing.com/profile/username" title="Xing">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-xing fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://stackoverflow.com/users/XXXXXXX/username" title="StackOverflow">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.snapchat.com/add/username" title="Snapchat">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-snapchat-ghost fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.instagram.com/username" title="Instagram">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-instagram fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.youtube.com/user/username" title="Youtube">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-youtube fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://soundcloud.com/username" title="SoundCloud">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-soundcloud fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://open.spotify.com/user/username" title="Spotify">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-spotify fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://username.bandcamp.com/" title="Bandcamp">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-bandcamp fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://itch.io/profile/username" title="Itch.io">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fas fa-gamepad fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://vk.com/username" title="VK">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-vk fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://paypal.me/username" title="PayPal">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-paypal fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://telegram.me/username" title="Telegram">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-telegram fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://500px.com/username" title="500px">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-500px fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://codepen.io/username" title="CodePen">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-codepen fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.kaggle.com/username" title="kaggle">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-kaggle fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://url" title="Mastodon">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-mastodon fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://weibo.com/username" title="Weibo">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-weibo fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
           
           <li>
             <a href="" title="RSS">
@@ -497,20 +697,24 @@
         </ul>
         <p class="credits copyright text-muted">
           
+            
+              <a href="yourwebsite.com">xue.zeng</a>
+            
+          
 
           &nbsp;&bull;&nbsp;&copy;
           
-            2019
+            2020
           
 
           
             &nbsp;&bull;&nbsp;
-            <a href="https://xue2zeng.github.io/">Xue.Zeng</a>
+            <a href="https://xue2zeng.github.io/">闲人码语</a>
           
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          <a href="https://gohugo.io">Hugo v0.78.1</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
           
         </p>
       </div>
@@ -535,6 +739,7 @@
 
 
 
+    
   </body>
 </html>
 

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Homebrew on 闲人码语</title>
+    <link>https://xue2zeng.github.io/tags/homebrew/</link>
+    <description>Recent content in Homebrew on 闲人码语</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <managingEditor>youremail@domain.com (xue.zeng)</managingEditor>
+    <webMaster>youremail@domain.com (xue.zeng)</webMaster>
+    <lastBuildDate>Sun, 15 Nov 2020 10:12:49 +0800</lastBuildDate><atom:link href="https://xue2zeng.github.io/tags/homebrew/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Homebrew镜像源加速</title>
+      <link>https://xue2zeng.github.io/post/setting/homebrew%E9%95%9C%E5%83%8F%E6%BA%90%E5%8A%A0%E9%80%9F/</link>
+      <pubDate>Sun, 15 Nov 2020 10:12:49 +0800</pubDate>
+      <author>youremail@domain.com (xue.zeng)</author>
+      <guid>https://xue2zeng.github.io/post/setting/homebrew%E9%95%9C%E5%83%8F%E6%BA%90%E5%8A%A0%E9%80%9F/</guid>
+      <description>执行 brew 命令安装软件的时候，跟以下 3 个仓库地址有关
+  brew.git
+  homebrew-core.git
+  homebrew-bottles
+  Alibaba镜像源   替换brew仓库
+cd &amp;#34;$(brew --repo)&amp;#34; git remote set-url origin https://mirrors.aliyun.com/homebrew/brew.git   替换homebrew-core仓库
+cd &amp;#34;$(brew --repo)/Library/Taps/homebrew/homebrew-core&amp;#34; git remote set-url origin https://mirrors.aliyun.com/homebrew/homebrew-core.git   替换homebrew-bottles仓库，这个步骤跟MacOS 系统使用的 shell 版本有关系
+先查看当前使用的 shell 版本
+echo $SHELL 如果输出结果是 /bin/zsh，参考zsh 终端操作方式 如果输出结果是 /bin/bash，参考bash 终端操作方式
+zsh 终端操作方式
+替换homebrew-bottles 访问地址:
+echo &amp;#39;export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.aliyun.com/homebrew/homebrew-bottles&amp;#39; &amp;gt;&amp;gt; ~/.zshrc source ~/.zshrc bash 终端操作方式
+替换 homebrew-bottles 访问地址:</description>
+    </item>
+    
+  </channel>
+</rss>

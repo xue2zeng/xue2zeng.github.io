@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>JDK on 闲人码语</title>
+    <link>https://xue2zeng.github.io/tags/jdk/</link>
+    <description>Recent content in JDK on 闲人码语</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <managingEditor>youremail@domain.com (xue.zeng)</managingEditor>
+    <webMaster>youremail@domain.com (xue.zeng)</webMaster>
+    <lastBuildDate>Sun, 15 Nov 2020 10:08:30 +0800</lastBuildDate><atom:link href="https://xue2zeng.github.io/tags/jdk/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>JDK管理-MacOS</title>
+      <link>https://xue2zeng.github.io/post/setting/jdk%E7%AE%A1%E7%90%86-macos/</link>
+      <pubDate>Sun, 15 Nov 2020 10:08:30 +0800</pubDate>
+      <author>youremail@domain.com (xue.zeng)</author>
+      <guid>https://xue2zeng.github.io/post/setting/jdk%E7%AE%A1%E7%90%86-macos/</guid>
+      <description>随着JDK生成数量的增加和发布节奏的越来越频繁，我发现很难跟踪我在MacOS中安装的内容并即时进行切换，这就需要通过某种方式来进行有效的管理，减轻平时使用过程中的重复劳动。为此需要花上点时间来整理这块的内容来帮助我即时管理与多版本之间的更加丝滑的切换。下面通过三种方式进行管理配置说明：
+ sh取别名 自定义sh脚本 开源管理工具（jEvn，jabba，SDKMAN）  sh取别名   查看已经安装的版本
+➜ ~ /usr/libexec/java_home -V Matching Java Virtual Machines (1): 11.0.9, x86_64:	&amp;#34;Java SE 11.0.9&amp;#34;	/Library/Java/JavaVirtualMachines/jdk-11.0.9.jdk/Contents/Home /Library/Java/JavaVirtualMachines/jdk-11.0.9.jdk/Contents/Home   修改配置文件bash(.bash_profile)/zsh(.zshrc)，写入如下内容
+export JAVA_8_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_xxx.jdk/Contents/Home export JAVA_9_HOME=/Library/Java/JavaVirtualMachines/jdk-9.0.4jdk/Contents/Home export JAVA_11_HOME=/Library/Java/JavaVirtualMachines/jdk-11.0.4.jdk/Contents/Home export JAVA_12_HOME=/Library/Java/JavaVirtualMachines/jdk-12.0.2.jdk/Contents/Home alias jdk8=&amp;#34;export JAVA_HOME=$JAVA_8_HOME&amp;#34; #编辑一个命令jdk8，输入则转至jdk1.8 alias jdk9=&amp;#34;export JAVA_HOME=$JAVA_9_HOME&amp;#34; #编辑一个命令jdk9，输入则转至jdk1.9 alias jdk11=&amp;#34;export JAVA_HOME=$JAVA_11_HOME&amp;#34; #编辑一个命令jdk11，输入则转至jdk1.11 alias jdk12=&amp;#34;export JAVA_HOME=$JAVA_12_HOME&amp;#34; #编辑一个命令jdk12，输入则转至jdk1.12 export JAVA_HOME=`/usr/libexec/java_home` #最后安装的版本，这样当自动更新时，始终指向最新版本   生效配置
+# zsh source .zshrc # bash source .bash_profile   版本切换</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -7,16 +7,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>调试与测试 - Xue.Zeng</title>
-  <meta property="og:title" content="调试与测试" />
-  <meta name="twitter:title" content="调试与测试" />
+  <title>调试与测试 - 闲人码语</title>
   <meta name="description" content="Go学习笔记">
-  <meta property="og:description" content="Go学习笔记">
-  <meta name="twitter:description" content="Go学习笔记"><script type="application/ld+json">
+  <meta name="author" content="xue.zeng"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
     "@type": "WebSite",
-    "name": "Xue.Zeng",
+    "name": "闲人码语",
     
     "url": "https:\/\/xue2zeng.github.io\/"
 }
@@ -57,12 +54,12 @@
   "@context": "http://schema.org",
   "@type": "Article",
   "author": {
-    "name" : ""
+    "name" : "xue.zeng"
   },
   "headline": "调试与测试",
-  "description" : "传统测试 测试数据与测试逻辑混在一起 出错信息不明确 一旦一个数据出错，测试全部结束 @Test public void testAdd() { assertEquals(3, add(1, 2)); assertEquals(2, add(0, 2)); assertEquals(0, add(0, 0)); assertEquals(0, add(-1, 1)); assertEquals(Integer.MIN_VALUE, add(1, Integer.MAX_VALUE)); } 表格驱动测试 测试数据",
+  "description" : "传统测试   测试数据与测试逻辑混在一起\n  出错信息不明确\n  一旦一个数据出错，测试全部结束\n@Test public void testAdd() { assertEquals(3, add(1, 2)); assertEquals(2, add(0, 2)); assertEquals(0, add(0, 0)); assertEquals(0, add(-1, 1)); assertEquals(Integer.MIN_VALUE, add(1, Integer.MAX_VALUE)); }   表格驱动测试   测试数据与测试逻辑分离\n  明确的出错信息（自定义出错信息内容）\n  可以部分失败\nfunc calcTriangle(a, b int) int { var c int c = int(math.Sqrt(float64(a*a \u002b b*b))) return c } tests := []struct{ a, b, c int }{ {3, 4, 5}, {5, 12, 13}, {8, 15, 17}, {12, 35, 37}, {30000, 40000, 50000}, } for _, tt := range tests { if actual := calcTriangle(tt.",
   "inLanguage" : "en",
-  "wordCount":  584 ,
+  "wordCount":  272 ,
   "datePublished" : "2019-09-16T20:22:23",
   "dateModified" : "2019-09-16T20:22:23",
   "image" : "https:\/\/xue2zeng.github.io\/img\/avatar-icon.png",
@@ -86,22 +83,17 @@
 <meta property="og:image" content="https://xue2zeng.github.io/img/avatar-icon.png" />
 <meta property="og:url" content="https://xue2zeng.github.io/post/language/go/testing/" />
 <meta property="og:type" content="website" />
-<meta property="og:site_name" content="Xue.Zeng" />
+<meta property="og:site_name" content="闲人码语" />
 
   <meta name="twitter:title" content="调试与测试" />
   <meta name="twitter:description" content="Go学习笔记">
   <meta name="twitter:image" content="https://xue2zeng.github.io/img/avatar-icon.png" />
   <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@username" />
+  <meta name="twitter:creator" content="@username" />
   <link href='https://xue2zeng.github.io/img/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta property="og:image" content="https://xue2zeng.github.io/img/avatar-icon.png" />
-  <meta name="twitter:image" content="https://xue2zeng.github.io/img/avatar-icon.png" />
-  <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://xue2zeng.github.io/post/language/go/testing/" />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Xue.Zeng" />
-
-  <meta name="generator" content="Hugo 0.55.6" />
-  <link rel="alternate" href="https://xue2zeng.github.io/index.xml" type="application/rss+xml" title="Xue.Zeng"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  <meta name="generator" content="Hugo 0.78.1" />
+  <link rel="alternate" href="https://xue2zeng.github.io/index.xml" type="application/rss+xml" title="闲人码语"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://xue2zeng.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
@@ -121,11 +113,17 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://xue2zeng.github.io/">Xue.Zeng</a>
+      <a class="navbar-brand" href="https://xue2zeng.github.io/">闲人码语</a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
       <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
         
           
             <li>
@@ -149,8 +147,8 @@
     
       <div class="avatar-container">
         <div class="avatar-img-border">
-          <a title="Xue.Zeng" href="https://xue2zeng.github.io/">
-            <img class="avatar-img" src="https://xue2zeng.github.io/img/avatar-icon.png" alt="Xue.Zeng" />
+          <a title="闲人码语" href="https://xue2zeng.github.io/">
+            <img class="avatar-img" src="https://xue2zeng.github.io/img/avatar-icon.png" alt="闲人码语" />
           </a>
         </div>
       </div>
@@ -241,16 +239,14 @@
                 <span class="post-meta">
   
   
-  <i class="fas fa-calendar"></i>&nbsp;Posted on 2019-09-16
+  <i class="fas fa-calendar"></i>&nbsp;
   
   
     &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;2&nbsp;minutes
   
   
-    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;584&nbsp;words
+    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;272&nbsp;words
   
-  
-    &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;
   
   
 </span>
@@ -270,157 +266,154 @@
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        
-
-<h4 id="传统测试">传统测试</h4>
-
+        <h4 id="传统测试">传统测试</h4>
 <ul>
-<li><p>测试数据与测试逻辑混在一起</p></li>
-
-<li><p>出错信息不明确</p></li>
-
-<li><p>一旦一个数据出错，测试全部结束</p></li>
+<li>
+<p>测试数据与测试逻辑混在一起</p>
+</li>
+<li>
+<p>出错信息不明确</p>
+</li>
+<li>
+<p>一旦一个数据出错，测试全部结束</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">testAdd</span><span class="o">()</span> <span class="o">{</span>
+  <span class="n">assertEquals</span><span class="o">(</span><span class="n">3</span><span class="o">,</span> <span class="n">add</span><span class="o">(</span><span class="n">1</span><span class="o">,</span> <span class="n">2</span><span class="o">));</span>
+  <span class="n">assertEquals</span><span class="o">(</span><span class="n">2</span><span class="o">,</span> <span class="n">add</span><span class="o">(</span><span class="n">0</span><span class="o">,</span> <span class="n">2</span><span class="o">));</span>
+  <span class="n">assertEquals</span><span class="o">(</span><span class="n">0</span><span class="o">,</span> <span class="n">add</span><span class="o">(</span><span class="n">0</span><span class="o">,</span> <span class="n">0</span><span class="o">));</span>
+  <span class="n">assertEquals</span><span class="o">(</span><span class="n">0</span><span class="o">,</span> <span class="n">add</span><span class="o">(-</span><span class="n">1</span><span class="o">,</span> <span class="n">1</span><span class="o">));</span>
+  <span class="n">assertEquals</span><span class="o">(</span><span class="n">Integer</span><span class="o">.</span><span class="na">MIN_VALUE</span><span class="o">,</span> <span class="n">add</span><span class="o">(</span><span class="n">1</span><span class="o">,</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">));</span>
+<span class="o">}</span>
+</code></pre></div></li>
 </ul>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">  <span class="nd">@Test</span>
-  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testAdd</span><span class="o">()</span> <span class="o">{</span>
-    <span class="n">assertEquals</span><span class="o">(</span><span class="n">3</span><span class="o">,</span> <span class="n">add</span><span class="o">(</span><span class="n">1</span><span class="o">,</span> <span class="n">2</span><span class="o">));</span>
-    <span class="n">assertEquals</span><span class="o">(</span><span class="n">2</span><span class="o">,</span> <span class="n">add</span><span class="o">(</span><span class="n">0</span><span class="o">,</span> <span class="n">2</span><span class="o">));</span>
-    <span class="n">assertEquals</span><span class="o">(</span><span class="n">0</span><span class="o">,</span> <span class="n">add</span><span class="o">(</span><span class="n">0</span><span class="o">,</span> <span class="n">0</span><span class="o">));</span>
-    <span class="n">assertEquals</span><span class="o">(</span><span class="n">0</span><span class="o">,</span> <span class="n">add</span><span class="o">(-</span><span class="n">1</span><span class="o">,</span> <span class="n">1</span><span class="o">));</span>
-    <span class="n">assertEquals</span><span class="o">(</span><span class="n">Integer</span><span class="o">.</span><span class="na">MIN_VALUE</span><span class="o">,</span> <span class="n">add</span><span class="o">(</span><span class="n">1</span><span class="o">,</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">));</span>
-  <span class="o">}</span></code></pre></div>
 <h4 id="表格驱动测试">表格驱动测试</h4>
-
 <ul>
-<li><p>测试数据与测试逻辑分离</p></li>
-
-<li><p>明确的出错信息（自定义出错信息内容）</p></li>
-
-<li><p>可以部分失败</p></li>
-</ul>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go">  <span class="kd">func</span> <span class="nf">calcTriangle</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span>
-  	<span class="kd">var</span> <span class="nx">c</span> <span class="kt">int</span>
-  	<span class="nx">c</span> <span class="p">=</span> <span class="nb">int</span><span class="p">(</span><span class="nx">math</span><span class="p">.</span><span class="nf">Sqrt</span><span class="p">(</span><span class="nb">float64</span><span class="p">(</span><span class="nx">a</span><span class="o">*</span><span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="o">*</span><span class="nx">b</span><span class="p">)))</span>
-  	<span class="k">return</span> <span class="nx">c</span>
+<li>
+<p>测试数据与测试逻辑分离</p>
+</li>
+<li>
+<p>明确的出错信息（自定义出错信息内容）</p>
+</li>
+<li>
+<p>可以部分失败</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">calcTriangle</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">c</span> <span class="kt">int</span>
+  <span class="nx">c</span> <span class="p">=</span> <span class="nb">int</span><span class="p">(</span><span class="nx">math</span><span class="p">.</span><span class="nf">Sqrt</span><span class="p">(</span><span class="nb">float64</span><span class="p">(</span><span class="nx">a</span><span class="o">*</span><span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="o">*</span><span class="nx">b</span><span class="p">)))</span>
+  <span class="k">return</span> <span class="nx">c</span>
+<span class="p">}</span>
+  
+<span class="nx">tests</span> <span class="o">:=</span> <span class="p">[]</span><span class="kd">struct</span><span class="p">{</span> <span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">c</span> <span class="kt">int</span> <span class="p">}{</span>
+      <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">},</span>
+      <span class="p">{</span><span class="mi">5</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">},</span>
+      <span class="p">{</span><span class="mi">8</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">17</span><span class="p">},</span>
+      <span class="p">{</span><span class="mi">12</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">37</span><span class="p">},</span>
+      <span class="p">{</span><span class="mi">30000</span><span class="p">,</span> <span class="mi">40000</span><span class="p">,</span> <span class="mi">50000</span><span class="p">},</span>
   <span class="p">}</span>
   
-  <span class="nx">tests</span> <span class="o">:=</span> <span class="p">[]</span><span class="kd">struct</span><span class="p">{</span> <span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">c</span> <span class="kt">int</span> <span class="p">}{</span>
-  		<span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">},</span>
-  		<span class="p">{</span><span class="mi">5</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">},</span>
-  		<span class="p">{</span><span class="mi">8</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">17</span><span class="p">},</span>
-  		<span class="p">{</span><span class="mi">12</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">37</span><span class="p">},</span>
-  		<span class="p">{</span><span class="mi">30000</span><span class="p">,</span> <span class="mi">40000</span><span class="p">,</span> <span class="mi">50000</span><span class="p">},</span>
-  	<span class="p">}</span>
-  
-  <span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">tt</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">tests</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="nx">actual</span> <span class="o">:=</span> <span class="nf">calcTriangle</span><span class="p">(</span><span class="nx">tt</span><span class="p">.</span><span class="nx">a</span><span class="p">,</span> <span class="nx">tt</span><span class="p">.</span><span class="nx">b</span><span class="p">);</span> <span class="nx">actual</span> <span class="o">!=</span> <span class="nx">tt</span><span class="p">.</span><span class="nx">c</span> <span class="p">{</span>
-      <span class="nx">t</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;calcTriangle(%d, %d); &#34;</span><span class="o">+</span>
-               <span class="s">&#34;got %d; expected %d&#34;</span><span class="p">,</span>
-               <span class="nx">tt</span><span class="p">.</span><span class="nx">a</span><span class="p">,</span> <span class="nx">tt</span><span class="p">.</span><span class="nx">b</span><span class="p">,</span> <span class="nx">actual</span><span class="p">,</span> <span class="nx">tt</span><span class="p">.</span><span class="nx">c</span><span class="p">)</span>
-    <span class="p">}</span>
-  <span class="p">}</span></code></pre></div>
-<h4 id="testing-t的使用">testing.T的使用</h4>
-
-<h4 id="testing-b的使用">testing.B的使用</h4>
-
+<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">tt</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">tests</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="nx">actual</span> <span class="o">:=</span> <span class="nf">calcTriangle</span><span class="p">(</span><span class="nx">tt</span><span class="p">.</span><span class="nx">a</span><span class="p">,</span> <span class="nx">tt</span><span class="p">.</span><span class="nx">b</span><span class="p">);</span> <span class="nx">actual</span> <span class="o">!=</span> <span class="nx">tt</span><span class="p">.</span><span class="nx">c</span> <span class="p">{</span>
+    <span class="nx">t</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;calcTriangle(%d, %d); &#34;</span><span class="o">+</span>
+             <span class="s">&#34;got %d; expected %d&#34;</span><span class="p">,</span>
+             <span class="nx">tt</span><span class="p">.</span><span class="nx">a</span><span class="p">,</span> <span class="nx">tt</span><span class="p">.</span><span class="nx">b</span><span class="p">,</span> <span class="nx">actual</span><span class="p">,</span> <span class="nx">tt</span><span class="p">.</span><span class="nx">c</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+<h4 id="testingt的使用">testing.T的使用</h4>
+<h4 id="testingb的使用">testing.B的使用</h4>
 <h4 id="代码覆盖">代码覆盖</h4>
-
 <ul>
-<li>使用go test生成代码覆盖报告</li>
+<li>
+<p>使用go test生成代码覆盖报告</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">go <span class="nb">test</span> -couverprofile<span class="o">=</span>test.prof
+</code></pre></div></li>
+<li>
+<p>使用go tool cover查看代码覆盖报告</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">go tool cover -html<span class="o">=</span>test.prof
+</code></pre></div></li>
 </ul>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">  go <span class="nb">test</span> -couverprofile<span class="o">=</span>test.prof</code></pre></div>
-<ul>
-<li>使用go tool cover查看代码覆盖报告</li>
-</ul>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">  go tool cover -html<span class="o">=</span>test.prof</code></pre></div>
 <h4 id="http测试">http测试</h4>
-
 <p>Web应用程序中往往需要与其他系统进行交互，比如通过http访问其他系统，此时就需要有一种方法用于打桩来模拟Web服务器和客户端，httptest包即Go语言针对Web应用提供的解决方案</p>
-
 <p>测试方式</p>
-
 <ul>
 <li>通过使用假的Request/Response</li>
 <li>通过起服务器</li>
 </ul>
-
 <h4 id="文档">文档</h4>
-
 <ul>
-<li>用注释写文档</li>
+<li>
+<p>用注释写文档</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">queue</span>
+  
+<span class="c1">// A FIFO queue.
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">Queue</span> <span class="p">[]</span><span class="kt">int</span>
+  
+<span class="c1">// Pushes the element into the queue.
+</span><span class="c1">// 		e.g. q.Push(123)
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">q</span> <span class="o">*</span><span class="nx">Queue</span><span class="p">)</span> <span class="nf">Push</span><span class="p">(</span><span class="nx">v</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+  <span class="o">*</span><span class="nx">q</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="o">*</span><span class="nx">q</span><span class="p">,</span> <span class="nx">v</span><span class="p">)</span>
+<span class="p">}</span>
+  
+<span class="c1">// Pops element from head.
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">q</span> <span class="o">*</span><span class="nx">Queue</span><span class="p">)</span> <span class="nf">Pop</span><span class="p">()</span> <span class="kt">int</span> <span class="p">{</span>
+  <span class="nx">head</span> <span class="o">:=</span> <span class="p">(</span><span class="o">*</span><span class="nx">q</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+  <span class="o">*</span><span class="nx">q</span> <span class="p">=</span> <span class="p">(</span><span class="o">*</span><span class="nx">q</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]</span>
+  <span class="k">return</span> <span class="nx">head</span>
+<span class="p">}</span>
+  
+<span class="c1">// Returns if the queue is empty or not.
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">q</span> <span class="o">*</span><span class="nx">Queue</span><span class="p">)</span> <span class="nf">IsEmpty</span><span class="p">()</span> <span class="kt">bool</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="o">*</span><span class="nx">q</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li>
+<p>在测试中加入Example</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">queue</span>
+  
+<span class="kn">import</span> <span class="s">&#34;fmt&#34;</span>
+  
+<span class="kd">func</span> <span class="nf">ExampleQueue_Pop</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">q</span> <span class="o">:=</span> <span class="nx">Queue</span><span class="p">{</span><span class="mi">1</span><span class="p">}</span>
+  <span class="nx">q</span><span class="p">.</span><span class="nf">Push</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+  <span class="nx">q</span><span class="p">.</span><span class="nf">Push</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+  <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">q</span><span class="p">.</span><span class="nf">Pop</span><span class="p">())</span>
+  <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">q</span><span class="p">.</span><span class="nf">Pop</span><span class="p">())</span>
+  <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">q</span><span class="p">.</span><span class="nf">IsEmpty</span><span class="p">())</span>
+  
+  <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">q</span><span class="p">.</span><span class="nf">Pop</span><span class="p">())</span>
+  <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">q</span><span class="p">.</span><span class="nf">IsEmpty</span><span class="p">())</span>
+  
+  <span class="c1">// Output:
+</span><span class="c1"></span>  <span class="c1">// 1
+</span><span class="c1"></span>  <span class="c1">// 2
+</span><span class="c1"></span>  <span class="c1">// false
+</span><span class="c1"></span>  <span class="c1">// 3
+</span><span class="c1"></span>  <span class="c1">// true
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></div><p>在文档中可以查看到如下内容</p>
+<p><img src="WX20190922-164427@2x.png" alt="doc"></p>
+</li>
+<li>
+<p>使用go doc查看文档</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">go doc Queue     
+<span class="nb">type</span> Queue <span class="o">[]</span>int
+    A FIFO queue.
+  
+func <span class="o">(</span>q *Queue<span class="o">)</span> IsEmpty<span class="o">()</span> bool
+func <span class="o">(</span>q *Queue<span class="o">)</span> Pop<span class="o">()</span> int
+func <span class="o">(</span>q *Queue<span class="o">)</span> Push<span class="o">(</span>v int<span class="o">)</span>
+  
+go doc Queue.isEmpty
+func <span class="o">(</span>q *Queue<span class="o">)</span> IsEmpty<span class="o">()</span> bool
+    Returns <span class="k">if</span> the queue is empty or not.
+</code></pre></div></li>
+<li>
+<p>使用godoc生成文档（）</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">godoc -http :6060
+</code></pre></div><p>访问 http://127.0.0.1:6060 可以查看到如下文档</p>
+<p><img src="WX20190922-164040@2x.png" alt="doc"></p>
+</li>
 </ul>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go">  <span class="kn">package</span> <span class="nx">queue</span>
-  
-  <span class="c1">// A FIFO queue.
-</span><span class="c1"></span>  <span class="kd">type</span> <span class="nx">Queue</span> <span class="p">[]</span><span class="kt">int</span>
-  
-  <span class="c1">// Pushes the element into the queue.
-</span><span class="c1"></span>  <span class="c1">// 		e.g. q.Push(123)
-</span><span class="c1"></span>  <span class="kd">func</span> <span class="p">(</span><span class="nx">q</span> <span class="o">*</span><span class="nx">Queue</span><span class="p">)</span> <span class="nf">Push</span><span class="p">(</span><span class="nx">v</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
-  	<span class="o">*</span><span class="nx">q</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="o">*</span><span class="nx">q</span><span class="p">,</span> <span class="nx">v</span><span class="p">)</span>
-  <span class="p">}</span>
-  
-  <span class="c1">// Pops element from head.
-</span><span class="c1"></span>  <span class="kd">func</span> <span class="p">(</span><span class="nx">q</span> <span class="o">*</span><span class="nx">Queue</span><span class="p">)</span> <span class="nf">Pop</span><span class="p">()</span> <span class="kt">int</span> <span class="p">{</span>
-  	<span class="nx">head</span> <span class="o">:=</span> <span class="p">(</span><span class="o">*</span><span class="nx">q</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-  	<span class="o">*</span><span class="nx">q</span> <span class="p">=</span> <span class="p">(</span><span class="o">*</span><span class="nx">q</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]</span>
-  	<span class="k">return</span> <span class="nx">head</span>
-  <span class="p">}</span>
-  
-  <span class="c1">// Returns if the queue is empty or not.
-</span><span class="c1"></span>  <span class="kd">func</span> <span class="p">(</span><span class="nx">q</span> <span class="o">*</span><span class="nx">Queue</span><span class="p">)</span> <span class="nf">IsEmpty</span><span class="p">()</span> <span class="kt">bool</span> <span class="p">{</span>
-  	<span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="o">*</span><span class="nx">q</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
-  <span class="p">}</span></code></pre></div>
-<ul>
-<li>在测试中加入Example</li>
-</ul>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go">  <span class="kn">package</span> <span class="nx">queue</span>
-  
-  <span class="kn">import</span> <span class="s">&#34;fmt&#34;</span>
-  
-  <span class="kd">func</span> <span class="nf">ExampleQueue_Pop</span><span class="p">()</span> <span class="p">{</span>
-  	<span class="nx">q</span> <span class="o">:=</span> <span class="nx">Queue</span><span class="p">{</span><span class="mi">1</span><span class="p">}</span>
-  	<span class="nx">q</span><span class="p">.</span><span class="nf">Push</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-  	<span class="nx">q</span><span class="p">.</span><span class="nf">Push</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-  	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">q</span><span class="p">.</span><span class="nf">Pop</span><span class="p">())</span>
-  	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">q</span><span class="p">.</span><span class="nf">Pop</span><span class="p">())</span>
-  	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">q</span><span class="p">.</span><span class="nf">IsEmpty</span><span class="p">())</span>
-  
-  	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">q</span><span class="p">.</span><span class="nf">Pop</span><span class="p">())</span>
-  	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">q</span><span class="p">.</span><span class="nf">IsEmpty</span><span class="p">())</span>
-  
-  	<span class="c1">// Output:
-</span><span class="c1"></span>  	<span class="c1">// 1
-</span><span class="c1"></span>  	<span class="c1">// 2
-</span><span class="c1"></span>  	<span class="c1">// false
-</span><span class="c1"></span>  	<span class="c1">// 3
-</span><span class="c1"></span>  	<span class="c1">// true
-</span><span class="c1"></span>  <span class="p">}</span></code></pre></div>
-<p>在文档中可以查看到如下内容</p>
-
-<p><img src="WX20190922-164427@2x.png" alt="doc" /></p>
-
-<ul>
-<li>使用go doc查看文档</li>
-</ul>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">  go doc Queue     
-  <span class="nb">type</span> Queue <span class="o">[]</span>int
-      A FIFO queue.
-  
-  func <span class="o">(</span>q *Queue<span class="o">)</span> IsEmpty<span class="o">()</span> bool
-  func <span class="o">(</span>q *Queue<span class="o">)</span> Pop<span class="o">()</span> int
-  func <span class="o">(</span>q *Queue<span class="o">)</span> Push<span class="o">(</span>v int<span class="o">)</span>
-  
-  go doc Queue.isEmpty
-  func <span class="o">(</span>q *Queue<span class="o">)</span> IsEmpty<span class="o">()</span> bool
-      Returns <span class="k">if</span> the queue is empty or not.</code></pre></div>
-<ul>
-<li>使用godoc生成文档（）</li>
-</ul>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">  godoc -http :6060</code></pre></div>
-<p>访问 <a href="http://127.0.0.1:6060">http://127.0.0.1:6060</a> 可以查看到如下文档</p>
-
-<p><img src="WX20190922-164040@2x.png" alt="doc" /></p>
 
 
         
@@ -441,15 +434,8 @@
     <ul class="share">
       
       <li>
-        <a href="//twitter.com/share?url=https%3a%2f%2fxue2zeng.github.io%2fpost%2flanguage%2fgo%2ftesting%2f&amp;text=%e8%b0%83%e8%af%95%e4%b8%8e%e6%b5%8b%e8%af%95&amp;via=" target="_blank" title="Share on Twitter">
+        <a href="//twitter.com/share?url=https%3a%2f%2fxue2zeng.github.io%2fpost%2flanguage%2fgo%2ftesting%2f&amp;text=%e8%b0%83%e8%af%95%e4%b8%8e%e6%b5%8b%e8%af%95&amp;via=username" target="_blank" title="Share on Twitter">
           <i class="fab fa-twitter"></i>
-        </a>
-      </li>
-  
-      
-      <li>
-        <a href="//plus.google.com/share?url=https%3a%2f%2fxue2zeng.github.io%2fpost%2flanguage%2fgo%2ftesting%2f" target="_blank" title="Share on Google Plus">
-          <i class="fab fa-google-plus"></i>
         </a>
       </li>
   
@@ -490,23 +476,33 @@
     </ul>
   </div>
   
+
               </div>
             </section>
         
 
         
           
+            
           
-          <h4 class="see-also">See also</h4>
-          <ul>
+
           
-            <li><a href="/post/language/go/resourceerror/">资源管理与错误处理</a></li>
-          
-            <li><a href="/post/language/go/functional/">函数式编程</a></li>
-          
-            <li><a href="/post/language/go/interfaceoriented/">面向接口</a></li>
-          
-          </ul>
+                  <h4 class="see-also">See also</h4>
+                  <ul>
+                
+                
+                    <li><a href="/post/language/go/sync/">并发-传统同步机制</a></li>
+                
+                    <li><a href="/post/language/go/select/">并发-Select</a></li>
+                
+                    <li><a href="/post/language/go/channel/">并发-Channel</a></li>
+                
+                    <li><a href="/post/language/go/goroutine/">并发-Goroutine(协程)</a></li>
+                
+                    <li><a href="/post/language/go/performance/">性能调优-PProf</a></li>
+                
+              </ul>
+
           
         
       </article>
@@ -536,12 +532,221 @@
   </div>
 </div>
 
-    <footer>
+      
+<footer>
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
           
+              <li>
+                <a href="mailto:youremail@domain.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.facebook.com/username" title="Facebook">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-facebook fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/username" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://gitlab.com/username" title="GitLab">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-gitlab fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://bitbucket.org/username" title="Bitbucket">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-bitbucket fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/username" title="Twitter">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://username.slack.com/" title="Slack">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-slack fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://reddit.com/u/username" title="Reddit">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-reddit-alien fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://linkedin.com/in/username" title="LinkedIn">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.xing.com/profile/username" title="Xing">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-xing fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://stackoverflow.com/users/XXXXXXX/username" title="StackOverflow">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.snapchat.com/add/username" title="Snapchat">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-snapchat-ghost fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.instagram.com/username" title="Instagram">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-instagram fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.youtube.com/user/username" title="Youtube">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-youtube fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://soundcloud.com/username" title="SoundCloud">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-soundcloud fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://open.spotify.com/user/username" title="Spotify">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-spotify fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://username.bandcamp.com/" title="Bandcamp">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-bandcamp fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://itch.io/profile/username" title="Itch.io">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fas fa-gamepad fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://vk.com/username" title="VK">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-vk fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://paypal.me/username" title="PayPal">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-paypal fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://telegram.me/username" title="Telegram">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-telegram fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://500px.com/username" title="500px">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-500px fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://codepen.io/username" title="CodePen">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-codepen fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.kaggle.com/username" title="kaggle">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-kaggle fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://url" title="Mastodon">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-mastodon fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://weibo.com/username" title="Weibo">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-weibo fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
           
           <li>
             <a href="" title="RSS">
@@ -555,20 +760,24 @@
         </ul>
         <p class="credits copyright text-muted">
           
+            
+              <a href="yourwebsite.com">xue.zeng</a>
+            
+          
 
           &nbsp;&bull;&nbsp;&copy;
           
-            2019
+            2020
           
 
           
             &nbsp;&bull;&nbsp;
-            <a href="https://xue2zeng.github.io/">Xue.Zeng</a>
+            <a href="https://xue2zeng.github.io/">闲人码语</a>
           
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          <a href="https://gohugo.io">Hugo v0.78.1</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
           
         </p>
       </div>
@@ -593,6 +802,7 @@
 
 
 
+    
   </body>
 </html>
 

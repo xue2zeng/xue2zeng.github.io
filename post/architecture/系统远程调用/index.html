@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>系统远程调用 - 闲人码语</title>
+  <meta name="description" content="系统远程调用思想 常规远程调用协议  dubbo thrift protocol buffer hessian  远程框架调用实现 调用端应用服务端暴露出来的接口，通过代理工厂创建代理对象
+spring实现：通过spring的自动注入的方式，在服务容器里面生成代理对象，然后当需要使用的时候，直接使用代理对象，
+就可以调用到另一个系统里面的服务
+远程通讯基本原理 从底层层面去看，网络通信需要做的就是将流从一台计算机传输到另外一台计算 机，基于传输协议和网络IO来实现，
+ 传输协议：主要有 tcp、udp、http等，tcp、udp、http都是在基于Socket概念上为某类应用场景而扩展出的传输协议 网络IO：主要有bio（阻塞）、 nio（非阻塞）、aio（异步，jdk7中新特性）三种方式，所有的分布式应用通讯都基于这个原理而实现，只是为了应用的易用，各种语言通常都会提供一些更为贴近应用易用的应用层协议  应用级协议 远程服务通讯，需要达到的目标是在一台计算机发起请求，另外一台机器在接收到请求后进行相应的处理并将结果返回给请求端，这其中又会有诸如one way request、同步请求、异步请求等等请求方式，按照网络通信原理，需要实现这个需要做的就是将请求转换成流，通过传输协议传输至远端，远端计算机在接 收到请求的流后进行处理，处理完毕后将结果转化为流，并通过传输协议返回给调用端
+原理是这样的，但为了应用的方便，业界推出了很多基于此原理之上的应用级的协议，使得大家可以不用去直接操作这么底层的东西，通常应用级的远程通信协议会 提供：
+ 为了避免直接做流操作这么麻烦，提供一种更加易用或贴合语言的标准传输格式 网络通信机制的实现，就是替你完成了将传输格式转化为流，通过某种传输协议传输至远端计算机，远端计算机在接收到流后转化为传输格式，并进行存储或以某种 方式通知远端计算机。  所以在学习应用级的远程通信协议时，可以带着这几个问题进行学习：
+ 传输的标准格式是什么？ 怎么样将请求转化为传输的流？ 怎么接收和处理流？ 传输协议是？  不过应用级的远程通信协议并不会在传输协议上做什么多大的改进，主要是在流操作方面，让应用层生成流和处理流的这个过程更加的贴合所使用的语言或标 准，至于传输协议则通常都是可选的
+Java领域实现远程调用技术  RMI XML-RPC Binary-RPC MINA ESB Burlap Hessian SOAP CORBA EJB JMS  RMI(Remote Method Invocation) RMI是个典型的为java定制的远程通信协议，在single vm中，可以通过直接调用java object instance来实现通信，那么在远程通信时，如果也能按照这种方式当然是最好了，这种远程通信的机制成为RPC（Remote Procedure Call），RMI正是朝着这个目标而诞生的。
+RMI 采用stubs 和 skeletons 来进行远程对象(remote object)的通讯。stub 充当远程对象的客户端代理，有着和远程对象相同的远程接口，远程对象的调用实际是通过调用该对象的客户端代理对象stub来完成的，通过该机制RMI就好比它是本地工作，采用tcp/ip协议，客户端直接调用服务端上的一些方法。优点是强类型，编译期可检查错误，缺点是只能基于JAVA语言，客户机与服务器紧耦合">
+  <meta name="author" content="xue.zeng"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "闲人码语",
+    
+    "url": "https:\/\/xue2zeng.github.io\/"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/xue2zeng.github.io\/"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/xue2zeng.github.io\/",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/xue2zeng.github.io\/post\/architecture\/%E7%B3%BB%E7%BB%9F%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8\/",
+          "name": "系统远程调用"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "xue.zeng"
+  },
+  "headline": "系统远程调用",
+  "description" : "系统远程调用思想 常规远程调用协议  dubbo thrift protocol buffer hessian  远程框架调用实现 调用端应用服务端暴露出来的接口，通过代理工厂创建代理对象\nspring实现：通过spring的自动注入的方式，在服务容器里面生成代理对象，然后当需要使用的时候，直接使用代理对象，\n就可以调用到另一个系统里面的服务\n远程通讯基本原理 从底层层面去看，网络通信需要做的就是将流从一台计算机传输到另外一台计算 机，基于传输协议和网络IO来实现，\n 传输协议：主要有 tcp、udp、http等，tcp、udp、http都是在基于Socket概念上为某类应用场景而扩展出的传输协议 网络IO：主要有bio（阻塞）、 nio（非阻塞）、aio（异步，jdk7中新特性）三种方式，所有的分布式应用通讯都基于这个原理而实现，只是为了应用的易用，各种语言通常都会提供一些更为贴近应用易用的应用层协议  应用级协议 远程服务通讯，需要达到的目标是在一台计算机发起请求，另外一台机器在接收到请求后进行相应的处理并将结果返回给请求端，这其中又会有诸如one way request、同步请求、异步请求等等请求方式，按照网络通信原理，需要实现这个需要做的就是将请求转换成流，通过传输协议传输至远端，远端计算机在接 收到请求的流后进行处理，处理完毕后将结果转化为流，并通过传输协议返回给调用端\n原理是这样的，但为了应用的方便，业界推出了很多基于此原理之上的应用级的协议，使得大家可以不用去直接操作这么底层的东西，通常应用级的远程通信协议会 提供：\n 为了避免直接做流操作这么麻烦，提供一种更加易用或贴合语言的标准传输格式 网络通信机制的实现，就是替你完成了将传输格式转化为流，通过某种传输协议传输至远端计算机，远端计算机在接收到流后转化为传输格式，并进行存储或以某种 方式通知远端计算机。  所以在学习应用级的远程通信协议时，可以带着这几个问题进行学习：\n 传输的标准格式是什么？ 怎么样将请求转化为传输的流？ 怎么接收和处理流？ 传输协议是？  不过应用级的远程通信协议并不会在传输协议上做什么多大的改进，主要是在流操作方面，让应用层生成流和处理流的这个过程更加的贴合所使用的语言或标 准，至于传输协议则通常都是可选的\nJava领域实现远程调用技术  RMI XML-RPC Binary-RPC MINA ESB Burlap Hessian SOAP CORBA EJB JMS  RMI(Remote Method Invocation) RMI是个典型的为java定制的远程通信协议，在single vm中，可以通过直接调用java object instance来实现通信，那么在远程通信时，如果也能按照这种方式当然是最好了，这种远程通信的机制成为RPC（Remote Procedure Call），RMI正是朝着这个目标而诞生的。\nRMI 采用stubs 和 skeletons 来进行远程对象(remote object)的通讯。stub 充当远程对象的客户端代理，有着和远程对象相同的远程接口，远程对象的调用实际是通过调用该对象的客户端代理对象stub来完成的，通过该机制RMI就好比它是本地工作，采用tcp\/ip协议，客户端直接调用服务端上的一些方法。优点是强类型，编译期可检查错误，缺点是只能基于JAVA语言，客户机与服务器紧耦合",
+  "inLanguage" : "en",
+  "wordCount":  293 ,
+  "datePublished" : "0001-01-01T00:00:00",
+  "dateModified" : "0001-01-01T00:00:00",
+  "image" : "https:\/\/xue2zeng.github.io\/img\/avatar-icon.png",
+  "keywords" : [ "arch" ],
+  "mainEntityOfPage" : "https:\/\/xue2zeng.github.io\/post\/architecture\/%E7%B3%BB%E7%BB%9F%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/xue2zeng.github.io\/",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/xue2zeng.github.io\/img\/avatar-icon.png",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+<meta property="og:title" content="系统远程调用" />
+<meta property="og:description" content="系统远程调用思想 常规远程调用协议  dubbo thrift protocol buffer hessian  远程框架调用实现 调用端应用服务端暴露出来的接口，通过代理工厂创建代理对象
+spring实现：通过spring的自动注入的方式，在服务容器里面生成代理对象，然后当需要使用的时候，直接使用代理对象，
+就可以调用到另一个系统里面的服务
+远程通讯基本原理 从底层层面去看，网络通信需要做的就是将流从一台计算机传输到另外一台计算 机，基于传输协议和网络IO来实现，
+ 传输协议：主要有 tcp、udp、http等，tcp、udp、http都是在基于Socket概念上为某类应用场景而扩展出的传输协议 网络IO：主要有bio（阻塞）、 nio（非阻塞）、aio（异步，jdk7中新特性）三种方式，所有的分布式应用通讯都基于这个原理而实现，只是为了应用的易用，各种语言通常都会提供一些更为贴近应用易用的应用层协议  应用级协议 远程服务通讯，需要达到的目标是在一台计算机发起请求，另外一台机器在接收到请求后进行相应的处理并将结果返回给请求端，这其中又会有诸如one way request、同步请求、异步请求等等请求方式，按照网络通信原理，需要实现这个需要做的就是将请求转换成流，通过传输协议传输至远端，远端计算机在接 收到请求的流后进行处理，处理完毕后将结果转化为流，并通过传输协议返回给调用端
+原理是这样的，但为了应用的方便，业界推出了很多基于此原理之上的应用级的协议，使得大家可以不用去直接操作这么底层的东西，通常应用级的远程通信协议会 提供：
+ 为了避免直接做流操作这么麻烦，提供一种更加易用或贴合语言的标准传输格式 网络通信机制的实现，就是替你完成了将传输格式转化为流，通过某种传输协议传输至远端计算机，远端计算机在接收到流后转化为传输格式，并进行存储或以某种 方式通知远端计算机。  所以在学习应用级的远程通信协议时，可以带着这几个问题进行学习：
+ 传输的标准格式是什么？ 怎么样将请求转化为传输的流？ 怎么接收和处理流？ 传输协议是？  不过应用级的远程通信协议并不会在传输协议上做什么多大的改进，主要是在流操作方面，让应用层生成流和处理流的这个过程更加的贴合所使用的语言或标 准，至于传输协议则通常都是可选的
+Java领域实现远程调用技术  RMI XML-RPC Binary-RPC MINA ESB Burlap Hessian SOAP CORBA EJB JMS  RMI(Remote Method Invocation) RMI是个典型的为java定制的远程通信协议，在single vm中，可以通过直接调用java object instance来实现通信，那么在远程通信时，如果也能按照这种方式当然是最好了，这种远程通信的机制成为RPC（Remote Procedure Call），RMI正是朝着这个目标而诞生的。
+RMI 采用stubs 和 skeletons 来进行远程对象(remote object)的通讯。stub 充当远程对象的客户端代理，有着和远程对象相同的远程接口，远程对象的调用实际是通过调用该对象的客户端代理对象stub来完成的，通过该机制RMI就好比它是本地工作，采用tcp/ip协议，客户端直接调用服务端上的一些方法。优点是强类型，编译期可检查错误，缺点是只能基于JAVA语言，客户机与服务器紧耦合">
+<meta property="og:image" content="https://xue2zeng.github.io/img/avatar-icon.png" />
+<meta property="og:url" content="https://xue2zeng.github.io/post/architecture/%E7%B3%BB%E7%BB%9F%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="闲人码语" />
+
+  <meta name="twitter:title" content="系统远程调用" />
+  <meta name="twitter:description" content="系统远程调用思想 常规远程调用协议  dubbo thrift protocol buffer hessian  远程框架调用实现 调用端应用服务端暴露出来的接口，通过代理工厂创建代理对象
+spring实现：通过spring的自动注入的方式，在服务容器里面生成代理对象，然后当需要使用的时候，直接使用代理对象，
+就可以调用到另一个系统里面的服务
+远程通讯基本原理 从底层层面去看，网络通信需要做的就是 …">
+  <meta name="twitter:image" content="https://xue2zeng.github.io/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@username" />
+  <meta name="twitter:creator" content="@username" />
+  <link href='https://xue2zeng.github.io/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.78.1" />
+  <link rel="alternate" href="https://xue2zeng.github.io/index.xml" type="application/rss+xml" title="闲人码语"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://xue2zeng.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://xue2zeng.github.io/css/highlight.min.css" /><link rel="stylesheet" href="https://xue2zeng.github.io/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://xue2zeng.github.io/">闲人码语</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/about">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    
+      <div class="avatar-container">
+        <div class="avatar-img-border">
+          <a title="闲人码语" href="https://xue2zeng.github.io/">
+            <img class="avatar-img" src="https://xue2zeng.github.io/img/avatar-icon.png" alt="闲人码语" />
+          </a>
+        </div>
+      </div>
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              
+                <h1>系统远程调用</h1>
+              
+              
+              
+              
+                <span class="post-meta">
+  
+  
+  <i class="fas fa-calendar"></i>&nbsp;
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;2&nbsp;minutes
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;293&nbsp;words
+  
+  
+  
+</span>
+
+
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <h2 id="系统远程调用思想">系统远程调用思想</h2>
+<h4 id="常规远程调用协议">常规远程调用协议</h4>
+<ul>
+<li>dubbo</li>
+<li>thrift</li>
+<li>protocol buffer</li>
+<li>hessian</li>
+</ul>
+<h4 id="远程框架调用实现">远程框架调用实现</h4>
+<p>调用端应用服务端暴露出来的接口，通过代理工厂创建代理对象</p>
+<p>spring实现：通过spring的自动注入的方式，在服务容器里面生成代理对象，然后当需要使用的时候，直接使用代理对象，</p>
+<p>就可以调用到另一个系统里面的服务</p>
+<h4 id="远程通讯基本原理">远程通讯基本原理</h4>
+<p>从底层层面去看，网络通信需要做的就是将流从一台计算机传输到另外一台计算 机，基于传输协议和网络IO来实现，</p>
+<ul>
+<li>传输协议：主要有 tcp、udp、http等，tcp、udp、http都是在基于Socket概念上为某类应用场景而扩展出的传输协议</li>
+<li>网络IO：主要有bio（阻塞）、 nio（非阻塞）、aio（异步，jdk7中新特性）三种方式，所有的分布式应用通讯都基于这个原理而实现，只是为了应用的易用，各种语言通常都会提供一些更为贴近应用易用的应用层协议</li>
+</ul>
+<h4 id="应用级协议">应用级协议</h4>
+<p>远程服务通讯，需要达到的目标是在一台计算机发起请求，另外一台机器在接收到请求后进行相应的处理并将结果返回给请求端，这其中又会有诸如one way request、同步请求、异步请求等等请求方式，按照网络通信原理，需要实现这个需要做的就是将请求转换成流，通过传输协议传输至远端，远端计算机在接 收到请求的流后进行处理，处理完毕后将结果转化为流，并通过传输协议返回给调用端</p>
+<p>原理是这样的，但为了应用的方便，业界推出了很多基于此原理之上的应用级的协议，使得大家可以不用去直接操作这么底层的东西，通常应用级的远程通信协议会 提供：</p>
+<ol>
+<li>为了避免直接做流操作这么麻烦，提供一种更加易用或贴合语言的标准传输格式</li>
+<li>网络通信机制的实现，就是替你完成了将传输格式转化为流，通过某种传输协议传输至远端计算机，远端计算机在接收到流后转化为传输格式，并进行存储或以某种 方式通知远端计算机。</li>
+</ol>
+<p>所以在学习应用级的远程通信协议时，可以带着这几个问题进行学习：</p>
+<ol>
+<li><strong>传输的标准格式是什么？</strong></li>
+<li><strong>怎么样将请求转化为传输的流？</strong></li>
+<li><strong>怎么接收和处理流？</strong></li>
+<li><strong>传输协议是？</strong></li>
+</ol>
+<p>不过应用级的远程通信协议并不会在传输协议上做什么多大的改进，主要是在流操作方面，让应用层生成流和处理流的这个过程更加的贴合所使用的语言或标 准，至于传输协议则通常都是可选的</p>
+<h4 id="java领域实现远程调用技术">Java领域实现远程调用技术</h4>
+<ul>
+<li>RMI</li>
+<li>XML-RPC</li>
+<li>Binary-RPC</li>
+<li>MINA</li>
+<li>ESB</li>
+<li>Burlap</li>
+<li>Hessian</li>
+<li>SOAP</li>
+<li>CORBA</li>
+<li>EJB</li>
+<li>JMS</li>
+</ul>
+<h3 id="rmiremote-method-invocation">RMI(Remote Method Invocation)</h3>
+<p>RMI是个典型的为java定制的远程通信协议，在single vm中，可以通过直接调用java object instance来实现通信，那么在远程通信时，如果也能按照这种方式当然是最好了，这种远程通信的机制成为RPC（Remote Procedure Call），RMI正是朝着这个目标而诞生的。</p>
+<p>RMI 采用stubs 和 skeletons 来进行远程对象(remote object)的通讯。stub 充当远程对象的客户端代理，有着和远程对象相同的远程接口，远程对象的调用实际是通过调用该对象的客户端代理对象stub来完成的，通过该机制RMI就好比它是本地工作，采用tcp/ip协议，客户端直接调用服务端上的一些方法。优点是强类型，编译期可检查错误，缺点是只能基于JAVA语言，客户机与服务器紧耦合</p>
+<p>RMI的实现对建立分布式Java应用程序至关重要，是Java体系非常重要的底层技术</p>
+<p><strong>基于RMI的一次完整的远程通信过程的原理</strong></p>
+<ol>
+<li>客户端发起请求，请求转交至RMI客户端的stub类；</li>
+<li>stub类将请求的接口、方法、参数等信息进行序列化；</li>
+<li>基于socket将序列化后的流传输至服务器端；</li>
+<li>服务器端接收到流后转发至相应的skelton类；</li>
+<li>skelton类将请求的信息反序列化后调用实际的处理类；</li>
+<li>处理类处理完毕后将结果返回给skelton类；</li>
+<li>skelton类将结果序列化，通过socket将流传送给客户端的stub；</li>
+<li>stub在接收到流后反序列化，将反序列化后的Java Object返回给调用者；</li>
+</ol>
+<p>基于jboss-remoting对于此过程的一个更好的图示</p>
+<p><img src="./design.jpg" alt="rmi"></p>
+<p><strong>根据上述原理来回答下之前学习应用级协议带着的几个问题</strong></p>
+<ol>
+<li>传输的标准格式是什么？是Java ObjectStream。</li>
+<li>怎么样将请求转化为传输的流？基于Java串行化机制将请求的java object信息转化为流。</li>
+<li>怎么接收和处理流？根据采用的协议启动相应的监听端口，当有流进入后基于Java串行化机制将流进行反序列化，并根据RMI协议获取到相应的处理对象信息，进行调用并处理，处理完毕后的结果同样基于java串行化机制进行返回。</li>
+<li>传输协议是？Socket。</li>
+</ol>
+<h3 id="xml-rpc">XML-RPC</h3>
+<p>RPC使用C/S方式，采用http协议，发送请求到服务器，等待服务器返回结果。这个请求包括一个参数集和一个文本集，通常形成“classname.methodname”形式。优点是跨语言跨平台，C端、S端有更大的独立性，缺点是不支持对象，无法在编译器检查错误，只能在运行期检查。</p>
+<p>XML-RPC也是一种和RMI类似的远程调用的协议，它和RMI的不同之处在于它以标准的xml格式来定义请求的信息(请求的对象、方法、参数等)，这样的好处是什么呢，就是在跨语言通讯的时候也可以使用。</p>
+<p><strong>XML-RPC协议的一次远程通信过程</strong></p>
+<ol>
+<li>
+<p>客户端发起请求，按照XML-RPC协议将请求信息进行填充；</p>
+</li>
+<li>
+<p>填充完毕后将xml转化为流，通过传输协议进行传输；</p>
+</li>
+<li>
+<p>接收到在接收到流后转换为xml，按照XML-RPC协议获取请求的信息并进行处理；</p>
+</li>
+<li>
+<p>处理完毕后将结果按照XML-RPC协议写入xml中并返回。</p>
+</li>
+</ol>
+<p><strong>根据上述原理来回答下之前学习应用级协议带着的几个问题</strong></p>
+<ol>
+<li>传输的标准格式是？标准格式的XML。</li>
+<li>怎么样将请求转化为传输的流？将XML转化为流。</li>
+<li>怎么接收和处理流？通过监听的端口获取到请求的流，转化为XML，并根据协议获取请求的信息，进行处理并将结果写入XML中返回。</li>
+<li>传输协议是？Http。</li>
+</ol>
+<h3 id="binary-rpc">Binary-RPC</h3>
+<p>Binary-RPC看名字就知道和XML-RPC是差不多的了，不同之处仅在于传输的标准格式由XML转为了二进制的格式。</p>
+<p><strong>根据上述原理来回答下之前学习应用级协议带着的几个问题</strong></p>
+<ol>
+<li>传输的标准格式是？标准格式的二进制文件。</li>
+<li>怎么样将请求转化为传输的流？将二进制格式文件转化为流。</li>
+<li>怎么接收和处理流？通过监听的端口获取到请求的流，转化为二进制文件，根据协议获取请求的信息，进行处理并将结果写入XML中返回。</li>
+<li>传输协议是？Http。</li>
+</ol>
+<h3 id="soap">SOAP</h3>
+<p>SOAP原意为Simple Object Access Protocol，是一个用于分布式环境的、轻量级的、基于XML进行信息交换的通信协议，可以认为SOAP是XML RPC的高级版，两者的原理完全相同，都是http+XML，不同的仅在于两者定义的XML规范不同，SOAP也是Webservice采用的服务调用协议标准。</p>
+<p>Web Service提供的服务是基于web容器的，底层使用http协议，类似一个远程的服务提供者，比如天气预报服务，对各地客户端提供天气预报，是一种请求应答的机制，是跨系统跨平台的。就是通过一个servlet，提供服务出去。</p>
+<p>首先客户端从服务器获得WebService的WSDL，同时在客户端生成一个代理类(Proxy Class)，这个代理类负责与WebService服务器进行Request和Response。当一个数据（XML格式的）被封装成SOAP格式的数据流发送到服务器端的时候，就会生成一个进程对象并且把接收到这个Request的SOAP包进行解析，然后对事物进行处理，处理结束以后再对这个计算结果进行SOAP包装，然后把这个包作为一个Response发送给客户端的代理类(Proxy Class)，同样地，这个代理类也对这个SOAP包进行解析处理，继而进行后续操作。这就是WebService的一个运行过程。</p>
+<p><strong>Web Service大体上分为5个层次</strong></p>
+<ol>
+<li>Http传输信道；</li>
+<li>XML的数据格式；</li>
+<li>SOAP封装格式；</li>
+<li>WSDL的描述方式；</li>
+<li>UDDI UDDI是一种目录服务，企业可以使用它对Webservices进行注册和搜索；</li>
+</ol>
+<h3 id="corba">CORBA</h3>
+<p>Common Object Request Broker Architecture（公用对象请求代理[调度]程序体系结构），是一组用来定义“分布式对象系统”的标准，由OMG(Object Menagement Group)作为发起和标准制定单位。CORBA的目的是定义一套协议，符合这个协议的对象可以互相交互，不论它们是用什么样的语言写的，不论它们运行于什么样的机器和操作系统。</p>
+<p>CORBA在我看来是个类似于SOA的体系架构，涵盖可选的远程通信协议，但其本身不能列入通信协议这里来讲，而且CORBA基本淘汰</p>
+<h3 id="jmsjava-message-service">JMS（Java Message Service）</h3>
+<p>JMS是实现java领域远程通信的一种手段和方法，基于JMS实现远程通信时和RPC是不同的，虽然可以做到RPC的效果，但因为不是从协议级别定义的，因此我们不认为JMS是个RPC协议，但它确实是个远程通信协议，在其他的语言体系中也存在着类似JMS的东西，可以统一的将这类机制称为消息机制，而消息机制呢，通常是高并发、分布式领域推荐的一种通信机制，这里的主要一个问题是容错。</p>
+<p>JMS是Java的消息服务，JMS的客户端之间可以通过JMS服务进行异步的消息传输。JMS支持两种消息模型：Point-to-Point（P2P）和Publish/Subscribe（Pub/Sub），即点对点和发布订阅模型。</p>
+<p><strong>JMS中的一次远程通信的过程</strong></p>
+<ol>
+<li>
+<p>客户端将请求转化为符合JMS规定的Message；</p>
+</li>
+<li>
+<p>通过JMS API将Message放入JMS Queue或Topic中；</p>
+</li>
+<li>
+<p>如为JMS Queue，则发送中相应的目标Queue中，如为Topic，则发送给订阅了此Topic的JMS Queue；</p>
+</li>
+<li>
+<p>处理端则通过轮训JMS Queue，来获取消息，接收到消息后根据JMS协议来解析Message并处理；</p>
+</li>
+</ol>
+<p><strong>根据上述原理来回答下之前学习应用级协议带着的几个问题</strong></p>
+<ol>
+<li>传输的标准格式是？JMS规定的Message。</li>
+<li>怎么样将请求转化为传输的流？将参数信息放入Message中即可。</li>
+<li>怎么接收和处理流？轮训JMS Queue来接收Message，接收到后进行处理，处理完毕后仍然是以Message的方式放入Queue中发送或Multicast。</li>
+<li>传输协议是？不限。</li>
+</ol>
+<p>基于JMS也是常用的实现远程异步调用的方法之一</p>
+<h3 id="java领域可用于实现远程通讯的框架或library">Java领域可用于实现远程通讯的框架或library</h3>
+<ul>
+<li>JBoss-Remoting</li>
+<li>Spring-Remoting</li>
+<li>Hessian</li>
+<li>Burlap</li>
+<li>XFire(Axis)</li>
+<li>ActiveMQ</li>
+<li>Mina</li>
+<li>Mule</li>
+<li>EJB3</li>
+</ul>
+<p>了解这些远程通讯的框架或library时，可以带着如下问题去学习</p>
+<ol>
+<li><strong>是基于什么协议实现的？</strong></li>
+<li><strong>怎么发起请求？</strong></li>
+<li><strong>怎么将请求转化为符合协议的格式的？</strong></li>
+<li><strong>使用什么传输协议传输？</strong></li>
+<li><strong>响应端基于什么机制来接收请求？</strong></li>
+<li><strong>怎么将流还原为传输格式的？</strong></li>
+<li><strong>处理完毕后怎么回应？</strong></li>
+</ol>
+<h4 id="jboss-remoting">JBoss-Remoting</h4>
+<p>Jboss- remoting是由jboss编写的一个java领域的远程通讯框架，基于此框架，可以很简单的实现基于多种传输协议的java对象的RPC</p>
+<p><strong>根据学习远程通信框架回答提出的问题</strong></p>
+<ol>
+<li>是基于什么协议实现的？JBoss-Remoting是个通讯框架，因此它支持多种协议方式的通信，例如纯粹的socket+io方式、rmi方式、http+io方式等。</li>
+<li>怎么发起请求？在JBoss-Remoting中，只需将需要发起的请求参数对象传入jboss-remoting的InvocationRequest对象即可，也可根据协议基于InvocationRequest封装符合需求的InvocationRequest对象。</li>
+<li>怎么将请求转化为符合协议的格式的？JBoss-Remoting基于Java串行化机制或JBoss自己的串行化实现来将请求转化为对象字节流。</li>
+<li>用什么传输协议传输？支持多种传输协议，例如socket、http等。</li>
+<li>响应端基于什么机制来接收请求？响应端只需将自己的处理对象注册到JBoss-Remoting提供的server端的Connector对象中即可。</li>
+<li>怎么将流还原为传输格式的？JBoss-Remoting基于java串行化机制或jboss自己的串行化实现来将请求信息还原为java对象。</li>
+<li>处理完毕后怎么回应？处理完毕后将结果对象直接返回即可，jboss-remoting会将此对象按照协议进行序列化，返回至调用端。
+另外，jboss- remoting支持多种通信方式，例如同步*/*异步*/*单向通信等。</li>
+</ol>
+<h4 id="spring-remoting">Spring-Remoting</h4>
+<p>Spring-remoting是Spring提供java领域的远程通讯框架，基于此框架，同样也可以很简单的将普通的spring bean以某种远程协议的方式来发布，同样也可以配置spring bean为远程调用的bean。</p>
+<p><strong>根据学习远程通信框架回答提出的问题</strong></p>
+<ol>
+<li>
+<p>是基于什么协议实现的？作为一个远程通讯的框架，Spring通过集成多种远程通讯的library，从而实现了对多种协议的支持，例如rmi、http+io、xml-rpc、binary-rpc等。</p>
+</li>
+<li>
+<p>怎么发起请求？在Spring中，由于其对于远程调用的bean采用的是proxy实现，发起请求完全是通过服务接口调用的方式。</p>
+</li>
+<li>
+<p>怎么将请求转化为符合协议的格式的？Spring按照协议方式将请求的对象信息转化为流，例如Spring Http Invoker是基于Spring自己定义的一个协议来实现的，传输协议上采用的为http，请求信息是基于java串行化机制转化为流进行传输。</p>
+</li>
+<li>
+<p>使用什么传输协议传输？支持多种传输协议，例如rmi、http等等。</p>
+</li>
+<li>
+<p>响应端基于什么机制来接收请求？响应端遵循协议方式来接收请求，对于使用者而言，则只需通过spring的配置方式将普通的spring bean配置为响应端或者说提供服务端。</p>
+</li>
+<li>
+<p>怎么将流还原为传输格式的？按照协议方式来进行还原。</p>
+</li>
+<li>
+<p>处理完毕后怎么回应？处理完毕后直接返回即可，spring-remoting将根据协议方式来做相应的序列化。</p>
+</li>
+</ol>
+<h4 id="hessian">Hessian</h4>
+<p>Hessian是由caucho提供的一个基于binary-RPC实现的远程通讯library</p>
+<p><strong>根据学习远程通信框架回答提出的问题</strong></p>
+<ol>
+<li>
+<p>是基于什么协议实现的？基于Binary-RPC协议实现。</p>
+</li>
+<li>
+<p>怎么发起请求？需通过Hessian本身提供的API来发起请求。</p>
+</li>
+<li>
+<p>怎么将请求转化为符合协议的格式的？Hessian通过其自定义的串行化机制将请求信息进行序列化，产生二进制流。</p>
+</li>
+<li>
+<p>使用什么传输协议传输？Hessian基于Http协议进行传输。</p>
+</li>
+<li>
+<p>响应端基于什么机制来接收请求？响应端根据Hessian提供的API来接收请求。</p>
+</li>
+<li>
+<p>怎么将流还原为传输格式的？Hessian根据其私有的串行化机制来将请求信息进行反序列化，传递给使用者时已是相应的请求信息对象了。</p>
+</li>
+<li>
+<p>处理完毕后怎么回应？处理完毕后直接返回，hessian将结果对象进行序列化，传输至调用端。</p>
+</li>
+</ol>
+<h4 id="burlap">Burlap</h4>
+<p>Burlap也是有caucho提供，它和hessian的不同在于，它是基于XML-RPC协议的</p>
+<p><strong>根据学习远程通信框架回答提出的问题</strong></p>
+<ol>
+<li>是基于什么协议实现的？基于XML-RPC协议实现。</li>
+<li>怎么发起请求？根据Burlap提供的API。</li>
+<li>怎么将请求转化为符合协议的格式的？将请求信息转化为符合协议的XML格式，转化为流进行传输。</li>
+<li>使用什么传输协议传输？Http协议。</li>
+<li>响应端基于什么机制来接收请求？监听Http请求。</li>
+<li>怎么将流还原为传输格式的？根据XML-RPC协议进行还原。</li>
+<li>处理完毕后怎么回应？返回结果写入XML中，由Burlap返回至调用端。</li>
+</ol>
+<h4 id="xfireaxis">XFire、Axis</h4>
+<p>XFire、Axis是Webservice的实现框架，WebService可算是一个完整的SOA架构实现标准了，因此采用XFire、Axis这些也就意味着是采用webservice方式了</p>
+<p><strong>根据学习远程通信框架回答提出的问题</strong></p>
+<ol>
+<li>
+<p>是基于什么协议实现的？基于SOAP协议。</p>
+</li>
+<li>
+<p>怎么发起请求？获取到远端service的proxy后直接调用。</p>
+</li>
+<li>
+<p>怎么将请求转化为符合协议的格式的？将请求信息转化为遵循SOAP协议的XML格式，由框架转化为流进行传输。</p>
+</li>
+<li>
+<p>使用什么传输协议传输？Http协议。</p>
+</li>
+<li>
+<p>响应端基于什么机制来接收请求？监听Http请求。</p>
+</li>
+<li>
+<p>怎么将流还原为传输格式的？根据SOAP协议进行还原。</p>
+</li>
+<li>
+<p>处理完毕后怎么回应？返回结果写入XML中，由框架返回至调用端。</p>
+</li>
+</ol>
+<h4 id="activemq">ActiveMQ</h4>
+<p>ActiveMQ是JMS的实现，基于JMS这类消息机制实现远程通讯是一种不错的选择，毕竟消息机制本身的功能使得基于它可以很容易的去实现同步/异步/单向调用等，而且消息机制从容错角度上来说也是个不错的选择，这是Erlang能够做到容错的重要基础</p>
+<p><strong>根据学习远程通信框架回答提出的问题</strong></p>
+<ol>
+<li>
+<p>是基于什么协议实现的？基于JMS协议。</p>
+</li>
+<li>
+<p>怎么发起请求？遵循JMS API发起请求。</p>
+</li>
+<li>
+<p>怎么将请求转化为符合协议的格式的？不太清楚，猜想应该是二进制流。</p>
+</li>
+<li>
+<p>使用什么传输协议传输？支持多种传输协议，例如socket、http等等。</p>
+</li>
+<li>
+<p>响应端基于什么机制来接收请求？监听符合协议的端口。</p>
+</li>
+<li>
+<p>怎么将流还原为传输格式的？同问题3。</p>
+</li>
+<li>
+<p>处理完毕后怎么回应？遵循JMS API生成消息，并写入JMS Queue中。</p>
+</li>
+</ol>
+<h4 id="mina">Mina</h4>
+<p>Mina是Apache提供的通讯框架，在之前一直没有提到网络IO这块，之前提及的框架或library基本都是基于BIO的，而Mina是采用NIO的，NIO在并发量增长时对比BIO而言会有明显的性能提升，而java性能的提升，与其NIO这块与OS的紧密结合是有不小的关系的</p>
+<p><strong>根据学习远程通信框架回答提出的问题</strong></p>
+<ol>
+<li>
+<p>是基于什么协议实现的？基于纯粹的Socket+NIO。</p>
+</li>
+<li>
+<p>怎么发起请求？通过Mina提供的Client API。</p>
+</li>
+<li>
+<p>怎么将请求转化为符合协议的格式的？Mina遵循java串行化机制对请求对象进行序列化。</p>
+</li>
+<li>
+<p>使用什么传输协议传输？支持多种传输协议，例如socket、http等等。</p>
+</li>
+<li>
+<p>响应端基于什么机制来接收请求？以NIO的方式监听协议端口。</p>
+</li>
+<li>
+<p>怎么将流还原为传输格式的？遵循java串行化机制对请求对象进行反序列化。</p>
+</li>
+<li>
+<p>处理完毕后怎么回应？遵循Mina API进行返回。</p>
+</li>
+</ol>
+<p>MINA是NIO方式的，因此支持异步调用是毫无悬念的。</p>
+<h4 id="ejb">EJB</h4>
+<p>EJB 最突出的在于其分布式，EJB采用的是ORMI协议，和RMI协议是差不多的，但EJB在分布式通讯的安全控制、transport pool、smart proxy等方面的突出使得其在分布式领域是不可忽视的力量。</p>
+<p><strong>根据学习远程通信框架回答提出的问题</strong></p>
+<ol>
+<li>是基于什么协议实现的？基于<em>ORMI</em>协议。</li>
+<li>怎么发起请求？EJB调用。</li>
+<li>怎么将请求转化为符合协议的格式的？遵循java串行化机制对请求对象进行序列化。</li>
+<li>使用什么传输协议传输？Socket。</li>
+<li>响应端基于什么机制来接收请求？监听协议端口。</li>
+<li>怎么将流还原为传输格式的？遵循java串行化机制对请求对象进行反序列化。</li>
+<li>处理完毕后怎么回应？直接返回处理对象即可。</li>
+</ol>
+<h2 id="远程通讯领域涉及的知识点">远程通讯领域涉及的知识点</h2>
+<ol>
+<li>
+<p>通信协议：传输层:socket（tcp，udp）应用层：http</p>
+</li>
+<li>
+<p>应用级的协议（dubbo，JRMP，SOAP，xml-rpc(xml+http)，binary-RPC(二进制+http)）
+2.1. 提供更加易用的标准传输格式,避免直接做流操作.
+2.2. 实现网络通信机制</p>
+<ul>
+<li>将传输格式转化为流</li>
+<li>通过某种传输协议传输至远端计算机</li>
+<li>远端计算机将流转化为传输格式</li>
+</ul>
+</li>
+<li>
+<p>网络IO</p>
+<ul>
+<li>bio(阻塞)、</li>
+<li>nio(非阻塞)、</li>
+<li>aio(异步，jdk7中新特性)。</li>
+</ul>
+</li>
+<li>
+<p>MultiThread，在服务端为每个请求启用一个线程</p>
+</li>
+<li>
+<p>本地调用与远程调用的透明化方案</p>
+<ul>
+<li>Java classloader</li>
+<li>Dynamic Proxy</li>
+<li>Unit Test</li>
+</ul>
+</li>
+<li>
+<p>网络通信处理机制
+自动重连、广播、异常、池处理等</p>
+</li>
+<li>
+<p>序列化
+各种协议的私有序列化机制</p>
+</li>
+</ol>
+
+
+        
+          <div class="blog-tags">
+            
+              <a href="https://xue2zeng.github.io//tags/arch/">arch</a>&nbsp;
+            
+          </div>
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        <a href="//twitter.com/share?url=https%3a%2f%2fxue2zeng.github.io%2fpost%2farchitecture%2f%25E7%25B3%25BB%25E7%25BB%259F%25E8%25BF%259C%25E7%25A8%258B%25E8%25B0%2583%25E7%2594%25A8%2f&amp;text=%e7%b3%bb%e7%bb%9f%e8%bf%9c%e7%a8%8b%e8%b0%83%e7%94%a8&amp;via=username" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fxue2zeng.github.io%2fpost%2farchitecture%2f%25E7%25B3%25BB%25E7%25BB%259F%25E8%25BF%259C%25E7%25A8%258B%25E8%25B0%2583%25E7%2594%25A8%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//reddit.com/submit?url=https%3a%2f%2fxue2zeng.github.io%2fpost%2farchitecture%2f%25E7%25B3%25BB%25E7%25BB%259F%25E8%25BF%259C%25E7%25A8%258B%25E8%25B0%2583%25E7%2594%25A8%2f&amp;title=%e7%b3%bb%e7%bb%9f%e8%bf%9c%e7%a8%8b%e8%b0%83%e7%94%a8" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fxue2zeng.github.io%2fpost%2farchitecture%2f%25E7%25B3%25BB%25E7%25BB%259F%25E8%25BF%259C%25E7%25A8%258B%25E8%25B0%2583%25E7%2594%25A8%2f&amp;title=%e7%b3%bb%e7%bb%9f%e8%bf%9c%e7%a8%8b%e8%b0%83%e7%94%a8" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fxue2zeng.github.io%2fpost%2farchitecture%2f%25E7%25B3%25BB%25E7%25BB%259F%25E8%25BF%259C%25E7%25A8%258B%25E8%25B0%2583%25E7%2594%25A8%2f&amp;title=%e7%b3%bb%e7%bb%9f%e8%bf%9c%e7%a8%8b%e8%b0%83%e7%94%a8" target="_blank" title="Share on StumbleUpon">
+          <i class="fab fa-stumbleupon"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fxue2zeng.github.io%2fpost%2farchitecture%2f%25E7%25B3%25BB%25E7%25BB%259F%25E8%25BF%259C%25E7%25A8%258B%25E8%25B0%2583%25E7%2594%25A8%2f&amp;description=%e7%b3%bb%e7%bb%9f%e8%bf%9c%e7%a8%8b%e8%b0%83%e7%94%a8" target="_blank" title="Share on Pinterest">
+          <i class="fab fa-pinterest"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+
+              </div>
+            </section>
+        
+
+        
+          
+            
+          
+
+          
+                  <h4 class="see-also">See also</h4>
+                  <ul>
+                
+                
+                    <li><a href="/post/architecture/%E5%BB%B6%E8%BF%9F%E4%BB%BB%E5%8A%A1/">延迟任务</a></li>
+                
+                    <li><a href="/post/architecture/rpc%E6%A1%86%E6%9E%B6/">RPC框架的发展</a></li>
+                
+              </ul>
+
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+          
+            <li class="next">
+              <a href="https://xue2zeng.github.io/post/toolkit/hugo%E7%BB%93%E5%90%88github/" data-toggle="tooltip" data-placement="top" title="Hugo结合Github搭建博客">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:youremail@domain.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.facebook.com/username" title="Facebook">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-facebook fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/username" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://gitlab.com/username" title="GitLab">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-gitlab fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://bitbucket.org/username" title="Bitbucket">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-bitbucket fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/username" title="Twitter">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://username.slack.com/" title="Slack">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-slack fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://reddit.com/u/username" title="Reddit">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-reddit-alien fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://linkedin.com/in/username" title="LinkedIn">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.xing.com/profile/username" title="Xing">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-xing fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://stackoverflow.com/users/XXXXXXX/username" title="StackOverflow">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.snapchat.com/add/username" title="Snapchat">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-snapchat-ghost fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.instagram.com/username" title="Instagram">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-instagram fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.youtube.com/user/username" title="Youtube">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-youtube fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://soundcloud.com/username" title="SoundCloud">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-soundcloud fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://open.spotify.com/user/username" title="Spotify">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-spotify fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://username.bandcamp.com/" title="Bandcamp">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-bandcamp fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://itch.io/profile/username" title="Itch.io">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fas fa-gamepad fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://vk.com/username" title="VK">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-vk fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://paypal.me/username" title="PayPal">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-paypal fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://telegram.me/username" title="Telegram">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-telegram fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://500px.com/username" title="500px">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-500px fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://codepen.io/username" title="CodePen">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-codepen fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.kaggle.com/username" title="kaggle">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-kaggle fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://url" title="Mastodon">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-mastodon fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://weibo.com/username" title="Weibo">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-weibo fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="yourwebsite.com">xue.zeng</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;&copy;
+          
+            2020
+          
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://xue2zeng.github.io/">闲人码语</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.78.1</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://xue2zeng.github.io/js/main.js"></script>
+<script src="https://xue2zeng.github.io/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> $(document).ready(function() {$("pre.chroma").css("padding","0");}); </script><script> renderMathInElement(document.body); </script><script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script><script src="https://xue2zeng.github.io/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+
+
+
+    
+  </body>
+</html>
+

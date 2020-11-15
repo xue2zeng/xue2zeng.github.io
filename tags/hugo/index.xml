@@ -1,23 +1,29 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Hugo on Xue.Zeng</title>
+    <title>Hugo on 闲人码语</title>
     <link>https://xue2zeng.github.io/tags/hugo/</link>
-    <description>Recent content in Hugo on Xue.Zeng</description>
+    <description>Recent content in Hugo on 闲人码语</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Mon, 26 Aug 2019 18:36:09 +0800</lastBuildDate>
-    
-	<atom:link href="https://xue2zeng.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <managingEditor>youremail@domain.com (xue.zeng)</managingEditor>
+    <webMaster>youremail@domain.com (xue.zeng)</webMaster><atom:link href="https://xue2zeng.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Hugo结合Github搭建博客</title>
       <link>https://xue2zeng.github.io/post/toolkit/hugo%E7%BB%93%E5%90%88github/</link>
-      <pubDate>Mon, 26 Aug 2019 18:36:09 +0800</pubDate>
-      
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (xue.zeng)</author>
       <guid>https://xue2zeng.github.io/post/toolkit/hugo%E7%BB%93%E5%90%88github/</guid>
-      <description>安装Hugo macOS环境 brew install hugo # 检测安装成功 hugo version Hugo Static Site Generator v0.55.6/extended darwin/amd64 BuildDate: 2019-08-26T15:23:01Z 生成站点 使用hugo创建blog站点 hugo new site blog cd blog # 目录结构 tree blog #blog #├── archetypes</description>
+      <description>安装Hugo   macOS环境
+brew install hugo # 检测安装成功 hugo version Hugo Static Site Generator v0.55.6/extended darwin/amd64 BuildDate: 2019-08-26T15:23:01Z   生成站点   使用hugo创建blog站点
+hugo new site blog cd blog # 目录结构 tree blog #blog #├── archetypes #│ └── default.md #├── config.toml #├── content #├── data #├── layouts #├── static #└── themes  archetypes：包括内容类型，在创建新内容时自动生成内容的配置
+config.toml：是网站的配置文件，包含一些基本配置和主题特有的配置
+content：包括网站内容，全部使用markdown格式
+data：存放自定义模版，导入的toml文件（或json，yaml）
+layouts：包括了网站的模版，决定内容如何呈现
+static：包括了css, js, fonts, media等，决定网站的外观
+themes：用于存放主题，可以去官方https://themes.gohugo.io/下载喜欢的主题
+   安装主题
+git init git submodule add https://github.</description>
     </item>
     
   </channel>

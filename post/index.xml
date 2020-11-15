@@ -1,149 +1,411 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Xue.Zeng</title>
+    <title>Posts on 闲人码语</title>
     <link>https://xue2zeng.github.io/post/</link>
-    <description>Recent content in Posts on Xue.Zeng</description>
+    <description>Recent content in Posts on 闲人码语</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Sun, 29 Sep 2019 13:06:38 +0800</lastBuildDate>
+    <managingEditor>youremail@domain.com (xue.zeng)</managingEditor>
+    <webMaster>youremail@domain.com (xue.zeng)</webMaster>
+    <lastBuildDate>Sun, 15 Nov 2020 10:12:49 +0800</lastBuildDate><atom:link href="https://xue2zeng.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Homebrew镜像源加速</title>
+      <link>https://xue2zeng.github.io/post/setting/homebrew%E9%95%9C%E5%83%8F%E6%BA%90%E5%8A%A0%E9%80%9F/</link>
+      <pubDate>Sun, 15 Nov 2020 10:12:49 +0800</pubDate>
+      <author>youremail@domain.com (xue.zeng)</author>
+      <guid>https://xue2zeng.github.io/post/setting/homebrew%E9%95%9C%E5%83%8F%E6%BA%90%E5%8A%A0%E9%80%9F/</guid>
+      <description>执行 brew 命令安装软件的时候，跟以下 3 个仓库地址有关
+  brew.git
+  homebrew-core.git
+  homebrew-bottles
+  Alibaba镜像源   替换brew仓库
+cd &amp;#34;$(brew --repo)&amp;#34; git remote set-url origin https://mirrors.aliyun.com/homebrew/brew.git   替换homebrew-core仓库
+cd &amp;#34;$(brew --repo)/Library/Taps/homebrew/homebrew-core&amp;#34; git remote set-url origin https://mirrors.aliyun.com/homebrew/homebrew-core.git   替换homebrew-bottles仓库，这个步骤跟MacOS 系统使用的 shell 版本有关系
+先查看当前使用的 shell 版本
+echo $SHELL 如果输出结果是 /bin/zsh，参考zsh 终端操作方式 如果输出结果是 /bin/bash，参考bash 终端操作方式
+zsh 终端操作方式
+替换homebrew-bottles 访问地址:
+echo &amp;#39;export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.aliyun.com/homebrew/homebrew-bottles&amp;#39; &amp;gt;&amp;gt; ~/.zshrc source ~/.zshrc bash 终端操作方式
+替换 homebrew-bottles 访问地址:</description>
+    </item>
     
-	<atom:link href="https://xue2zeng.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>JDK管理-MacOS</title>
+      <link>https://xue2zeng.github.io/post/setting/jdk%E7%AE%A1%E7%90%86-macos/</link>
+      <pubDate>Sun, 15 Nov 2020 10:08:30 +0800</pubDate>
+      <author>youremail@domain.com (xue.zeng)</author>
+      <guid>https://xue2zeng.github.io/post/setting/jdk%E7%AE%A1%E7%90%86-macos/</guid>
+      <description>随着JDK生成数量的增加和发布节奏的越来越频繁，我发现很难跟踪我在MacOS中安装的内容并即时进行切换，这就需要通过某种方式来进行有效的管理，减轻平时使用过程中的重复劳动。为此需要花上点时间来整理这块的内容来帮助我即时管理与多版本之间的更加丝滑的切换。下面通过三种方式进行管理配置说明：
+ sh取别名 自定义sh脚本 开源管理工具（jEvn，jabba，SDKMAN）  sh取别名   查看已经安装的版本
+➜ ~ /usr/libexec/java_home -V Matching Java Virtual Machines (1): 11.0.9, x86_64:	&amp;#34;Java SE 11.0.9&amp;#34;	/Library/Java/JavaVirtualMachines/jdk-11.0.9.jdk/Contents/Home /Library/Java/JavaVirtualMachines/jdk-11.0.9.jdk/Contents/Home   修改配置文件bash(.bash_profile)/zsh(.zshrc)，写入如下内容
+export JAVA_8_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_xxx.jdk/Contents/Home export JAVA_9_HOME=/Library/Java/JavaVirtualMachines/jdk-9.0.4jdk/Contents/Home export JAVA_11_HOME=/Library/Java/JavaVirtualMachines/jdk-11.0.4.jdk/Contents/Home export JAVA_12_HOME=/Library/Java/JavaVirtualMachines/jdk-12.0.2.jdk/Contents/Home alias jdk8=&amp;#34;export JAVA_HOME=$JAVA_8_HOME&amp;#34; #编辑一个命令jdk8，输入则转至jdk1.8 alias jdk9=&amp;#34;export JAVA_HOME=$JAVA_9_HOME&amp;#34; #编辑一个命令jdk9，输入则转至jdk1.9 alias jdk11=&amp;#34;export JAVA_HOME=$JAVA_11_HOME&amp;#34; #编辑一个命令jdk11，输入则转至jdk1.11 alias jdk12=&amp;#34;export JAVA_HOME=$JAVA_12_HOME&amp;#34; #编辑一个命令jdk12，输入则转至jdk1.12 export JAVA_HOME=`/usr/libexec/java_home` #最后安装的版本，这样当自动更新时，始终指向最新版本   生效配置
+# zsh source .zshrc # bash source .bash_profile   版本切换</description>
+    </item>
     
+    <item>
+      <title>延迟任务</title>
+      <link>https://xue2zeng.github.io/post/architecture/%E5%BB%B6%E8%BF%9F%E4%BB%BB%E5%8A%A1/</link>
+      <pubDate>Sun, 25 Oct 2020 18:36:09 +0800</pubDate>
+      <author>youremail@domain.com (xue.zeng)</author>
+      <guid>https://xue2zeng.github.io/post/architecture/%E5%BB%B6%E8%BF%9F%E4%BB%BB%E5%8A%A1/</guid>
+      <description>延迟任务 什么是延迟任务 顾明思议，把需要延迟执行的任务叫做延迟任务
+延迟任务得使用场景
+ 订单下单之后 30 分钟后，用户如果没有付钱，系统需要自动取消订单，并退还库存 如何定期检查处于退款状态的订单是否已经退款成功 重试机制实现：把调用失败的接口放入一个固定延时的队列,到期后再重试 新创建的店铺：如果在十天内都没有上传过商品，则自动发送消息提醒 用户发起退款：如果三天内没有得到处理则通知相关运营人员 预定会议后：需要在预定的时间点前十分钟通知各个与会人员参加会议 关闭空闲连接：服务器中，有很多客户端的连接，空闲一段时间之后需要关闭之 清理过期数据业务：比如缓存中的对象，超过了空闲时间，需要从缓存中移出 多考生考试：到期全部考生必须交卷,要求时间非常准确的场景 任务超时处理：在网络协议滑动窗口请求应答式交互时，处理超时未响应的请求 订餐通知：下单成功后60s之后给用户发送短信通知 红包 24 小时未被查收，需要延迟执退还业务 每个月账单日，需要给用户发送当月的对账单  延迟任务实现思路 延迟任务实现的关键是在某个时间节点执行某个任务。基于这个信息可以想到实现延迟任务的手段有以下两个：
+ 自己手写一个“死循环”一直判断当前时间节点有没有要执行的任务 借助 JDK 或者第三方提供的工具类来实现延迟任务  通过 JDK 实现延迟任务能想到的关键词是：DelayQueue、Timer、ScheduledExecutorService 第三方提供的延迟任务执行方法就有很多了，例如：Redis、Netty、MQ 等手段    实现方式  定期轮询（数据库等） JDK（DelayQueue、Timer、ScheduledExecutorService周期性线程池） 时间轮（Kafka、Netty的HashedWheelTimer） Redis有序集合（zset） Zookeeper之curator MQ（RabbitMQ） Quartz，xxxjob等定时任务框架 Koala（考拉） JCronTab（仿crontab的java调度器） SchedulerX（阿里） 有赞延迟队列 &amp;hellip;&amp;hellip;  轮询 特点：定期轮训数据库，设置状态
+ 优点：实现简单
+缺点：
+ 对服务器内存消耗大 存在轮询延迟 数据量过大时会消耗太多的IO资源，效率太低   DelayQueue 特点：无界、延迟、阻塞队列
+ 优点：JDK自带，轻量级，使用简单
+缺点：</description>
+    </item>
+    
+    <item>
+      <title>RPC框架的发展</title>
+      <link>https://xue2zeng.github.io/post/architecture/rpc%E6%A1%86%E6%9E%B6/</link>
+      <pubDate>Sat, 24 Oct 2020 17:47:09 +0800</pubDate>
+      <author>youremail@domain.com (xue.zeng)</author>
+      <guid>https://xue2zeng.github.io/post/architecture/rpc%E6%A1%86%E6%9E%B6/</guid>
+      <description>定义 RPC（Remote Procedure Call）是一种远程调用协议，简单地说就是能使应用像调用本地方法一样的调用远程的过程或服务，可以应用在分布式服务、分布式计算、远程服务调用等许多场景。说起 RPC 大家并不陌生，业界有很多开源的优秀 RPC 框架
+ Dubbo Thrift gRPC Hprose  RPC 与其它远程调用方式比较，RPC 与 HTTP、RMI、Web Service 都能完成远程调用，但是实现方式和侧重点各有不同
+RPC与RMI RPC跨语言，RMI只支持Java
+RMI（Remote Method Invocation）是指 Java 语言中的远程方法调用，RMI 中的每个方法都具有方法签名，RMI 客户端和服务器端通过方法签名进行远程方法调用。RMI 只能在 Java 语言中使用，可以把 RMI 看作面向对象的 Java RPC
+RMI调用远程对象方法，允许方法返回Java对象以及基本数据类型，而RPC不支持对象的概念，传送到RPC服务的消息由外部数据表示 (External Data Representation, XDR) 语言表示，这种语言抽象了字节序类和数据类型结构之间的差异。只有由 XDR 定义的数据类型才能被传递，可以说 RMI 是面向对象方式的Java RPC。
+在方法调用上，RMI中，远程接口使每个远程方法都具有方法签名。如果一个方法在服务器上执行，但是没有相匹配的签名被添加到这个远程接口上，那么这个新方法就不能被RMI客户方所调用。在RPC中，当一个请求到达RPC服务器时，这个请求就包含了一个参数集和一个文本值，通常形成“classname.methodname”的形式。这就向RPC服务器表明，被请求的方法在为 “classname”的类中，名叫“methodname”。然后RPC服务器就去搜索与之相匹配的类和方法，并把它作为那种方法参数类型的输入。这里的参数类型是与RPC请求中的类型是匹配的。一旦匹配成功，这个方法就被调用了，其结果被编码后返回客户方。
+RPC本身没有规范,但基本的工作机制是一样的，即：serialization/deserialization+stub+skeleton，宽泛的讲，只要能实现远程调用，都是RPC，如:rmi .net-remoting ws/soap/rest hessian xmlrpc thrift potocolbuffer。
+在Java里提供了完整的sockets通讯接口，但sockets要求客户端和服务端必须进行应用级协议的编码交换数据，采用sockets是非常麻烦的。一个代替Sockets的协议是RPC(Remote Procedure Call), 它抽象出了通讯接口用于过程调用，使得编程者调用一个远程过程和调用本地过程同样方便。RPC 系统采用XDR来编码远程调用的参数和返回值。但RPC并不支持对象，所以，面向对象的远程调用RMI(Remote Method Invocation)成为必然选择。采用RMI，调用远程对象和调用本地对象同样方便。RMI 采用JRMP(Java Remote Method Protocol)通讯协议，是构建在TCP/IP协议上的一种远程调用方法。
+RPC与HTTP HTTP（HyperText Transfer Protocol）是应用层通信协议，使用标准语义访问指定资源（图片、接口等），网络中的中转服务器能识别协议内容。HTTP 协议是一种资源访问协议，通过 HTTP 协议可以完成远程请求并返回请求结果。</description>
+    </item>
+    
+    <item>
+      <title>Elastic Stack</title>
+      <link>https://xue2zeng.github.io/post/elastic-stack/packetbeat/</link>
+      <pubDate>Sun, 30 Aug 2020 20:29:09 +0800</pubDate>
+      <author>youremail@domain.com (xue.zeng)</author>
+      <guid>https://xue2zeng.github.io/post/elastic-stack/packetbeat/</guid>
+      <description>简介  实时抓取网络包 自动解析应用层协议  ICMP (v4 and v6) DHCP (v4) DNS HTTP AMQP 0.9.1 Cassandra Mysql PostgreSQL Redis Thrift-RPC MongoDB Memcache NFS TLS   Wireshark  运行 [root@localhost fiebeat]# sudo ./packetbeat -e -c elasticsearch.yml -strict.perms=false  sudo：获取执行权限
+strict.perms：跳过对执行配置文件的权限检查
+ </description>
+    </item>
+    
+    <item>
+      <title>Elastic Stack</title>
+      <link>https://xue2zeng.github.io/post/elastic-stack/filebeat/</link>
+      <pubDate>Sat, 29 Aug 2020 16:46:09 +0800</pubDate>
+      <author>youremail@domain.com (xue.zeng)</author>
+      <guid>https://xue2zeng.github.io/post/elastic-stack/filebeat/</guid>
+      <description>处理流程   input 输入
+ 类型支持：log和stdin
+   filter 处理
+    input时处理 output前处理 &amp;ndash; process     include_lines exclude_linesexclude_files drop_evetdrop_fieldsdecode_json_fieldsinclude_fields       output 输出
+   Console
+  Elasticsearch
+  Logstash
+  Kafka
+  Redis
+  File
+&amp;hellip;
+     调试   通过stdin收集日志
+  通过console输出结果
+#=========================== Filebeat inputs =============================# List of inputs to fetch data.</description>
+    </item>
+    
+    <item>
+      <title>Elastic Stack</title>
+      <link>https://xue2zeng.github.io/post/elastic-stack/elasticsearch%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Thu, 27 Aug 2020 18:56:09 +0800</pubDate>
+      <author>youremail@domain.com (xue.zeng)</author>
+      <guid>https://xue2zeng.github.io/post/elastic-stack/elasticsearch%E9%85%8D%E7%BD%AE/</guid>
+      <description>配置说明 配置相关文件位于${ELASTICSEARCH_HOME}/config目录下
+ elasticsearch.yml es相关配置项 jvm.options jvm相关参数配置 log4j2.properties 日志相关配置  Development与Production模式
+ 以transport的地址是否绑定在localhost为标准判断network.host启用那种模式 Development模式下在启动时会以warning的方式提示配置检查异常 Production模式下在启动时会以error的方式提示配置检查异常并退出  </description>
+    </item>
+    
+    <item>
+      <title>Beats简介</title>
+      <link>https://xue2zeng.github.io/post/elastic-stack/beats/</link>
+      <pubDate>Wed, 26 Aug 2020 18:36:09 +0800</pubDate>
+      <author>youremail@domain.com (xue.zeng)</author>
+      <guid>https://xue2zeng.github.io/post/elastic-stack/beats/</guid>
+      <description>官方定义 Lightweight Data Shipper：轻量级的数据传输者
+ Filebeat 日志文件 Metricbeat 度量数据（CPU，内存，磁盘，常用软件（Nginx，Mysql）） Packectbeat 网络数据 Winlogbeat windows数据 Heartbeat 健康检查  Beats在Elastic Stack中的地位</description>
+    </item>
     
     <item>
       <title>并发-传统同步机制</title>
       <link>https://xue2zeng.github.io/post/language/go/sync/</link>
       <pubDate>Sun, 29 Sep 2019 13:06:38 +0800</pubDate>
-      
+      <author>youremail@domain.com (xue.zeng)</author>
       <guid>https://xue2zeng.github.io/post/language/go/sync/</guid>
-      <description>在CSP模型下尽量少用传统同步机制，尽量使用chanel进行通信。Go语言中原子操作由内置的标准库sync/atomic提供。 sync.Mutex 互斥量是一种</description>
+      <description>在CSP模型下尽量少用传统同步机制，尽量使用chanel进行通信。Go语言中原子操作由内置的标准库sync/atomic提供。
+sync.Mutex 互斥量是一种常用的控制共享资源访问的方法，它能够保证同时只有一个goroutine可以访问共享资源。Go语言中使用sync包的Mutex类型来实现互斥量
+import ( &amp;#34;fmt&amp;#34; &amp;#34;sync&amp;#34; &amp;#34;time&amp;#34; ) type atomicInt struct { value int lock sync.Mutex } func (a *atomicInt) increment() { fmt.Println(&amp;#34;safe increment&amp;#34;) func() { a.lock.Lock() defer a.lock.Unlock() a.value++ }() } func (a *atomicInt) get() int { a.lock.Lock() defer a.lock.Unlock() return a.value } func main() { var a atomicInt a.increment() go func() { a.increment() }() time.Sleep(time.Millisecond) fmt.Println(a.get()) }  lock.Lock()：加锁
+lock.Unlock()：解锁
+通过运行时查看数据访问冲突
+go run -race atomic.go
+ </description>
     </item>
     
     <item>
       <title>并发-Select</title>
       <link>https://xue2zeng.github.io/post/language/go/select/</link>
       <pubDate>Sun, 29 Sep 2019 11:43:05 +0800</pubDate>
-      
+      <author>youremail@domain.com (xue.zeng)</author>
       <guid>https://xue2zeng.github.io/post/language/go/select/</guid>
-      <description>官方文档有关select的描述 A &amp;ldquo;select&amp;rdquo; statement chooses which of a set of possible send or receive operations will proceed. It looks similar to a &amp;ldquo;switch&amp;rdquo; statement but with the cases all referring to communication operations. 一个select语句用来选择哪个case中的发</description>
+      <description>官方文档有关select的描述
+ A &amp;ldquo;select&amp;rdquo; statement chooses which of a set of possible send or receive operations will proceed. It looks similar to a &amp;ldquo;switch&amp;rdquo; statement but with the cases all referring to communication operations. 一个select语句用来选择哪个case中的发送或接收操作可以被立即执行。它类似于switch语句，但是它的case涉及到channel有关的I/O操作。
+ select就是用来监听和channel有关的IO操作，当 IO 操作发生时，触发相应的动作，功能与epoll(nginx)/poll/select的功能类似。
+select是Go在语言层面提供的多路IO复用的机制，其可以检测多个channel是否ready(即是否可读或可写)
+概述  select语句中除default外，每个case操作必须是一个channel，要么读要么写 如果有多个case都可以运行，Go运行时系统会针对select随机公平地选出一个执行，其他不会执行 select语句中如果没有default语句，且没有任意可运行case，则会一直阻塞等待任一case  分支选择执行规则 官方文档描述
+ Execution of a &amp;ldquo;select&amp;rdquo; statement proceeds in several steps:
+1.For all the cases in the statement, the channel operands of receive operations and the channel and right-hand-side expressions of send statements are evaluated exactly once, in source order, upon entering the &amp;ldquo;select&amp;rdquo; statement.</description>
     </item>
     
     <item>
       <title>并发-Channel</title>
       <link>https://xue2zeng.github.io/post/language/go/channel/</link>
       <pubDate>Sat, 28 Sep 2019 15:56:51 +0800</pubDate>
-      
+      <author>youremail@domain.com (xue.zeng)</author>
       <guid>https://xue2zeng.github.io/post/language/go/channel/</guid>
-      <description>Channel主要被用来在多个Goroutione之间传递数据，并且还会保证其过程的同步。总是遵循先入先出（First In First Out）的规则，保</description>
+      <description>Channel主要被用来在多个Goroutione之间传递数据，并且还会保证其过程的同步。总是遵循先入先出（First In First Out）的规则，保证收发数据的顺序
+Go并发模型  多线程共享内存。其实就是Java或者C++等语言中的多线程开发 CSP（communicating sequential processes）并发模型。Go语言特有  CSP并发模型是在1970年左右提出的概念，属于比较新的概念，不同于传统的多线程通过共享内存来通信，CSP讲究的是&#39;&amp;lsquo;以通信的方式来共享内存&amp;quot;。
+ 请记住下面这句话： DO NOT COMMUNICATE BY SHARING MEMORY; INSTEAD, SHARE MEMORY BY COMMUNICATING. “不要以共享内存的方式来通信，相反，要通过通信来共享内存。”
+ 普通的线程并发模型，像Java、C++、Python，他们线程间通信都是通过共享内存的方式来进行的。非常典型的方式就是在访问共享数据（例如数组、Map、或者某个结构体或对象）的时候，通过锁来限制，因此，在很多时候，衍生出一种方便操作的数据结构，叫做&amp;quot;线程安全的数据结构&amp;quot;。例如Java提供的包&amp;quot;java.util.concurrent&amp;quot;中的数据结构。Go中也实现了传统的线程并发模型
+Go的CSP并发模型，是通过goroutine和channel来实现的。
+ goroutine 是Go语言中并发的执行单位。有点抽象，其实就是和传统概念上的&amp;quot;线程&amp;quot;类似，可以理解为&amp;quot;线程&amp;quot; channel是Go语言中各个并发结构体(goroutine)之前的通信机制。 通俗的讲，就是各个goroutine之间通信的&amp;quot;管道&amp;quot;，有点类似于Linux中的管道  开启一个goroutine的方式非常简单
+go func() 通信机制channel也很方便，传数据用channel &amp;lt;- data，取数据用&amp;lt;-channel。在通信过程中，传数据channel &amp;lt;- data和取数据&amp;lt;-channel必然会成对出现，因为这边传，那边取，两个goroutine之间才会实现通信。而且不管传还是取，必阻塞，直到另外的goroutine传或者取为止。
+import ( &amp;#34;time&amp;#34; &amp;#34;fmt&amp;#34; ) func worker(id int, c chan int) { // for true { 	// n, ok := &amp;lt;- c 	// if !ok { 	// break 	// } 	// fmt.</description>
     </item>
     
     <item>
       <title>并发-Goroutine(协程)</title>
       <link>https://xue2zeng.github.io/post/language/go/goroutine/</link>
       <pubDate>Sat, 28 Sep 2019 09:57:11 +0800</pubDate>
-      
+      <author>youremail@domain.com (xue.zeng)</author>
       <guid>https://xue2zeng.github.io/post/language/go/goroutine/</guid>
-      <description>轻量级&amp;rdquo;线程&amp;rdquo; 线程（Thread）：有时被称为轻量级进程(Lightweight Process，LWP），是程序执行</description>
+      <description>轻量级&amp;quot;线程&amp;quot;
+ 线程（Thread）：有时被称为轻量级进程(Lightweight Process，LWP），是程序执行流的最小单元。一个标准的线程由线程ID，当前指令指针(PC），寄存器集合和堆栈组成。另外，线程是进程中的一个实体，是被系统独立调度和分派的基本单位，线程自己不拥有系统资源，只拥有一点儿在运行中必不可少的资源，但它可与同属一个进程的其它线程共享进程所拥有的全部资源
+线程拥有自己独立的栈和共享的堆，共享堆，不共享栈，线程的切换一般也由操作系统调度
+协程（Coroutine）：又称微线程与子例程（或者称为函数）一样，协程也是一种程序组件。相对子例程而言，协程更为一般和灵活，但在实践中使用没有子例程那样广泛
+和线程类似，共享堆，不共享栈，协程的切换一般由程序员在代码中显式控制。它避免了上下文切换的额外耗费，兼顾了多线程的优点，简化了高并发程序的复杂
+Goroutine和其他语言的协程（Coroutine）在使用方式上类似，但从字面意义上来看不同（一个是Goroutine，一个是Coroutine），再就是协程是一种协作任务控制机制，在最简单的意义上，协程不是并发的，而Go语言层面支持并发（Goroutine）。因此Goroutine可以理解为一种Go语言的协程。同时它可以运行在一个或多个线程上
+Goroutine与创建线程相比，创建成本和开销都很小，每个goroutine的堆栈只有几kb，并且堆栈可根据程序的需要增长和缩小(线程的堆栈需指明和固定)，所以go程序从语言层面支持了高并发
+Goroutine是Go中最基本的执行单元。事实上每一个Go程序至少有一个Goroutine：主Goroutine
+其它语言支持
+ C++：Boost.Coroutine Java：不支持（有第三方库） Python：使用yield关键字实现协程，3.5加入async def对协程原生支持     非抢占式多任务处理，由协程主动交出控制权
+  编译器/解释器/虚拟机层面的多任务
+  多个协程可能在一个或多个线程上运行
+  简单示例 import ( &amp;#34;fmt&amp;#34; &amp;#34;time&amp;#34; &amp;#34;runtime&amp;#34; ) func main() { var a [10]int for j := 0; j &amp;lt; 10 ; j++ { go func(j int) { for{ a[j]++ runtime.Gosched() //程序主动交出控制权 	} }(j) } time.Sleep(time.Microsecond) fmt.Println(a) } 可以使用如下命令检测数据访问的冲突</description>
     </item>
     
     <item>
       <title>性能调优-PProf</title>
       <link>https://xue2zeng.github.io/post/language/go/performance/</link>
       <pubDate>Mon, 16 Sep 2019 21:02:52 +0800</pubDate>
-      
+      <author>youremail@domain.com (xue.zeng)</author>
       <guid>https://xue2zeng.github.io/post/language/go/performance/</guid>
-      <description>PProf pprof 是用于可视化和分析性能分析数据的工具，以 profile.proto 读取分析样本的集合，并生成报告以可视化并帮助分析数据（支持文本和图形报告） profile.proto 是一个 Protocol Buffer v3 的描述</description>
+      <description>PProf pprof 是用于可视化和分析性能分析数据的工具，以 profile.proto 读取分析样本的集合，并生成报告以可视化并帮助分析数据（支持文本和图形报告）
+profile.proto 是一个 Protocol Buffer v3 的描述文件，它描述了一组 callstack 和 symbolization 信息， 作用是表示统计分析的一组采样的调用栈，是很常见的 stacktrace 配置文件格式
+涉及的工具包有：
+  runtime/pprof：采集程序（非 Server）的运行数据进行分析
+  net/http/pprof：采集 HTTP Server 的运行时数据进行分析（只是使用runtime/pprof包来进行封装，并在http端口上暴露出来）
+#web服务器: import ( &amp;#34;net/http&amp;#34; _ &amp;#34;net/http/pprof&amp;#34; ) #一般应用程序(实际应用无web交互) import ( &amp;#34;net/http&amp;#34; _ &amp;#34;runtime/pprof&amp;#34; )   使用工具命令bench在源文件目录生成性能采样文件，然后通过pprof工具交互式分析采样文件
+go test -bench . -cpuprofile cpu.pprof ## 运行如下会出现交互式命令窗口，可以通过输入help命令获取帮助 ## 最简单的方式是输入web，会生成一张svg格式的树形结构图（需要安装Graphviz工具） go tool pprof cpu.pprof (pprof) web 采样范围
+ CPU Profiling：采集程序的 CPU 使用情况，按照一定的频率采集所监听的应用程序 CPU（含寄存器）的使用情况，可确定应用程序在主动消耗 CPU 周期时花费时间的位置 Memory Profiling：采集程序内存使用情况，在应用程序进行堆分配时记录堆栈跟踪，用于监视当前和历史内存使用情况，以及检查内存泄漏 Block Profiling：阻塞分析，记录 goroutine 阻塞等待同步（包括定时器通道）的位置，可以用来分析和查找死锁等性能瓶颈 Mutex Profiling：互斥锁分析，报告互斥锁的竞争情况  支持使用模式</description>
     </item>
     
     <item>
       <title>调试与测试</title>
       <link>https://xue2zeng.github.io/post/language/go/testing/</link>
       <pubDate>Mon, 16 Sep 2019 20:22:23 +0800</pubDate>
-      
+      <author>youremail@domain.com (xue.zeng)</author>
       <guid>https://xue2zeng.github.io/post/language/go/testing/</guid>
-      <description>传统测试 测试数据与测试逻辑混在一起 出错信息不明确 一旦一个数据出错，测试全部结束 @Test public void testAdd() { assertEquals(3, add(1, 2)); assertEquals(2, add(0, 2)); assertEquals(0, add(0, 0)); assertEquals(0, add(-1, 1)); assertEquals(Integer.MIN_VALUE, add(1, Integer.MAX_VALUE)); } 表格驱动测试 测试数据</description>
+      <description>传统测试   测试数据与测试逻辑混在一起
+  出错信息不明确
+  一旦一个数据出错，测试全部结束
+@Test public void testAdd() { assertEquals(3, add(1, 2)); assertEquals(2, add(0, 2)); assertEquals(0, add(0, 0)); assertEquals(0, add(-1, 1)); assertEquals(Integer.MIN_VALUE, add(1, Integer.MAX_VALUE)); }   表格驱动测试   测试数据与测试逻辑分离
+  明确的出错信息（自定义出错信息内容）
+  可以部分失败
+func calcTriangle(a, b int) int { var c int c = int(math.Sqrt(float64(a*a + b*b))) return c } tests := []struct{ a, b, c int }{ {3, 4, 5}, {5, 12, 13}, {8, 15, 17}, {12, 35, 37}, {30000, 40000, 50000}, } for _, tt := range tests { if actual := calcTriangle(tt.</description>
     </item>
     
     <item>
       <title>资源管理与错误处理</title>
       <link>https://xue2zeng.github.io/post/language/go/resourceerror/</link>
       <pubDate>Sun, 08 Sep 2019 18:32:51 +0800</pubDate>
-      
+      <author>youremail@domain.com (xue.zeng)</author>
       <guid>https://xue2zeng.github.io/post/language/go/resourceerror/</guid>
-      <description>Defer 调用特点 确保调用在函数结束时发生 defer列表为后进先出，参数在defer语句时才计算 func tryDefer() { defer fmt.Println(1) defer fmt.Println(2) fmt.Println(3) //return panic(&amp;#34;error occurred&amp;#34;) fmt.Println(4) } --------- 3 2 1 常见使用defer</description>
+      <description>Defer 调用特点
+  确保调用在函数结束时发生
+  defer列表为后进先出，参数在defer语句时才计算
+func tryDefer() { defer fmt.Println(1) defer fmt.Println(2) fmt.Println(3) //return  panic(&amp;#34;error occurred&amp;#34;) fmt.Println(4) } --------- 3 2 1   常见使用defer调用场景
+ Open/Close Lock/Unlock PrintHeader/PrintFooter  错误处理   常用错误处理
+file, err := os.OpenFile(filename, os.O_EXCL|os.O_CREATE|os.O_WRONLY, 0666) if err != nil { if pathError, ok := err.(*os.PathError); !ok { panic(err) } else { fmt.Printf(&amp;#34;%s, %s, %s\n&amp;#34;, pathError.Op, pathError.Path, pathError.Err) } return } defer file.</description>
     </item>
     
     <item>
       <title>函数式编程</title>
       <link>https://xue2zeng.github.io/post/language/go/functional/</link>
       <pubDate>Sun, 08 Sep 2019 14:15:09 +0800</pubDate>
-      
+      <author>youremail@domain.com (xue.zeng)</author>
       <guid>https://xue2zeng.github.io/post/language/go/functional/</guid>
-      <description>&amp;ldquo;正统&amp;rdquo;函数式编程 不可变性：不能有状态，只有常量和函数 函数只能有一个参数 // 正统函数式编程 type iAdder func(int) (int, iAdder) func adder(base int) iAdder { return func(v int) (int,</description>
+      <description>&amp;ldquo;正统&amp;quot;函数式编程   不可变性：不能有状态，只有常量和函数
+  函数只能有一个参数
+// 正统函数式编程 type iAdder func(int) (int, iAdder) func adder(base int) iAdder { return func(v int) (int, iAdder) { return base + v, adder(base + v) } }   Go 函数式编程   函数是一等公民：参数，变量，返回值都可以是函数
+  高阶函数
+  闭包
+// 闭包 func adder() func(v int) int { sum := 0 return func(v int) int { sum += v return sum } }   Python 闭包</description>
     </item>
     
     <item>
       <title>面向接口</title>
       <link>https://xue2zeng.github.io/post/language/go/interfaceoriented/</link>
       <pubDate>Sat, 07 Sep 2019 21:11:31 +0800</pubDate>
-      
+      <author>youremail@domain.com (xue.zeng)</author>
       <guid>https://xue2zeng.github.io/post/language/go/interfaceoriented/</guid>
-      <description>Duck Typing（鸭子类型） 在维基百科中是这样定义的： 鸭子类型（英语：duck typing）是动态类型的一种风格。在这种风格中，一个对象有效的</description>
+      <description>Duck Typing（鸭子类型） 在维基百科中是这样定义的：
+ 鸭子类型（英语：duck typing）是动态类型的一种风格。在这种风格中，一个对象有效的语义，不是由继承自特定的类或实现特定的接口，而是由&amp;quot;当前方法和属性的集合&amp;quot;决定。
+而鸭子类型这一名字出自James Whitcomb Riley在鸭子测试中提出的如下的表述：
+当看到一只鸟走起来像鸭子、游泳起来像鸭子、叫起来也像鸭子，那么这只鸟就可以被称为鸭子
+ Duck Typing 的原话是，走起来像鸭子、游泳起来像鸭子、叫起来也像鸭子，那么它就是一只鸭子。
+所谓duck typing，可以联想到它的推导，并不在乎类型的真正实体，只关心它的行为有duck的特性（描述事物的外部行为而非内部结构），那么就可以把它当做一只duck来看到
+一般来讲，使用 duck typing 的编程语言往往被归类到“动态类型语言”或者“解释型语言”里，比如 Python, Javascript, Ruby 等；而其它的类型系统往往被归到“静态类型语言“中，比如 C/C++/Java。在不同的编程语言中，Duck Typing 实现方式：
+ Python 中的 Duck Typing  def download(retriever): return retriever.get(&amp;#34;www.baidu.com&amp;#34;); 有一个 download 函数，传过来一个 retriever 参数，retriever 是可以获取一个 url 链接的资源的。 这个 retriever 就是一个 Duck Typing 的对象，使用者约定好这个 retriever 会有一个 get 函数就可以了。 显然这个 download 函数会有以下问题：
+运行时才知道传入的 retriever 有没有 get 函数。那么站在 download 函数的使用者的角度上看，怎么知道需要给 retriever 实现 get 方法呢？不可能去阅读 download 函数的代码，实际情况中，可能 download 函数的代码很长，可能 retriever 不只要实现 get 方法，还有其它方法需要实现。通常这种情况需要通过加注释来说明。</description>
     </item>
     
     <item>
       <title>面向对象</title>
       <link>https://xue2zeng.github.io/post/language/go/objectoriented/</link>
       <pubDate>Sat, 07 Sep 2019 10:28:18 +0800</pubDate>
-      
+      <author>youremail@domain.com (xue.zeng)</author>
       <guid>https://xue2zeng.github.io/post/language/go/objectoriented/</guid>
-      <description>Go语言仅支持封装，不支持继承和多态 Go语言没有class，只有struct 结构体和方法 创建 type Node struct { Value int Left, Right *Node } 定义方法 func CreateNode(value int) *Node { return &amp;amp;Node{Value: value} } func</description>
-    </item>
-    
-    <item>
-      <title>Hugo结合Github搭建博客</title>
-      <link>https://xue2zeng.github.io/post/toolkit/hugo%E7%BB%93%E5%90%88github/</link>
-      <pubDate>Mon, 26 Aug 2019 18:36:09 +0800</pubDate>
-      
-      <guid>https://xue2zeng.github.io/post/toolkit/hugo%E7%BB%93%E5%90%88github/</guid>
-      <description>安装Hugo macOS环境 brew install hugo # 检测安装成功 hugo version Hugo Static Site Generator v0.55.6/extended darwin/amd64 BuildDate: 2019-08-26T15:23:01Z 生成站点 使用hugo创建blog站点 hugo new site blog cd blog # 目录结构 tree blog #blog #├── archetypes</description>
+      <description>Go语言仅支持封装，不支持继承和多态
+Go语言没有class，只有struct
+结构体和方法   创建
+type Node struct { Value int Left, Right *Node }   定义方法
+func CreateNode(value int) *Node { return &amp;amp;Node{Value: value} } func (node *Node) SetValue(value int) { if node == nil { fmt.Println(&amp;#34;Setting Value to nil &amp;#34; + &amp;#34;node. Ignored.&amp;#34;) return } node.Value = value }  只有使用指针才可以改变结构内容
+nil指针也可以调用方法
+   值接收者 vs 指针接收者
+ 要改变内容必须使用指针接收者 结构过大也考虑使用指针接收者 一致性：如果指针接收者，最好都是指针接收者    包和封装  结构定义的方法必须放在同一个包内 可以是不同的文件 如果包中内容需要public，需要将包中的变量，方法名等首字母大写 类型扩展  定义别名 使用组合    GOPATH及目录结构   GOPATH环境变量</description>
     </item>
     
     <item>
       <title>容器</title>
       <link>https://xue2zeng.github.io/post/language/go/container/</link>
       <pubDate>Sun, 25 Aug 2019 16:44:25 +0800</pubDate>
-      
+      <author>youremail@domain.com (xue.zeng)</author>
       <guid>https://xue2zeng.github.io/post/language/go/container/</guid>
-      <description>数组 切片(Slice) 1、扩展 arry := [...]int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9} fmt.Println(&amp;#34;arry = &amp;#34;, arry) s1 = arry[2:6] s2 = s1[3:5] Slice可以向后扩展，不可以向前扩展 s[i]不可以超越len(s</description>
+      <description>数组 切片(Slice) 1、扩展 arry := [...]int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9} fmt.Println(&amp;#34;arry = &amp;#34;, arry) s1 = arry[2:6] s2 = s1[3:5] Slice可以向后扩展，不可以向前扩展
+s[i]不可以超越len(s)，向后扩展不可以超越底层数组cap(s)
+添加元素时，如果超越cap，系统会重新分配更大的底层数组
+由于值传递的关系，必须接收append的返回值。如：s = append(s, val)
+Slice实现原理
+Map Map创建：make(map[string]int)
+获取元素：m[key]
+key不存在时，获取Value类型的初始值
+使用value, ok := m[key]来判断是否存在key
+使用delete函数删除一个key
+使用range遍历key，或者key/value对
+不保证遍历顺序，如需要顺序，需手动对key进行排序
+使用len函数获取元素个数
+map的key适用类型
+ map使用哈希表，必须可以相等比较 除了slice, map, function的内建类型都可以作为key Struct类型不包含上述字段，也可以作为key  </description>
     </item>
     
     <item>
       <title>程序结构</title>
       <link>https://xue2zeng.github.io/post/language/go/structure/</link>
       <pubDate>Sun, 18 Aug 2019 09:56:38 +0800</pubDate>
-      
+      <author>youremail@domain.com (xue.zeng)</author>
       <guid>https://xue2zeng.github.io/post/language/go/structure/</guid>
-      <description>条件语句 1、if&amp;hellip;else&amp;hellip; 条件内可以赋值 条件内赋值的变量作用域就存在于这个if语句里 if contents, err := ioutil.ReadFile(filename); err == nil { fmt.Println(string(contents)) } else {</description>
+      <description>条件语句 1、if&amp;hellip;else&amp;hellip;   条件内可以赋值
+  条件内赋值的变量作用域就存在于这个if语句里
+if contents, err := ioutil.ReadFile(filename); err == nil { fmt.Println(string(contents)) } else { fmt.Println(&amp;#34;cannot print file contents: &amp;#34;, err) }   2、switch   switch后可以没有表达式
+  不需要显示break，switch会自动break，除非使用fallthrough
+func grade(score int) string { g := &amp;#34;&amp;#34; switch { case score &amp;lt; 0 || score &amp;gt; 100: panic(fmt.Sprintf(&amp;#34;Wrong score: %d&amp;#34;, score)) case score &amp;lt; 60: g = &amp;#34;F&amp;#34; case score &amp;lt; 80: g = &amp;#34;C&amp;#34; case score &amp;lt; 90: g = &amp;#34;B&amp;#34; case score &amp;lt;= 100: g = &amp;#34;A&amp;#34; } return g }   3、for   表达式不需要括号</description>
     </item>
     
     <item>
       <title>Go 变量</title>
       <link>https://xue2zeng.github.io/post/language/go/variable/</link>
       <pubDate>Sat, 03 Aug 2019 16:42:15 +0800</pubDate>
-      
+      <author>youremail@domain.com (xue.zeng)</author>
       <guid>https://xue2zeng.github.io/post/language/go/variable/</guid>
-      <description>变量定义 1、使用var关键字(变量类型写在变量名之后) var a, b, c bool var s1, s2 string = &amp;ldquo;hello&amp;rdquo;, &amp;ldquo;world&amp;rdquo; 可定义在函数体内或直接定义在包内 使用var()集中定义变量 var (</description>
+      <description>变量定义 1、使用var关键字(变量类型写在变量名之后)   var a, b, c bool
+  var s1, s2 string = &amp;ldquo;hello&amp;rdquo;, &amp;ldquo;world&amp;rdquo;
+  可定义在函数体内或直接定义在包内
+  使用var()集中定义变量
+var ( a, b, c)   2、编译器自动识别类型  var a, b, i, s1, s2 = true, false, 1, &amp;ldquo;hello&amp;rdquo;, &amp;ldquo;world&amp;rdquo;  3、使用:=定义  a, b, i, s1, s2 := true, false, 1, &amp;ldquo;hello&amp;rdquo;, &amp;ldquo;world&amp;rdquo; 只能在函数体内定义使用  命名规则：一个名字必须以一个字母（Unicode字母）或下划线开头，后面可以跟任意 数量的字母、数字或下划线。大写字母和小写字母是不同的。关键字不能用于自定义名字，只能在特定语法结构中使用。
+Go语言中不存在 未初始化的变量
+类型必须完全匹配，nil可以赋值给任何指针或引用类型的变量
+25个关键字 break default func interface select case defer go map struct chan else goto package switch const fallthrough if range type continue for import return var 内建常量 true, false, iota, nil 内建变量类型 1、bool, string 2、(u)int, (u)int8, (u)int16, (u)int32, (u)int64, uintptr(指针) 3、byte, rune(字符) 4、float32, float64, complex64, complex128 5、error 内建函数 1、make, len, cap, new, append, copy, close, delete 2、complex, real, imag 3、panic, recover 强制类型转换 类型转换是强制的 var a, b int = 3, 4 var c int = int(math.</description>
     </item>
     
     <item>
       <title>GO 概述</title>
       <link>https://xue2zeng.github.io/post/language/go/overview/</link>
       <pubDate>Sat, 03 Aug 2019 10:49:44 +0800</pubDate>
-      
+      <author>youremail@domain.com (xue.zeng)</author>
       <guid>https://xue2zeng.github.io/post/language/go/overview/</guid>
-      <description>区别于其它语言 没有&amp;rdquo; 对象&amp;rdquo;，没有继承、多态，没有泛型，没有try/catch 有接口，函数式编程，CSP并发模型（go</description>
+      <description>区别于其它语言  没有&amp;quot; 对象&amp;quot;，没有继承、多态，没有泛型，没有try/catch 有接口，函数式编程，CSP并发模型（goroutioe + channel）  </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://xue2zeng.github.io/post/language/java/builder/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (xue.zeng)</author>
+      <guid>https://xue2zeng.github.io/post/language/java/builder/</guid>
+      <description>Java8通用Builder Java8之后，对于Builder模式可以利用Supplier、Consumer来构造一个通用的Builder模式，具体的代码如下
+import com.google.common.collect.Lists; import java.util.List; import java.util.function.BiConsumer; import java.util.function.Consumer; import java.util.function.Supplier; /** * 通用的建造者（Builder）模式构建器 * @param &amp;lt;T&amp;gt; 构造对象 * @author xue.zeng */ public class GenericBuilder&amp;lt;T&amp;gt; { private final Supplier&amp;lt;T&amp;gt; instantiator; private List&amp;lt;Consumer&amp;lt;T&amp;gt;&amp;gt; instantiatorModifiers = Lists.newArrayList(); private List&amp;lt;Consumer&amp;lt;T&amp;gt;&amp;gt; keyValueModifiers = Lists.newArrayList(); public GenericBuilder(Supplier&amp;lt;T&amp;gt; instantiator) { this.instantiator = instantiator; } public static &amp;lt;T&amp;gt; GenericBuilder&amp;lt;T&amp;gt; of(Supplier&amp;lt;T&amp;gt; instantiator) { return new GenericBuilder&amp;lt;T&amp;gt;(instantiator); } public &amp;lt;U&amp;gt; GenericBuilder&amp;lt;T&amp;gt; with(BiConsumer&amp;lt;T, U&amp;gt; consumer, U value) { Consumer&amp;lt;T&amp;gt; c = instance -&amp;gt; consumer.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://xue2zeng.github.io/post/toolkit/%E5%9C%A8%E7%BA%BF%E5%B7%A5%E5%85%B7/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (xue.zeng)</author>
+      <guid>https://xue2zeng.github.io/post/toolkit/%E5%9C%A8%E7%BA%BF%E5%B7%A5%E5%85%B7/</guid>
+      <description>在线工具 https://www.uuidgenerator.net/ UUID生成
+前端资源 https://nodesign.dev/ 设计元素
+Shell工具  MobaXterm  </description>
+    </item>
+    
+    <item>
+      <title>Hugo结合Github搭建博客</title>
+      <link>https://xue2zeng.github.io/post/toolkit/hugo%E7%BB%93%E5%90%88github/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (xue.zeng)</author>
+      <guid>https://xue2zeng.github.io/post/toolkit/hugo%E7%BB%93%E5%90%88github/</guid>
+      <description>安装Hugo   macOS环境
+brew install hugo # 检测安装成功 hugo version Hugo Static Site Generator v0.55.6/extended darwin/amd64 BuildDate: 2019-08-26T15:23:01Z   生成站点   使用hugo创建blog站点
+hugo new site blog cd blog # 目录结构 tree blog #blog #├── archetypes #│ └── default.md #├── config.toml #├── content #├── data #├── layouts #├── static #└── themes  archetypes：包括内容类型，在创建新内容时自动生成内容的配置
+config.toml：是网站的配置文件，包含一些基本配置和主题特有的配置
+content：包括网站内容，全部使用markdown格式
+data：存放自定义模版，导入的toml文件（或json，yaml）
+layouts：包括了网站的模版，决定内容如何呈现
+static：包括了css, js, fonts, media等，决定网站的外观
+themes：用于存放主题，可以去官方https://themes.gohugo.io/下载喜欢的主题
+   安装主题
+git init git submodule add https://github.</description>
+    </item>
+    
+    <item>
+      <title>系统远程调用</title>
+      <link>https://xue2zeng.github.io/post/architecture/%E7%B3%BB%E7%BB%9F%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (xue.zeng)</author>
+      <guid>https://xue2zeng.github.io/post/architecture/%E7%B3%BB%E7%BB%9F%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/</guid>
+      <description>系统远程调用思想 常规远程调用协议  dubbo thrift protocol buffer hessian  远程框架调用实现 调用端应用服务端暴露出来的接口，通过代理工厂创建代理对象
+spring实现：通过spring的自动注入的方式，在服务容器里面生成代理对象，然后当需要使用的时候，直接使用代理对象，
+就可以调用到另一个系统里面的服务
+远程通讯基本原理 从底层层面去看，网络通信需要做的就是将流从一台计算机传输到另外一台计算 机，基于传输协议和网络IO来实现，
+ 传输协议：主要有 tcp、udp、http等，tcp、udp、http都是在基于Socket概念上为某类应用场景而扩展出的传输协议 网络IO：主要有bio（阻塞）、 nio（非阻塞）、aio（异步，jdk7中新特性）三种方式，所有的分布式应用通讯都基于这个原理而实现，只是为了应用的易用，各种语言通常都会提供一些更为贴近应用易用的应用层协议  应用级协议 远程服务通讯，需要达到的目标是在一台计算机发起请求，另外一台机器在接收到请求后进行相应的处理并将结果返回给请求端，这其中又会有诸如one way request、同步请求、异步请求等等请求方式，按照网络通信原理，需要实现这个需要做的就是将请求转换成流，通过传输协议传输至远端，远端计算机在接 收到请求的流后进行处理，处理完毕后将结果转化为流，并通过传输协议返回给调用端
+原理是这样的，但为了应用的方便，业界推出了很多基于此原理之上的应用级的协议，使得大家可以不用去直接操作这么底层的东西，通常应用级的远程通信协议会 提供：
+ 为了避免直接做流操作这么麻烦，提供一种更加易用或贴合语言的标准传输格式 网络通信机制的实现，就是替你完成了将传输格式转化为流，通过某种传输协议传输至远端计算机，远端计算机在接收到流后转化为传输格式，并进行存储或以某种 方式通知远端计算机。  所以在学习应用级的远程通信协议时，可以带着这几个问题进行学习：
+ 传输的标准格式是什么？ 怎么样将请求转化为传输的流？ 怎么接收和处理流？ 传输协议是？  不过应用级的远程通信协议并不会在传输协议上做什么多大的改进，主要是在流操作方面，让应用层生成流和处理流的这个过程更加的贴合所使用的语言或标 准，至于传输协议则通常都是可选的
+Java领域实现远程调用技术  RMI XML-RPC Binary-RPC MINA ESB Burlap Hessian SOAP CORBA EJB JMS  RMI(Remote Method Invocation) RMI是个典型的为java定制的远程通信协议，在single vm中，可以通过直接调用java object instance来实现通信，那么在远程通信时，如果也能按照这种方式当然是最好了，这种远程通信的机制成为RPC（Remote Procedure Call），RMI正是朝着这个目标而诞生的。
+RMI 采用stubs 和 skeletons 来进行远程对象(remote object)的通讯。stub 充当远程对象的客户端代理，有着和远程对象相同的远程接口，远程对象的调用实际是通过调用该对象的客户端代理对象stub来完成的，通过该机制RMI就好比它是本地工作，采用tcp/ip协议，客户端直接调用服务端上的一些方法。优点是强类型，编译期可检查错误，缺点是只能基于JAVA语言，客户机与服务器紧耦合</description>
     </item>
     
   </channel>

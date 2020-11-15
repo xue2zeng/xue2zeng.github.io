@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>延迟任务 - 闲人码语</title>
+  <meta name="description" content="延迟任务 什么是延迟任务 顾明思议，把需要延迟执行的任务叫做延迟任务
+延迟任务得使用场景
+ 订单下单之后 30 分钟后，用户如果没有付钱，系统需要自动取消订单，并退还库存 如何定期检查处于退款状态的订单是否已经退款成功 重试机制实现：把调用失败的接口放入一个固定延时的队列,到期后再重试 新创建的店铺：如果在十天内都没有上传过商品，则自动发送消息提醒 用户发起退款：如果三天内没有得到处理则通知相关运营人员 预定会议后：需要在预定的时间点前十分钟通知各个与会人员参加会议 关闭空闲连接：服务器中，有很多客户端的连接，空闲一段时间之后需要关闭之 清理过期数据业务：比如缓存中的对象，超过了空闲时间，需要从缓存中移出 多考生考试：到期全部考生必须交卷,要求时间非常准确的场景 任务超时处理：在网络协议滑动窗口请求应答式交互时，处理超时未响应的请求 订餐通知：下单成功后60s之后给用户发送短信通知 红包 24 小时未被查收，需要延迟执退还业务 每个月账单日，需要给用户发送当月的对账单  延迟任务实现思路 延迟任务实现的关键是在某个时间节点执行某个任务。基于这个信息可以想到实现延迟任务的手段有以下两个：
+ 自己手写一个“死循环”一直判断当前时间节点有没有要执行的任务 借助 JDK 或者第三方提供的工具类来实现延迟任务  通过 JDK 实现延迟任务能想到的关键词是：DelayQueue、Timer、ScheduledExecutorService 第三方提供的延迟任务执行方法就有很多了，例如：Redis、Netty、MQ 等手段    实现方式  定期轮询（数据库等） JDK（DelayQueue、Timer、ScheduledExecutorService周期性线程池） 时间轮（Kafka、Netty的HashedWheelTimer） Redis有序集合（zset） Zookeeper之curator MQ（RabbitMQ） Quartz，xxxjob等定时任务框架 Koala（考拉） JCronTab（仿crontab的java调度器） SchedulerX（阿里） 有赞延迟队列 &hellip;&hellip;  轮询 特点：定期轮训数据库，设置状态
+ 优点：实现简单
+缺点：
+ 对服务器内存消耗大 存在轮询延迟 数据量过大时会消耗太多的IO资源，效率太低   DelayQueue 特点：无界、延迟、阻塞队列
+ 优点：JDK自带，轻量级，使用简单
+缺点：">
+  <meta name="author" content="xue.zeng"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "闲人码语",
+    
+    "url": "https:\/\/xue2zeng.github.io\/"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/xue2zeng.github.io\/"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/xue2zeng.github.io\/",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/xue2zeng.github.io\/post\/architecture\/%E5%BB%B6%E8%BF%9F%E4%BB%BB%E5%8A%A1\/",
+          "name": "延迟任务"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "xue.zeng"
+  },
+  "headline": "延迟任务",
+  "description" : "延迟任务 什么是延迟任务 顾明思议，把需要延迟执行的任务叫做延迟任务\n延迟任务得使用场景\n 订单下单之后 30 分钟后，用户如果没有付钱，系统需要自动取消订单，并退还库存 如何定期检查处于退款状态的订单是否已经退款成功 重试机制实现：把调用失败的接口放入一个固定延时的队列,到期后再重试 新创建的店铺：如果在十天内都没有上传过商品，则自动发送消息提醒 用户发起退款：如果三天内没有得到处理则通知相关运营人员 预定会议后：需要在预定的时间点前十分钟通知各个与会人员参加会议 关闭空闲连接：服务器中，有很多客户端的连接，空闲一段时间之后需要关闭之 清理过期数据业务：比如缓存中的对象，超过了空闲时间，需要从缓存中移出 多考生考试：到期全部考生必须交卷,要求时间非常准确的场景 任务超时处理：在网络协议滑动窗口请求应答式交互时，处理超时未响应的请求 订餐通知：下单成功后60s之后给用户发送短信通知 红包 24 小时未被查收，需要延迟执退还业务 每个月账单日，需要给用户发送当月的对账单  延迟任务实现思路 延迟任务实现的关键是在某个时间节点执行某个任务。基于这个信息可以想到实现延迟任务的手段有以下两个：\n 自己手写一个“死循环”一直判断当前时间节点有没有要执行的任务 借助 JDK 或者第三方提供的工具类来实现延迟任务  通过 JDK 实现延迟任务能想到的关键词是：DelayQueue、Timer、ScheduledExecutorService 第三方提供的延迟任务执行方法就有很多了，例如：Redis、Netty、MQ 等手段    实现方式  定期轮询（数据库等） JDK（DelayQueue、Timer、ScheduledExecutorService周期性线程池） 时间轮（Kafka、Netty的HashedWheelTimer） Redis有序集合（zset） Zookeeper之curator MQ（RabbitMQ） Quartz，xxxjob等定时任务框架 Koala（考拉） JCronTab（仿crontab的java调度器） SchedulerX（阿里） 有赞延迟队列 \u0026hellip;\u0026hellip;  轮询 特点：定期轮训数据库，设置状态\n 优点：实现简单\n缺点：\n 对服务器内存消耗大 存在轮询延迟 数据量过大时会消耗太多的IO资源，效率太低   DelayQueue 特点：无界、延迟、阻塞队列\n 优点：JDK自带，轻量级，使用简单\n缺点：",
+  "inLanguage" : "en",
+  "wordCount":  197 ,
+  "datePublished" : "2020-10-25T18:36:09",
+  "dateModified" : "2020-10-25T18:36:09",
+  "image" : "https:\/\/xue2zeng.github.io\/img\/avatar-icon.png",
+  "keywords" : [ "arch" ],
+  "mainEntityOfPage" : "https:\/\/xue2zeng.github.io\/post\/architecture\/%E5%BB%B6%E8%BF%9F%E4%BB%BB%E5%8A%A1\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/xue2zeng.github.io\/",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/xue2zeng.github.io\/img\/avatar-icon.png",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+<meta property="og:title" content="延迟任务" />
+<meta property="og:description" content="延迟任务 什么是延迟任务 顾明思议，把需要延迟执行的任务叫做延迟任务
+延迟任务得使用场景
+ 订单下单之后 30 分钟后，用户如果没有付钱，系统需要自动取消订单，并退还库存 如何定期检查处于退款状态的订单是否已经退款成功 重试机制实现：把调用失败的接口放入一个固定延时的队列,到期后再重试 新创建的店铺：如果在十天内都没有上传过商品，则自动发送消息提醒 用户发起退款：如果三天内没有得到处理则通知相关运营人员 预定会议后：需要在预定的时间点前十分钟通知各个与会人员参加会议 关闭空闲连接：服务器中，有很多客户端的连接，空闲一段时间之后需要关闭之 清理过期数据业务：比如缓存中的对象，超过了空闲时间，需要从缓存中移出 多考生考试：到期全部考生必须交卷,要求时间非常准确的场景 任务超时处理：在网络协议滑动窗口请求应答式交互时，处理超时未响应的请求 订餐通知：下单成功后60s之后给用户发送短信通知 红包 24 小时未被查收，需要延迟执退还业务 每个月账单日，需要给用户发送当月的对账单  延迟任务实现思路 延迟任务实现的关键是在某个时间节点执行某个任务。基于这个信息可以想到实现延迟任务的手段有以下两个：
+ 自己手写一个“死循环”一直判断当前时间节点有没有要执行的任务 借助 JDK 或者第三方提供的工具类来实现延迟任务  通过 JDK 实现延迟任务能想到的关键词是：DelayQueue、Timer、ScheduledExecutorService 第三方提供的延迟任务执行方法就有很多了，例如：Redis、Netty、MQ 等手段    实现方式  定期轮询（数据库等） JDK（DelayQueue、Timer、ScheduledExecutorService周期性线程池） 时间轮（Kafka、Netty的HashedWheelTimer） Redis有序集合（zset） Zookeeper之curator MQ（RabbitMQ） Quartz，xxxjob等定时任务框架 Koala（考拉） JCronTab（仿crontab的java调度器） SchedulerX（阿里） 有赞延迟队列 &hellip;&hellip;  轮询 特点：定期轮训数据库，设置状态
+ 优点：实现简单
+缺点：
+ 对服务器内存消耗大 存在轮询延迟 数据量过大时会消耗太多的IO资源，效率太低   DelayQueue 特点：无界、延迟、阻塞队列
+ 优点：JDK自带，轻量级，使用简单
+缺点：">
+<meta property="og:image" content="https://xue2zeng.github.io/img/avatar-icon.png" />
+<meta property="og:url" content="https://xue2zeng.github.io/post/architecture/%E5%BB%B6%E8%BF%9F%E4%BB%BB%E5%8A%A1/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="闲人码语" />
+
+  <meta name="twitter:title" content="延迟任务" />
+  <meta name="twitter:description" content="延迟任务 什么是延迟任务 顾明思议，把需要延迟执行的任务叫做延迟任务
+延迟任务得使用场景
+ 订单下单之后 30 分钟后，用户如果没有付钱，系统需要自动取消订单，并退还库存 如何定期检查处于退款状态的订单是否已经退款成功 重试机制实现：把调用失败的接口放入一个固定延时的队列,到期后再重试 新创建的店铺：如果在十天内都没有上传过商品，则自动发送消息提醒 用户发起退款：如果三天内没有得到处理则通知相关运 …">
+  <meta name="twitter:image" content="https://xue2zeng.github.io/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@username" />
+  <meta name="twitter:creator" content="@username" />
+  <link href='https://xue2zeng.github.io/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.78.1" />
+  <link rel="alternate" href="https://xue2zeng.github.io/index.xml" type="application/rss+xml" title="闲人码语"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://xue2zeng.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://xue2zeng.github.io/css/highlight.min.css" /><link rel="stylesheet" href="https://xue2zeng.github.io/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://xue2zeng.github.io/">闲人码语</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/about">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    
+      <div class="avatar-container">
+        <div class="avatar-img-border">
+          <a title="闲人码语" href="https://xue2zeng.github.io/">
+            <img class="avatar-img" src="https://xue2zeng.github.io/img/avatar-icon.png" alt="闲人码语" />
+          </a>
+        </div>
+      </div>
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              
+                <h1>延迟任务</h1>
+              
+              
+              
+              
+                <span class="post-meta">
+  
+  
+  <i class="fas fa-calendar"></i>&nbsp;
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;1&nbsp;minutes
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;197&nbsp;words
+  
+  
+  
+</span>
+
+
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <h2 id="延迟任务">延迟任务</h2>
+<h3 id="什么是延迟任务">什么是延迟任务</h3>
+<p>顾明思议，<strong>把需要延迟执行的任务叫做延迟任务</strong></p>
+<p>延迟任务得<strong>使用场景</strong></p>
+<ul>
+<li>订单下单之后 30 分钟后，用户如果没有付钱，系统需要自动取消订单，并退还库存</li>
+<li>如何定期检查处于退款状态的订单是否已经退款成功</li>
+<li>重试机制实现：把调用失败的接口放入一个固定延时的队列,到期后再重试</li>
+<li>新创建的店铺：如果在十天内都没有上传过商品，则自动发送消息提醒</li>
+<li>用户发起退款：如果三天内没有得到处理则通知相关运营人员</li>
+<li>预定会议后：需要在预定的时间点前十分钟通知各个与会人员参加会议</li>
+<li>关闭空闲连接：服务器中，有很多客户端的连接，空闲一段时间之后需要关闭之</li>
+<li>清理过期数据业务：比如缓存中的对象，超过了空闲时间，需要从缓存中移出</li>
+<li>多考生考试：到期全部考生必须交卷,要求时间非常准确的场景</li>
+<li>任务超时处理：在网络协议滑动窗口请求应答式交互时，处理超时未响应的请求</li>
+<li>订餐通知：下单成功后60s之后给用户发送短信通知</li>
+<li>红包 24 小时未被查收，需要延迟执退还业务</li>
+<li>每个月账单日，需要给用户发送当月的对账单</li>
+</ul>
+<h3 id="延迟任务实现思路">延迟任务实现思路</h3>
+<p>延迟任务<strong>实现的关键是在某个时间节点执行某个任务</strong>。基于这个信息可以想到<strong>实现延迟任务的手段</strong>有以下两个：</p>
+<ul>
+<li>自己手写一个“死循环”一直判断当前时间节点有没有要执行的任务</li>
+<li>借助 JDK 或者第三方提供的工具类来实现延迟任务
+<ol>
+<li>通过 JDK 实现延迟任务能想到的关键词是：DelayQueue、Timer、ScheduledExecutorService</li>
+<li>第三方提供的延迟任务执行方法就有很多了，例如：Redis、Netty、MQ 等手段</li>
+</ol>
+</li>
+</ul>
+<h3 id="实现方式">实现方式</h3>
+<ul>
+<li>定期轮询（数据库等）</li>
+<li>JDK（DelayQueue、Timer、ScheduledExecutorService周期性线程池）</li>
+<li>时间轮（Kafka、Netty的HashedWheelTimer）</li>
+<li>Redis有序集合（zset）</li>
+<li>Zookeeper之curator</li>
+<li>MQ（RabbitMQ）</li>
+<li>Quartz，xxxjob等定时任务框架</li>
+<li>Koala（考拉）</li>
+<li>JCronTab（仿crontab的java调度器）</li>
+<li>SchedulerX（阿里）</li>
+<li>有赞延迟队列</li>
+<li>&hellip;&hellip;</li>
+</ul>
+<h4 id="轮询">轮询</h4>
+<p>特点：定期轮训数据库，设置状态</p>
+<blockquote>
+<p>优点：实现简单</p>
+<p>缺点：</p>
+<ol>
+<li>对服务器内存消耗大</li>
+<li>存在轮询延迟</li>
+<li>数据量过大时会消耗太多的IO资源，效率太低</li>
+</ol>
+</blockquote>
+<h4 id="delayqueue">DelayQueue</h4>
+<p>特点：无界、延迟、阻塞队列</p>
+<blockquote>
+<p>优点：JDK自带，轻量级，使用简单</p>
+<p>缺点：</p>
+<ol>
+<li>存储在内存，由于内存限制如果需要延迟得数量量过大很容易出现OOM异常</li>
+<li>服务器重启会造成数据丢失，可配合redis使用</li>
+<li>如果数据量庞大，推荐使用MQ消息中间件实现</li>
+</ol>
+</blockquote>
+<p>实现方式</p>
+<ol>
+<li>BlockingQueue（无界阻塞队列）+PriorityQueue（堆排序优先队列：内部使用完全二叉树实现队列元素排序）+Delayed</li>
+<li>DelayQueue中存放的对象必须实现Delayed接口，并重写compareTo(Delayed)方法和getDelay(TimeUnit)方法。</li>
+<li>getDelay方法返回该元素距离失效还剩余的时间，当&lt;=0时元素就失效了， 就可以从队列中获取到。</li>
+</ol>
+<h4 id="timer">Timer</h4>
+<p>Timer是一种定时器工具，用来在一个后台线程计划执行指定任务。它可以计划执行一个任务一次或反复多次。TaskQueue中的排序是对TimerTask中的下一次执行时间进行堆排序，每次去取数组第一个</p>
+<blockquote>
+<p>优点：JDK自带，使用简单</p>
+<p>缺点：</p>
+<ol>
+<li>不支持多线程，任务只能串行执行，任务执行时间长影响其它任务</li>
+<li>一个任务抛出异常，其它挂在Timer下得所有任务都会无法继续执行</li>
+<li>不能指定绝对的日期或者时间、无法高可用（节点挂了，任务不能执行）</li>
+</ol>
+</blockquote>
+<h4 id="scheduledexecutorservice">ScheduledExecutorService</h4>
+<p>可以实现 Timer 类具备的所有功能，并且它可以解决了 Timer 类存在的所有问题</p>
+<p>特点：支持多线程，同时在线程中对异常进行了封装</p>
+<h4 id="时间轮kafka">时间轮（Kafka）</h4>
+<p><strong>名词解释</strong></p>
+<p>tickMs：时间轮由多个时间格组成，每个时间格就是tickMs，它代表当前时间轮的基本时间跨度。</p>
+<p>wheelSize：代表每一层时间轮的格数</p>
+<p>interval：当前时间轮的总体时间跨度，interval=tickMs × wheelSize</p>
+<p>startMs：构造当层时间轮时候的当前时间，第一层的时间轮的startMs是TimeUnit.NANOSECONDS.toMillis(nanoseconds()),上层时间轮的startMs为下层时间轮的currentTime。</p>
+<p>currentTime：表示时间轮当前所处的时间，currentTime是tickMs的整数倍（通过currentTime=startMs - (startMs % tickMs来保正currentTime一定是tickMs的整数倍），这个运算类比钟表中分钟里65秒分针指针指向的还是1分钟）。currentTime可以将整个时间轮划分为到期部分和未到期部分，currentTime当前指向的时间格也属于到期部分，表示刚好到期，需要处理此时间格所对应的TimerTaskList的所有任务</p>
+<p>特点：时间轮更适合任务数很大的延时场景，它的任务插入和删除时间复杂度都为O(1)。</p>
+<p>延迟超过时间轮所能表示的范围有两种处理方式，</p>
+<ul>
+<li>通过增加一个字段-轮数，Netty 就是这样实现的</li>
+<li>多层次时间轮，Kakfa 是这样实现的。</li>
+</ul>
+<p>相比而言 Netty 的实现会有空推进的问题，而 Kafka 采用 DelayQueue 以槽为单位，利用空间换时间的思想解决了空推进的问题</p>
+<p><img src="./kafka-timing-wheel.png" alt="timing-wheel"></p>
+<p><strong>数据结构</strong></p>
+<p>Kafka并没有使用JDK自带的Timer或者DelayQueue来实现延迟的功能，而是基于时间轮自定义了一个用于实现延迟功能的定时器（SystemTimer）。JDK的Timer和DelayQueue插入和删除操作的平均时间复杂度为O(nlog(n))。</p>
+<p>Kafka中的时间轮（TimingWheel）是一个存储定时任务的环形队列，底层采用数组实现，数组中的每个元素可以存放一个定时任务列表（TimerTaskList）。TimerTaskList是一个环形的双向链表，链表中的每一项表示的都是定时任务项（TimerTaskEntry），其中封装了真正的定时任务TimerTask。在Kafka中对这个TimeTaskList是用一个名称为buckets的数组表示，使用DelayQueue对时间轮里面的bucket放入延迟队列</p>
+<p><img src="./kafka-struct.png" alt="struct"></p>
+<h4 id="netty">Netty</h4>
+<p>Netty 通过提供的工具类 HashedWheelTimer 来实现延迟任务，底层数据结构依然是使用DelayQueue，只是采用时间轮的算法实现。</p>
+<blockquote>
+<p>优点：效率高,任务触发时间延迟时间比DelayQueue低，代码复杂度比DelayQueue低。</p>
+<p>缺点：</p>
+<ol>
+<li>服务器重启后，数据全部消失，怕宕机</li>
+<li>集群扩展相当麻烦</li>
+<li>因为内存条件限制的原因，比如下单未付款的订单数太多，那么很容易就出现OOM异常</li>
+</ol>
+</blockquote>
+<p>构造函数参数含义</p>
+<ol>
+<li>ThreadFactory ：表示用于生成工作线程，一般采用线程池</li>
+<li>tickDuration和unit：每格的时间间隔，默认100ms</li>
+<li>ticksPerWheel：一圈下来有几格，默认512，而如果传入数值的不是2的N次方，则会调整为大于等于该参数的一个2的N次方数值，有利于优化hash值的计算</li>
+<li>TimerTask：一个定时任务的实现接口，其中run方法包装了定时任务的逻辑</li>
+<li>Timeout：一个定时任务提交到Timer之后返回的句柄，通过这个句柄外部可以取消这个定时任务，并对定时任务的状态进行一些基本的判断</li>
+<li>Timer：是HashedWheelTimer实现的父接口，仅定义了如何提交定时任务和如何停止整个定时机制</li>
+</ol>
+<h4 id="redis">Redis</h4>
+<p>Redis 实现延迟任务的方法可分为两类</p>
+<ul>
+<li>通过Zset数据判断方式：主要利用它的score属性，redis通过score来为集合中的元素进行大小写的排序</li>
+<li>通过键空间通知方式：默认情况 Redis 服务器端是不开启键空间通知的，需要通过 config set notify-keyspace-events Ex 的命令手动开启或者修改redis.conf文件开启notify-keyspace-events Ex，开启键空间通知后，就可以拿到每个键值过期的事件</li>
+</ul>
+<h4 id="mq">MQ</h4>
+<p>AMQP协议本身没有直接支持延迟队列功能，但是可以通过提供的一些特性模拟出延迟队列的功能</p>
+<p>Rabbitmq实现延时队列的两种形式</p>
+<ul>
+<li>
+<p>利用两个特性： Time To Live(TTL)、Dead Letter Exchanges（DLX）</p>
+<p><strong>实现原理</strong></p>
+<p><img src="./rebbitmq-delay-queue-principle.png" alt="实现原理"></p>
+<blockquote>
+<ol>
+<li>
+<p><a href="https://www.rabbitmq.com/ttl.html#per-queue-message-ttl">Time To Live(TTL)</a></p>
+<p>TTL即消息的存活时间。RabbitMQ可以针对Queue设置x-expires 或者 针对Message设置 x-message-ttl，来控制消息的生存时间，它的值是一个非负整数，单位为微秒，如果超时(两者同时设置以最先到期的时间为准)，则消息变为Dead Letter(死信)</p>
+<p>RabbitMQ针对队列中的消息过期时间有两种方法可以设置。</p>
+<ul>
+<li>通过队列属性设置，队列中所有消息都有相同的过期时间。</li>
+<li>设置消息过期时间，对队列中的某一条消息设置过期时间，每条消息TTL可以不同。</li>
+</ul>
+<p>如果同时使用，则消息的过期时间以两者之间TTL较小的那个数值为准。消息在队列的生存时间一旦超过设置的TTL值，就成为Dead Letter</p>
+</li>
+<li>
+<p><a href="https://www.rabbitmq.com/dlx.html">Dead Letter Exchanges（DLX）</a></p>
+<p>DLX即死信交换机，绑定在死信交换机上的即死信队列。RabbitMQ的Queue可以配置x-dead-letter-exchange 和x-dead-letter-routing-key（可选）两个参数，如果队列内出现了Dead Letter，则按照这两个参数重新路由转发到指定的队列。</p>
+<ul>
+<li>x-dead-letter-exchange：队列中出现Dead Letter之后将Dead Letter重新发送到指定exchange（交换机）</li>
+<li>x-dead-letter-routing-key：出现Dead Letter之后将Dead Letter重新按照指定的routing-key发送，一般为要指定转发的队列</li>
+</ul>
+<p>队列出现Dead Letter的情况有：</p>
+<ul>
+<li>消息或者队列的TTL过期</li>
+<li>队列达到最大长度</li>
+<li>消息被消费端拒绝（basic.reject or basic.nack）并且requeue=false</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<p><strong>实现流程</strong></p>
+<p><img src="./rebbitmq-delay-queue.png" alt="延迟任务流程"></p>
+</li>
+<li>
+<p>使用 rabbitmq-delayed-message-exchange 插件实现延迟功能</p>
+</li>
+</ul>
+<h4 id="quartz">Quartz</h4>
+<ul>
+<li>Quartz是一个任务调度框架（库），几乎可以集成到任何应用系统当中</li>
+<li>Spring对Quartz进行很好的封装集成</li>
+<li>非常的轻量级，只需要少量的配置</li>
+<li>非常好的容错机制，并且可以在重启服务的时候持久化定时任务，保证任务不会丢失</li>
+</ul>
+<p><strong>核心概念</strong>：调度器，任务和触发器</p>
+<p>三者关系：调度器负责调度各个任务，到了某个时刻或者过了一定时间，触发器触动了，特定任务便启动执行</p>
+<p><img src="./quartz.png" alt="Quartz"></p>
+<blockquote>
+<ol>
+<li>
+<p>scheduler是一个计划调度器容器（总部），容器里面可以盛放众多的JobDetail和trigger，当容器启动后，里面的每个JobDetail都会根据trigger按部就班自动去执行。</p>
+</li>
+<li>
+<p>JobDetail是一个可执行的工作，它本身是有状态的。</p>
+</li>
+<li>
+<p>Trigger代表什么时候去调。</p>
+</li>
+<li>
+<p>当JobDetail和Trigger在scheduler容器上注册后，形成了装配好的作业（JobDetail和Trigger所组成的一对儿），就可以伴随容器启动而调度执行了。</p>
+</li>
+<li>
+<p>scheduler是个容器，容器中有一个线程池，用来并行调度执行每个作业，这样可以提高容器效率</p>
+</li>
+</ol>
+</blockquote>
+<p>相关代码实现地址：<a href="https://github.com/xue2zeng/practice-java/tree/master/spring/spring-boot-training/spring-boot-delay-task">GitHub</a></p>
+
+
+        
+          <div class="blog-tags">
+            
+              <a href="https://xue2zeng.github.io//tags/arch/">arch</a>&nbsp;
+            
+          </div>
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        <a href="//twitter.com/share?url=https%3a%2f%2fxue2zeng.github.io%2fpost%2farchitecture%2f%25E5%25BB%25B6%25E8%25BF%259F%25E4%25BB%25BB%25E5%258A%25A1%2f&amp;text=%e5%bb%b6%e8%bf%9f%e4%bb%bb%e5%8a%a1&amp;via=username" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fxue2zeng.github.io%2fpost%2farchitecture%2f%25E5%25BB%25B6%25E8%25BF%259F%25E4%25BB%25BB%25E5%258A%25A1%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//reddit.com/submit?url=https%3a%2f%2fxue2zeng.github.io%2fpost%2farchitecture%2f%25E5%25BB%25B6%25E8%25BF%259F%25E4%25BB%25BB%25E5%258A%25A1%2f&amp;title=%e5%bb%b6%e8%bf%9f%e4%bb%bb%e5%8a%a1" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fxue2zeng.github.io%2fpost%2farchitecture%2f%25E5%25BB%25B6%25E8%25BF%259F%25E4%25BB%25BB%25E5%258A%25A1%2f&amp;title=%e5%bb%b6%e8%bf%9f%e4%bb%bb%e5%8a%a1" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fxue2zeng.github.io%2fpost%2farchitecture%2f%25E5%25BB%25B6%25E8%25BF%259F%25E4%25BB%25BB%25E5%258A%25A1%2f&amp;title=%e5%bb%b6%e8%bf%9f%e4%bb%bb%e5%8a%a1" target="_blank" title="Share on StumbleUpon">
+          <i class="fab fa-stumbleupon"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fxue2zeng.github.io%2fpost%2farchitecture%2f%25E5%25BB%25B6%25E8%25BF%259F%25E4%25BB%25BB%25E5%258A%25A1%2f&amp;description=%e5%bb%b6%e8%bf%9f%e4%bb%bb%e5%8a%a1" target="_blank" title="Share on Pinterest">
+          <i class="fab fa-pinterest"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+
+              </div>
+            </section>
+        
+
+        
+          
+            
+          
+
+          
+                  <h4 class="see-also">See also</h4>
+                  <ul>
+                
+                
+                    <li><a href="/post/architecture/rpc%E6%A1%86%E6%9E%B6/">RPC框架的发展</a></li>
+                
+                    <li><a href="/post/architecture/%E7%B3%BB%E7%BB%9F%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/">系统远程调用</a></li>
+                
+              </ul>
+
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://xue2zeng.github.io/post/architecture/rpc%E6%A1%86%E6%9E%B6/" data-toggle="tooltip" data-placement="top" title="RPC框架的发展">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://xue2zeng.github.io/post/setting/jdk%E7%AE%A1%E7%90%86-macos/" data-toggle="tooltip" data-placement="top" title="JDK管理-MacOS">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:youremail@domain.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.facebook.com/username" title="Facebook">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-facebook fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/username" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://gitlab.com/username" title="GitLab">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-gitlab fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://bitbucket.org/username" title="Bitbucket">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-bitbucket fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/username" title="Twitter">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://username.slack.com/" title="Slack">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-slack fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://reddit.com/u/username" title="Reddit">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-reddit-alien fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://linkedin.com/in/username" title="LinkedIn">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.xing.com/profile/username" title="Xing">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-xing fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://stackoverflow.com/users/XXXXXXX/username" title="StackOverflow">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.snapchat.com/add/username" title="Snapchat">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-snapchat-ghost fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.instagram.com/username" title="Instagram">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-instagram fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.youtube.com/user/username" title="Youtube">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-youtube fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://soundcloud.com/username" title="SoundCloud">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-soundcloud fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://open.spotify.com/user/username" title="Spotify">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-spotify fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://username.bandcamp.com/" title="Bandcamp">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-bandcamp fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://itch.io/profile/username" title="Itch.io">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fas fa-gamepad fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://vk.com/username" title="VK">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-vk fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://paypal.me/username" title="PayPal">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-paypal fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://telegram.me/username" title="Telegram">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-telegram fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://500px.com/username" title="500px">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-500px fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://codepen.io/username" title="CodePen">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-codepen fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.kaggle.com/username" title="kaggle">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-kaggle fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://url" title="Mastodon">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-mastodon fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://weibo.com/username" title="Weibo">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-weibo fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="yourwebsite.com">xue.zeng</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;&copy;
+          
+            2020
+          
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://xue2zeng.github.io/">闲人码语</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.78.1</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://xue2zeng.github.io/js/main.js"></script>
+<script src="https://xue2zeng.github.io/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> $(document).ready(function() {$("pre.chroma").css("padding","0");}); </script><script> renderMathInElement(document.body); </script><script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script><script src="https://xue2zeng.github.io/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+
+
+
+    
+  </body>
+</html>
+

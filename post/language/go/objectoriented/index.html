@@ -7,16 +7,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>面向对象 - Xue.Zeng</title>
-  <meta property="og:title" content="面向对象" />
-  <meta name="twitter:title" content="面向对象" />
+  <title>面向对象 - 闲人码语</title>
   <meta name="description" content="Go学习笔记">
-  <meta property="og:description" content="Go学习笔记">
-  <meta name="twitter:description" content="Go学习笔记"><script type="application/ld+json">
+  <meta name="author" content="xue.zeng"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
     "@type": "WebSite",
-    "name": "Xue.Zeng",
+    "name": "闲人码语",
     
     "url": "https:\/\/xue2zeng.github.io\/"
 }
@@ -57,12 +54,12 @@
   "@context": "http://schema.org",
   "@type": "Article",
   "author": {
-    "name" : ""
+    "name" : "xue.zeng"
   },
   "headline": "面向对象",
-  "description" : "Go语言仅支持封装，不支持继承和多态 Go语言没有class，只有struct 结构体和方法 创建 type Node struct { Value int Left, Right *Node } 定义方法 func CreateNode(value int) *Node { return \x26amp;Node{Value: value} } func",
+  "description" : "Go语言仅支持封装，不支持继承和多态\nGo语言没有class，只有struct\n结构体和方法   创建\ntype Node struct { Value int Left, Right *Node }   定义方法\nfunc CreateNode(value int) *Node { return \u0026amp;Node{Value: value} } func (node *Node) SetValue(value int) { if node == nil { fmt.Println(\u0026#34;Setting Value to nil \u0026#34; \u002b \u0026#34;node. Ignored.\u0026#34;) return } node.Value = value }  只有使用指针才可以改变结构内容\nnil指针也可以调用方法\n   值接收者 vs 指针接收者\n 要改变内容必须使用指针接收者 结构过大也考虑使用指针接收者 一致性：如果指针接收者，最好都是指针接收者    包和封装  结构定义的方法必须放在同一个包内 可以是不同的文件 如果包中内容需要public，需要将包中的变量，方法名等首字母大写 类型扩展  定义别名 使用组合    GOPATH及目录结构   GOPATH环境变量",
   "inLanguage" : "en",
-  "wordCount":  481 ,
+  "wordCount":  109 ,
   "datePublished" : "2019-09-07T10:28:18",
   "dateModified" : "2019-09-07T10:28:18",
   "image" : "https:\/\/xue2zeng.github.io\/img\/avatar-icon.png",
@@ -86,22 +83,17 @@
 <meta property="og:image" content="https://xue2zeng.github.io/img/avatar-icon.png" />
 <meta property="og:url" content="https://xue2zeng.github.io/post/language/go/objectoriented/" />
 <meta property="og:type" content="website" />
-<meta property="og:site_name" content="Xue.Zeng" />
+<meta property="og:site_name" content="闲人码语" />
 
   <meta name="twitter:title" content="面向对象" />
   <meta name="twitter:description" content="Go学习笔记">
   <meta name="twitter:image" content="https://xue2zeng.github.io/img/avatar-icon.png" />
   <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@username" />
+  <meta name="twitter:creator" content="@username" />
   <link href='https://xue2zeng.github.io/img/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta property="og:image" content="https://xue2zeng.github.io/img/avatar-icon.png" />
-  <meta name="twitter:image" content="https://xue2zeng.github.io/img/avatar-icon.png" />
-  <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://xue2zeng.github.io/post/language/go/objectoriented/" />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Xue.Zeng" />
-
-  <meta name="generator" content="Hugo 0.55.6" />
-  <link rel="alternate" href="https://xue2zeng.github.io/index.xml" type="application/rss+xml" title="Xue.Zeng"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  <meta name="generator" content="Hugo 0.78.1" />
+  <link rel="alternate" href="https://xue2zeng.github.io/index.xml" type="application/rss+xml" title="闲人码语"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://xue2zeng.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
@@ -121,11 +113,17 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://xue2zeng.github.io/">Xue.Zeng</a>
+      <a class="navbar-brand" href="https://xue2zeng.github.io/">闲人码语</a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
       <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
         
           
             <li>
@@ -149,8 +147,8 @@
     
       <div class="avatar-container">
         <div class="avatar-img-border">
-          <a title="Xue.Zeng" href="https://xue2zeng.github.io/">
-            <img class="avatar-img" src="https://xue2zeng.github.io/img/avatar-icon.png" alt="Xue.Zeng" />
+          <a title="闲人码语" href="https://xue2zeng.github.io/">
+            <img class="avatar-img" src="https://xue2zeng.github.io/img/avatar-icon.png" alt="闲人码语" />
           </a>
         </div>
       </div>
@@ -241,16 +239,14 @@
                 <span class="post-meta">
   
   
-  <i class="fas fa-calendar"></i>&nbsp;Posted on 2019-09-07
+  <i class="fas fa-calendar"></i>&nbsp;
   
   
     &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;1&nbsp;minutes
   
   
-    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;481&nbsp;words
+    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;109&nbsp;words
   
-  
-    &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;
   
   
 </span>
@@ -270,131 +266,116 @@
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        
-
-<p><strong>Go语言仅支持封装，不支持继承和多态</strong></p>
-
+        <p><strong>Go语言仅支持封装，不支持继承和多态</strong></p>
 <p><strong>Go语言没有class，只有struct</strong></p>
-
 <h4 id="结构体和方法">结构体和方法</h4>
-
 <ul>
-<li>创建</li>
-</ul>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go">  <span class="kd">type</span> <span class="nx">Node</span> <span class="kd">struct</span> <span class="p">{</span>
-  	<span class="nx">Value</span>       <span class="kt">int</span>
-  	<span class="nx">Left</span><span class="p">,</span> <span class="nx">Right</span> <span class="o">*</span><span class="nx">Node</span>
-  <span class="p">}</span></code></pre></div>
-<ul>
-<li>定义方法</li>
-</ul>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go">  <span class="kd">func</span> <span class="nf">CreateNode</span><span class="p">(</span><span class="nx">value</span> <span class="kt">int</span><span class="p">)</span> <span class="o">*</span><span class="nx">Node</span> <span class="p">{</span>
-  	<span class="k">return</span> <span class="o">&amp;</span><span class="nx">Node</span><span class="p">{</span><span class="nx">Value</span><span class="p">:</span> <span class="nx">value</span><span class="p">}</span>
+<li>
+<p>创建</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">Node</span> <span class="kd">struct</span> <span class="p">{</span>
+  <span class="nx">Value</span>       <span class="kt">int</span>
+  <span class="nx">Left</span><span class="p">,</span> <span class="nx">Right</span> <span class="o">*</span><span class="nx">Node</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li>
+<p>定义方法</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">CreateNode</span><span class="p">(</span><span class="nx">value</span> <span class="kt">int</span><span class="p">)</span> <span class="o">*</span><span class="nx">Node</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="o">&amp;</span><span class="nx">Node</span><span class="p">{</span><span class="nx">Value</span><span class="p">:</span> <span class="nx">value</span><span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">func</span> <span class="p">(</span><span class="nx">node</span> <span class="o">*</span><span class="nx">Node</span><span class="p">)</span> <span class="nf">SetValue</span><span class="p">(</span><span class="nx">value</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="nx">node</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+      <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Setting Value to nil &#34;</span> <span class="o">+</span>
+          <span class="s">&#34;node. Ignored.&#34;</span><span class="p">)</span>
+      <span class="k">return</span>
   <span class="p">}</span>
-  <span class="kd">func</span> <span class="p">(</span><span class="nx">node</span> <span class="o">*</span><span class="nx">Node</span><span class="p">)</span> <span class="nf">SetValue</span><span class="p">(</span><span class="nx">value</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
-  	<span class="k">if</span> <span class="nx">node</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
-  		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Setting Value to nil &#34;</span> <span class="o">+</span>
-  			<span class="s">&#34;node. Ignored.&#34;</span><span class="p">)</span>
-  		<span class="k">return</span>
-  	<span class="p">}</span>
-  	<span class="nx">node</span><span class="p">.</span><span class="nx">Value</span> <span class="p">=</span> <span class="nx">value</span>
-  <span class="p">}</span></code></pre></div>
-<blockquote>
+  <span class="nx">node</span><span class="p">.</span><span class="nx">Value</span> <span class="p">=</span> <span class="nx">value</span>
+<span class="p">}</span>
+</code></pre></div><blockquote>
 <p>只有使用指针才可以改变结构内容</p>
-
 <p>nil指针也可以调用方法</p>
 </blockquote>
-
-<ul>
-<li><p>值接收者 vs 指针接收者</p>
-
+</li>
+<li>
+<p>值接收者 vs 指针接收者</p>
 <ol>
 <li>要改变内容必须使用指针接收者</li>
 <li>结构过大也考虑使用指针接收者</li>
 <li>一致性：如果指针接收者，最好都是指针接收者</li>
-</ol></li>
+</ol>
+</li>
 </ul>
-
 <h4 id="包和封装">包和封装</h4>
-
 <ul>
 <li>结构定义的方法必须放在同一个包内</li>
 <li>可以是不同的文件</li>
 <li>如果包中内容需要public，需要将包中的变量，方法名等<strong>首字母大写</strong></li>
 <li>类型扩展
-
 <ol>
 <li>定义别名</li>
 <li>使用组合</li>
-</ol></li>
+</ol>
+</li>
 </ul>
-
 <h4 id="gopath及目录结构">GOPATH及目录结构</h4>
-
 <ul>
-<li><p>GOPATH环境变量</p>
-
+<li>
+<p>GOPATH环境变量</p>
 <ol>
 <li>默认在~/go(unix, linux), %USERPROFILE%\go(windows)</li>
 <li>官方推荐：所有项目和第三方库都放在同一个GOPATH下</li>
-</ol></li>
-
-<li><p>获取第三方库</p>
-
-<ol>
-<li><p>使用<code>go get</code> 命令</p></li>
-
-<li><p>国内环境无法下载golang.org下的库，使用<code>gopm</code>获取无法下载的库</p></li>
 </ol>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"> go get -v -u github.com/gpmgo/gopm</code></pre></div>
+</li>
+<li>
+<p>获取第三方库</p>
 <ol>
-<li><p>配置<code>$GOPATH:bin</code></p></li>
-
-<li><p>使用<code>gopm</code>命令用下载谷歌的工具包</p></li>
+<li>
+<p>使用<code>go get</code> 命令</p>
+</li>
+<li>
+<p>国内环境无法下载golang.org下的库，使用<code>gopm</code>获取无法下载的库</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">go get -v -u github.com/gpmgo/gopm
+</code></pre></div></li>
+<li>
+<p>配置<code>$GOPATH:bin</code></p>
+</li>
+<li>
+<p>使用<code>gopm</code>命令用下载谷歌的工具包</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">gopm get -v -g -u golang.org/x/tools/cmd/goimports
+</code></pre></div></li>
+<li>
+<p>使用<code>go install</code>命令把<code>goimports</code>安装到 <code>$GOPATH</code> 下</p>
+</li>
 </ol>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"> gopm get -v -g -u golang.org/x/tools/cmd/goimports</code></pre></div>
+</li>
+<li>
+<p>常用命令</p>
 <ol>
-<li>使用<code>go install</code>命令把<code>goimports</code>安装到 <code>$GOPATH</code> 下
-<br /></li>
-</ol></li>
-
-<li><p>常用命令</p>
-
-<ol>
-<li>got get <code>sourcepath</code>
-<br /></li>
-</ol>
-
+<li>
+<p>got get <code>sourcepath</code></p>
 <blockquote>
 <p>获取第三方库</p>
 </blockquote>
-
-<ol>
-<li>go build <code>sourcepath</code>
-<br /></li>
-</ol>
-
+</li>
+<li>
+<p>go build <code>sourcepath</code></p>
 <blockquote>
 <p>编译库</p>
 </blockquote>
-
-<ol>
-<li>go install <code>sourcepath</code>
-<br /></li>
-</ol>
-
+</li>
+<li>
+<p>go install <code>sourcepath</code></p>
 <blockquote>
 <p>安装库，产生pkg文件和可执行文件</p>
 </blockquote>
-
-<ol>
-<li>go run <code>sourcepath</code>
-<br /></li>
-</ol>
-
+</li>
+<li>
+<p>go run <code>sourcepath</code></p>
 <blockquote>
 <p>编译运行库</p>
-</blockquote></li>
+</blockquote>
+</li>
+</ol>
+</li>
 </ul>
 
 
@@ -416,15 +397,8 @@
     <ul class="share">
       
       <li>
-        <a href="//twitter.com/share?url=https%3a%2f%2fxue2zeng.github.io%2fpost%2flanguage%2fgo%2fobjectoriented%2f&amp;text=%e9%9d%a2%e5%90%91%e5%af%b9%e8%b1%a1&amp;via=" target="_blank" title="Share on Twitter">
+        <a href="//twitter.com/share?url=https%3a%2f%2fxue2zeng.github.io%2fpost%2flanguage%2fgo%2fobjectoriented%2f&amp;text=%e9%9d%a2%e5%90%91%e5%af%b9%e8%b1%a1&amp;via=username" target="_blank" title="Share on Twitter">
           <i class="fab fa-twitter"></i>
-        </a>
-      </li>
-  
-      
-      <li>
-        <a href="//plus.google.com/share?url=https%3a%2f%2fxue2zeng.github.io%2fpost%2flanguage%2fgo%2fobjectoriented%2f" target="_blank" title="Share on Google Plus">
-          <i class="fab fa-google-plus"></i>
         </a>
       </li>
   
@@ -465,23 +439,33 @@
     </ul>
   </div>
   
+
               </div>
             </section>
         
 
         
           
+            
           
-          <h4 class="see-also">See also</h4>
-          <ul>
+
           
-            <li><a href="/post/language/go/structure/">程序结构</a></li>
-          
-            <li><a href="/post/language/go/variable/">Go 变量</a></li>
-          
-            <li><a href="/post/language/go/overview/">GO 概述</a></li>
-          
-          </ul>
+                  <h4 class="see-also">See also</h4>
+                  <ul>
+                
+                
+                    <li><a href="/post/language/go/sync/">并发-传统同步机制</a></li>
+                
+                    <li><a href="/post/language/go/select/">并发-Select</a></li>
+                
+                    <li><a href="/post/language/go/channel/">并发-Channel</a></li>
+                
+                    <li><a href="/post/language/go/goroutine/">并发-Goroutine(协程)</a></li>
+                
+                    <li><a href="/post/language/go/performance/">性能调优-PProf</a></li>
+                
+              </ul>
+
           
         
       </article>
@@ -490,7 +474,7 @@
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="https://xue2zeng.github.io/post/toolkit/hugo%E7%BB%93%E5%90%88github/" data-toggle="tooltip" data-placement="top" title="Hugo结合Github搭建博客">&larr; Previous Post</a>
+              <a href="https://xue2zeng.github.io/post/language/go/container/" data-toggle="tooltip" data-placement="top" title="容器">&larr; Previous Post</a>
             </li>
           
           
@@ -511,12 +495,221 @@
   </div>
 </div>
 
-    <footer>
+      
+<footer>
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
           
+              <li>
+                <a href="mailto:youremail@domain.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.facebook.com/username" title="Facebook">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-facebook fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/username" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://gitlab.com/username" title="GitLab">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-gitlab fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://bitbucket.org/username" title="Bitbucket">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-bitbucket fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/username" title="Twitter">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://username.slack.com/" title="Slack">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-slack fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://reddit.com/u/username" title="Reddit">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-reddit-alien fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://linkedin.com/in/username" title="LinkedIn">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.xing.com/profile/username" title="Xing">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-xing fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://stackoverflow.com/users/XXXXXXX/username" title="StackOverflow">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.snapchat.com/add/username" title="Snapchat">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-snapchat-ghost fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.instagram.com/username" title="Instagram">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-instagram fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.youtube.com/user/username" title="Youtube">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-youtube fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://soundcloud.com/username" title="SoundCloud">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-soundcloud fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://open.spotify.com/user/username" title="Spotify">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-spotify fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://username.bandcamp.com/" title="Bandcamp">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-bandcamp fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://itch.io/profile/username" title="Itch.io">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fas fa-gamepad fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://vk.com/username" title="VK">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-vk fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://paypal.me/username" title="PayPal">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-paypal fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://telegram.me/username" title="Telegram">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-telegram fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://500px.com/username" title="500px">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-500px fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://codepen.io/username" title="CodePen">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-codepen fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.kaggle.com/username" title="kaggle">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-kaggle fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://url" title="Mastodon">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-mastodon fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://weibo.com/username" title="Weibo">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-weibo fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
           
           <li>
             <a href="" title="RSS">
@@ -530,20 +723,24 @@
         </ul>
         <p class="credits copyright text-muted">
           
+            
+              <a href="yourwebsite.com">xue.zeng</a>
+            
+          
 
           &nbsp;&bull;&nbsp;&copy;
           
-            2019
+            2020
           
 
           
             &nbsp;&bull;&nbsp;
-            <a href="https://xue2zeng.github.io/">Xue.Zeng</a>
+            <a href="https://xue2zeng.github.io/">闲人码语</a>
           
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          <a href="https://gohugo.io">Hugo v0.78.1</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
           
         </p>
       </div>
@@ -568,6 +765,7 @@
 
 
 
+    
   </body>
 </html>
 

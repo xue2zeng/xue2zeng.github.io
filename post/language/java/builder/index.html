@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>闲人码语 - 闲人码语</title>
+  <meta name="description" content="Java8通用Builder Java8之后，对于Builder模式可以利用Supplier、Consumer来构造一个通用的Builder模式，具体的代码如下
+import com.google.common.collect.Lists; import java.util.List; import java.util.function.BiConsumer; import java.util.function.Consumer; import java.util.function.Supplier; /** * 通用的建造者（Builder）模式构建器 * @param &lt;T&gt; 构造对象 * @author xue.zeng */ public class GenericBuilder&lt;T&gt; { private final Supplier&lt;T&gt; instantiator; private List&lt;Consumer&lt;T&gt;&gt; instantiatorModifiers = Lists.newArrayList(); private List&lt;Consumer&lt;T&gt;&gt; keyValueModifiers = Lists.newArrayList(); public GenericBuilder(Supplier&lt;T&gt; instantiator) { this.instantiator = instantiator; } public static &lt;T&gt; GenericBuilder&lt;T&gt; of(Supplier&lt;T&gt; instantiator) { return new GenericBuilder&lt;T&gt;(instantiator); } public &lt;U&gt; GenericBuilder&lt;T&gt; with(BiConsumer&lt;T, U&gt; consumer, U value) { Consumer&lt;T&gt; c = instance -&gt; consumer.">
+  <meta name="author" content="xue.zeng"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "闲人码语",
+    
+    "url": "https:\/\/xue2zeng.github.io\/"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/xue2zeng.github.io\/"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/xue2zeng.github.io\/",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/xue2zeng.github.io\/post\/language\/java\/builder\/",
+          "name": ""
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "xue.zeng"
+  },
+  "headline": "",
+  "description" : "Java8通用Builder Java8之后，对于Builder模式可以利用Supplier、Consumer来构造一个通用的Builder模式，具体的代码如下\nimport com.google.common.collect.Lists; import java.util.List; import java.util.function.BiConsumer; import java.util.function.Consumer; import java.util.function.Supplier; \/** * 通用的建造者（Builder）模式构建器 * @param \u0026lt;T\u0026gt; 构造对象 * @author xue.zeng *\/ public class GenericBuilder\u0026lt;T\u0026gt; { private final Supplier\u0026lt;T\u0026gt; instantiator; private List\u0026lt;Consumer\u0026lt;T\u0026gt;\u0026gt; instantiatorModifiers = Lists.newArrayList(); private List\u0026lt;Consumer\u0026lt;T\u0026gt;\u0026gt; keyValueModifiers = Lists.newArrayList(); public GenericBuilder(Supplier\u0026lt;T\u0026gt; instantiator) { this.instantiator = instantiator; } public static \u0026lt;T\u0026gt; GenericBuilder\u0026lt;T\u0026gt; of(Supplier\u0026lt;T\u0026gt; instantiator) { return new GenericBuilder\u0026lt;T\u0026gt;(instantiator); } public \u0026lt;U\u0026gt; GenericBuilder\u0026lt;T\u0026gt; with(BiConsumer\u0026lt;T, U\u0026gt; consumer, U value) { Consumer\u0026lt;T\u0026gt; c = instance -\u0026gt; consumer.",
+  "inLanguage" : "en",
+  "wordCount":  215 ,
+  "datePublished" : "0001-01-01T00:00:00",
+  "dateModified" : "0001-01-01T00:00:00",
+  "image" : "https:\/\/xue2zeng.github.io\/img\/avatar-icon.png",
+  "keywords" : [ "" ],
+  "mainEntityOfPage" : "https:\/\/xue2zeng.github.io\/post\/language\/java\/builder\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/xue2zeng.github.io\/",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/xue2zeng.github.io\/img\/avatar-icon.png",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+<meta property="og:title" content="闲人码语" />
+<meta property="og:description" content="Java8通用Builder Java8之后，对于Builder模式可以利用Supplier、Consumer来构造一个通用的Builder模式，具体的代码如下
+import com.google.common.collect.Lists; import java.util.List; import java.util.function.BiConsumer; import java.util.function.Consumer; import java.util.function.Supplier; /** * 通用的建造者（Builder）模式构建器 * @param &lt;T&gt; 构造对象 * @author xue.zeng */ public class GenericBuilder&lt;T&gt; { private final Supplier&lt;T&gt; instantiator; private List&lt;Consumer&lt;T&gt;&gt; instantiatorModifiers = Lists.newArrayList(); private List&lt;Consumer&lt;T&gt;&gt; keyValueModifiers = Lists.newArrayList(); public GenericBuilder(Supplier&lt;T&gt; instantiator) { this.instantiator = instantiator; } public static &lt;T&gt; GenericBuilder&lt;T&gt; of(Supplier&lt;T&gt; instantiator) { return new GenericBuilder&lt;T&gt;(instantiator); } public &lt;U&gt; GenericBuilder&lt;T&gt; with(BiConsumer&lt;T, U&gt; consumer, U value) { Consumer&lt;T&gt; c = instance -&gt; consumer.">
+<meta property="og:image" content="https://xue2zeng.github.io/img/avatar-icon.png" />
+<meta property="og:url" content="https://xue2zeng.github.io/post/language/java/builder/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="闲人码语" />
+
+  <meta name="twitter:title" content="闲人码语" />
+  <meta name="twitter:description" content="Java8通用Builder Java8之后，对于Builder模式可以利用Supplier、Consumer来构造一个通用的Builder模式，具体的代码如下
+import com.google.common.collect.Lists; import java.util.List; import java.util.function.BiConsumer; import …">
+  <meta name="twitter:image" content="https://xue2zeng.github.io/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@username" />
+  <meta name="twitter:creator" content="@username" />
+  <link href='https://xue2zeng.github.io/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.78.1" />
+  <link rel="alternate" href="https://xue2zeng.github.io/index.xml" type="application/rss+xml" title="闲人码语"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://xue2zeng.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://xue2zeng.github.io/css/highlight.min.css" /><link rel="stylesheet" href="https://xue2zeng.github.io/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://xue2zeng.github.io/">闲人码语</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/about">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    
+      <div class="avatar-container">
+        <div class="avatar-img-border">
+          <a title="闲人码语" href="https://xue2zeng.github.io/">
+            <img class="avatar-img" src="https://xue2zeng.github.io/img/avatar-icon.png" alt="闲人码语" />
+          </a>
+        </div>
+      </div>
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+
+  
+  
+  
+
+
+
+
+
+
+  <div class="intro-header"></div>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <h2 id="java8通用builder">Java8通用Builder</h2>
+<p>Java8之后，对于Builder模式可以利用Supplier、Consumer来构造一个通用的Builder模式，具体的代码如下</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nn">com.google.common.collect.Lists</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.function.BiConsumer</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.function.Consumer</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.function.Supplier</span><span class="o">;</span>
+
+<span class="cm">/**
+</span><span class="cm"> * 通用的建造者（Builder）模式构建器
+</span><span class="cm"> * @param &lt;T&gt; 构造对象
+</span><span class="cm"> * @author xue.zeng
+</span><span class="cm"> */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">GenericBuilder</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">{</span>
+  <span class="kd">private</span> <span class="kd">final</span> <span class="n">Supplier</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">instantiator</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Consumer</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span> <span class="n">instantiatorModifiers</span> <span class="o">=</span> <span class="n">Lists</span><span class="o">.</span><span class="na">newArrayList</span><span class="o">();</span>
+  <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Consumer</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span> <span class="n">keyValueModifiers</span> <span class="o">=</span> <span class="n">Lists</span><span class="o">.</span><span class="na">newArrayList</span><span class="o">();</span>
+
+  <span class="kd">public</span> <span class="nf">GenericBuilder</span><span class="o">(</span><span class="n">Supplier</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">instantiator</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">instantiator</span> <span class="o">=</span> <span class="n">instantiator</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">GenericBuilder</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">of</span><span class="o">(</span><span class="n">Supplier</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">instantiator</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="n">GenericBuilder</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;(</span><span class="n">instantiator</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="o">&lt;</span><span class="n">U</span><span class="o">&gt;</span> <span class="n">GenericBuilder</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">with</span><span class="o">(</span><span class="n">BiConsumer</span><span class="o">&lt;</span><span class="n">T</span><span class="o">,</span> <span class="n">U</span><span class="o">&gt;</span> <span class="n">consumer</span><span class="o">,</span> <span class="n">U</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">c</span> <span class="o">=</span> <span class="n">instance</span> <span class="o">-&gt;</span> <span class="n">consumer</span><span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="n">instance</span><span class="o">,</span> <span class="n">value</span><span class="o">);</span>
+    <span class="n">instantiatorModifiers</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>
+    <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="o">&lt;</span><span class="n">K</span><span class="o">,</span> <span class="n">V</span><span class="o">&gt;</span> <span class="n">GenericBuilder</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">with</span><span class="o">(</span><span class="n">KeyValueConsumer</span><span class="o">&lt;</span><span class="n">T</span><span class="o">,</span> <span class="n">K</span><span class="o">,</span> <span class="n">V</span><span class="o">&gt;</span> <span class="n">consumer</span><span class="o">,</span> <span class="n">K</span> <span class="n">key</span><span class="o">,</span> <span class="n">V</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">c</span> <span class="o">=</span> <span class="n">instance</span> <span class="o">-&gt;</span> <span class="n">consumer</span><span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="n">instance</span><span class="o">,</span> <span class="n">key</span><span class="o">,</span> <span class="n">value</span><span class="o">);</span>
+    <span class="n">keyValueModifiers</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>
+    <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="n">T</span> <span class="nf">build</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">T</span> <span class="n">value</span> <span class="o">=</span> <span class="n">instantiator</span><span class="o">.</span><span class="na">get</span><span class="o">();</span>
+    <span class="n">instantiatorModifiers</span><span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">modifier</span> <span class="o">-&gt;</span> <span class="n">modifier</span><span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="n">value</span><span class="o">));</span>
+    <span class="n">keyValueModifiers</span><span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">keyValueModifier</span> <span class="o">-&gt;</span> <span class="n">keyValueModifier</span><span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="n">value</span><span class="o">));</span>
+    <span class="n">instantiatorModifiers</span><span class="o">.</span><span class="na">clear</span><span class="o">();</span>
+    <span class="n">keyValueModifiers</span><span class="o">.</span><span class="na">clear</span><span class="o">();</span>
+    <span class="k">return</span> <span class="n">value</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="cm">/**
+</span><span class="cm">   * 键值对 Consumer
+</span><span class="cm">   * @param &lt;T&gt; Consumer
+</span><span class="cm">   * @param &lt;K&gt; Key
+</span><span class="cm">   * @param &lt;V&gt; Value
+</span><span class="cm">   */</span>
+  <span class="nd">@FunctionalInterface</span>
+  <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">KeyValueConsumer</span><span class="o">&lt;</span><span class="n">T</span><span class="o">,</span> <span class="n">K</span><span class="o">,</span> <span class="n">V</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="kt">void</span> <span class="nf">accept</span><span class="o">(</span><span class="n">T</span> <span class="n">t</span><span class="o">,</span> <span class="n">K</span> <span class="n">k</span><span class="o">,</span> <span class="n">V</span> <span class="n">v</span><span class="o">);</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div><p>Test类定义</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
+  <span class="kd">private</span> <span class="n">String</span> <span class="n">code</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">offers</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">features</span><span class="o">;</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">addOffer</span><span class="o">(</span><span class="n">String</span> <span class="n">offer</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">offers</span> <span class="o">=</span> <span class="n">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span><span class="n">offers</span><span class="o">).</span><span class="na">orElseGet</span><span class="o">(</span><span class="n">ArrayList</span><span class="o">::</span><span class="k">new</span><span class="o">);</span>
+    <span class="n">offers</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">offer</span><span class="o">);</span>
+  <span class="o">}</span>
+  <span class="kd">public</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="kt">void</span> <span class="nf">addFeature</span><span class="o">(</span><span class="n">String</span> <span class="n">key</span><span class="o">,</span> <span class="n">T</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">features</span> <span class="o">=</span> <span class="n">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span><span class="n">features</span><span class="o">).</span><span class="na">orElseGet</span><span class="o">(</span><span class="n">HashMap</span><span class="o">::</span><span class="k">new</span><span class="o">);</span>
+    <span class="n">features</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">value</span><span class="o">);</span>
+  <span class="o">}</span>
+  <span class="c1">//省略getter setter
+</span><span class="c1"></span><span class="o">}</span>
+</code></pre></div><p>Builder使用</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Order</span> <span class="n">order</span> <span class="o">=</span> <span class="n">GenericBuilder</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">Order</span><span class="o">::</span><span class="k">new</span><span class="o">)</span>
+     <span class="o">.</span><span class="na">with</span><span class="o">(</span><span class="n">Order</span><span class="o">::</span><span class="n">setCode</span><span class="o">,</span> <span class="s">&#34;123232&#34;</span><span class="o">)</span>
+     <span class="o">.</span><span class="na">with</span><span class="o">(</span><span class="n">Order</span><span class="o">::</span><span class="n">addOffer</span><span class="o">,</span> <span class="s">&#34;满100减5&#34;</span><span class="o">)</span>
+     <span class="o">.</span><span class="na">with</span><span class="o">(</span><span class="n">Order</span><span class="o">::</span><span class="n">addFeature</span><span class="o">,</span> <span class="s">&#34;category&#34;</span><span class="o">,</span> <span class="s">&#34;shoe&#34;</span><span class="o">)</span>
+     <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+</code></pre></div><p>使用通用Builder的方法，简化了代码开发。相对于Lombok来说，由于仍然要生成getter&amp;setter方法，还是没有使用Lombok简洁。但是它利用Java8的特性，不需要提供额外第三包的支持。</p>
+
+
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        <a href="//twitter.com/share?url=https%3a%2f%2fxue2zeng.github.io%2fpost%2flanguage%2fjava%2fbuilder%2f&amp;text=&amp;via=username" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fxue2zeng.github.io%2fpost%2flanguage%2fjava%2fbuilder%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//reddit.com/submit?url=https%3a%2f%2fxue2zeng.github.io%2fpost%2flanguage%2fjava%2fbuilder%2f&amp;title=" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fxue2zeng.github.io%2fpost%2flanguage%2fjava%2fbuilder%2f&amp;title=" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fxue2zeng.github.io%2fpost%2flanguage%2fjava%2fbuilder%2f&amp;title=" target="_blank" title="Share on StumbleUpon">
+          <i class="fab fa-stumbleupon"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fxue2zeng.github.io%2fpost%2flanguage%2fjava%2fbuilder%2f&amp;description=" target="_blank" title="Share on Pinterest">
+          <i class="fab fa-pinterest"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+
+              </div>
+            </section>
+        
+
+        
+          
+
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://xue2zeng.github.io/post/toolkit/%E5%9C%A8%E7%BA%BF%E5%B7%A5%E5%85%B7/" data-toggle="tooltip" data-placement="top" title="">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://xue2zeng.github.io/post/language/go/overview/" data-toggle="tooltip" data-placement="top" title="GO 概述">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:youremail@domain.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.facebook.com/username" title="Facebook">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-facebook fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/username" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://gitlab.com/username" title="GitLab">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-gitlab fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://bitbucket.org/username" title="Bitbucket">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-bitbucket fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/username" title="Twitter">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://username.slack.com/" title="Slack">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-slack fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://reddit.com/u/username" title="Reddit">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-reddit-alien fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://linkedin.com/in/username" title="LinkedIn">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.xing.com/profile/username" title="Xing">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-xing fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://stackoverflow.com/users/XXXXXXX/username" title="StackOverflow">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.snapchat.com/add/username" title="Snapchat">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-snapchat-ghost fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.instagram.com/username" title="Instagram">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-instagram fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.youtube.com/user/username" title="Youtube">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-youtube fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://soundcloud.com/username" title="SoundCloud">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-soundcloud fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://open.spotify.com/user/username" title="Spotify">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-spotify fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://username.bandcamp.com/" title="Bandcamp">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-bandcamp fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://itch.io/profile/username" title="Itch.io">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fas fa-gamepad fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://vk.com/username" title="VK">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-vk fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://paypal.me/username" title="PayPal">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-paypal fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://telegram.me/username" title="Telegram">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-telegram fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://500px.com/username" title="500px">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-500px fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://codepen.io/username" title="CodePen">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-codepen fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.kaggle.com/username" title="kaggle">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-kaggle fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://url" title="Mastodon">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-mastodon fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://weibo.com/username" title="Weibo">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-weibo fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="yourwebsite.com">xue.zeng</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;&copy;
+          
+            2020
+          
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://xue2zeng.github.io/">闲人码语</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.78.1</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://xue2zeng.github.io/js/main.js"></script>
+<script src="https://xue2zeng.github.io/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> $(document).ready(function() {$("pre.chroma").css("padding","0");}); </script><script> renderMathInElement(document.body); </script><script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script><script src="https://xue2zeng.github.io/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+
+
+
+    
+  </body>
+</html>
+

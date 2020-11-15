@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>arch on 闲人码语</title>
+    <link>https://xue2zeng.github.io/tags/arch/</link>
+    <description>Recent content in arch on 闲人码语</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <managingEditor>youremail@domain.com (xue.zeng)</managingEditor>
+    <webMaster>youremail@domain.com (xue.zeng)</webMaster>
+    <lastBuildDate>Sun, 25 Oct 2020 18:36:09 +0800</lastBuildDate><atom:link href="https://xue2zeng.github.io/tags/arch/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>延迟任务</title>
+      <link>https://xue2zeng.github.io/post/architecture/%E5%BB%B6%E8%BF%9F%E4%BB%BB%E5%8A%A1/</link>
+      <pubDate>Sun, 25 Oct 2020 18:36:09 +0800</pubDate>
+      <author>youremail@domain.com (xue.zeng)</author>
+      <guid>https://xue2zeng.github.io/post/architecture/%E5%BB%B6%E8%BF%9F%E4%BB%BB%E5%8A%A1/</guid>
+      <description>延迟任务 什么是延迟任务 顾明思议，把需要延迟执行的任务叫做延迟任务
+延迟任务得使用场景
+ 订单下单之后 30 分钟后，用户如果没有付钱，系统需要自动取消订单，并退还库存 如何定期检查处于退款状态的订单是否已经退款成功 重试机制实现：把调用失败的接口放入一个固定延时的队列,到期后再重试 新创建的店铺：如果在十天内都没有上传过商品，则自动发送消息提醒 用户发起退款：如果三天内没有得到处理则通知相关运营人员 预定会议后：需要在预定的时间点前十分钟通知各个与会人员参加会议 关闭空闲连接：服务器中，有很多客户端的连接，空闲一段时间之后需要关闭之 清理过期数据业务：比如缓存中的对象，超过了空闲时间，需要从缓存中移出 多考生考试：到期全部考生必须交卷,要求时间非常准确的场景 任务超时处理：在网络协议滑动窗口请求应答式交互时，处理超时未响应的请求 订餐通知：下单成功后60s之后给用户发送短信通知 红包 24 小时未被查收，需要延迟执退还业务 每个月账单日，需要给用户发送当月的对账单  延迟任务实现思路 延迟任务实现的关键是在某个时间节点执行某个任务。基于这个信息可以想到实现延迟任务的手段有以下两个：
+ 自己手写一个“死循环”一直判断当前时间节点有没有要执行的任务 借助 JDK 或者第三方提供的工具类来实现延迟任务  通过 JDK 实现延迟任务能想到的关键词是：DelayQueue、Timer、ScheduledExecutorService 第三方提供的延迟任务执行方法就有很多了，例如：Redis、Netty、MQ 等手段    实现方式  定期轮询（数据库等） JDK（DelayQueue、Timer、ScheduledExecutorService周期性线程池） 时间轮（Kafka、Netty的HashedWheelTimer） Redis有序集合（zset） Zookeeper之curator MQ（RabbitMQ） Quartz，xxxjob等定时任务框架 Koala（考拉） JCronTab（仿crontab的java调度器） SchedulerX（阿里） 有赞延迟队列 &amp;hellip;&amp;hellip;  轮询 特点：定期轮训数据库，设置状态
+ 优点：实现简单
+缺点：
+ 对服务器内存消耗大 存在轮询延迟 数据量过大时会消耗太多的IO资源，效率太低   DelayQueue 特点：无界、延迟、阻塞队列
+ 优点：JDK自带，轻量级，使用简单
+缺点：</description>
+    </item>
+    
+    <item>
+      <title>RPC框架的发展</title>
+      <link>https://xue2zeng.github.io/post/architecture/rpc%E6%A1%86%E6%9E%B6/</link>
+      <pubDate>Sat, 24 Oct 2020 17:47:09 +0800</pubDate>
+      <author>youremail@domain.com (xue.zeng)</author>
+      <guid>https://xue2zeng.github.io/post/architecture/rpc%E6%A1%86%E6%9E%B6/</guid>
+      <description>定义 RPC（Remote Procedure Call）是一种远程调用协议，简单地说就是能使应用像调用本地方法一样的调用远程的过程或服务，可以应用在分布式服务、分布式计算、远程服务调用等许多场景。说起 RPC 大家并不陌生，业界有很多开源的优秀 RPC 框架
+ Dubbo Thrift gRPC Hprose  RPC 与其它远程调用方式比较，RPC 与 HTTP、RMI、Web Service 都能完成远程调用，但是实现方式和侧重点各有不同
+RPC与RMI RPC跨语言，RMI只支持Java
+RMI（Remote Method Invocation）是指 Java 语言中的远程方法调用，RMI 中的每个方法都具有方法签名，RMI 客户端和服务器端通过方法签名进行远程方法调用。RMI 只能在 Java 语言中使用，可以把 RMI 看作面向对象的 Java RPC
+RMI调用远程对象方法，允许方法返回Java对象以及基本数据类型，而RPC不支持对象的概念，传送到RPC服务的消息由外部数据表示 (External Data Representation, XDR) 语言表示，这种语言抽象了字节序类和数据类型结构之间的差异。只有由 XDR 定义的数据类型才能被传递，可以说 RMI 是面向对象方式的Java RPC。
+在方法调用上，RMI中，远程接口使每个远程方法都具有方法签名。如果一个方法在服务器上执行，但是没有相匹配的签名被添加到这个远程接口上，那么这个新方法就不能被RMI客户方所调用。在RPC中，当一个请求到达RPC服务器时，这个请求就包含了一个参数集和一个文本值，通常形成“classname.methodname”的形式。这就向RPC服务器表明，被请求的方法在为 “classname”的类中，名叫“methodname”。然后RPC服务器就去搜索与之相匹配的类和方法，并把它作为那种方法参数类型的输入。这里的参数类型是与RPC请求中的类型是匹配的。一旦匹配成功，这个方法就被调用了，其结果被编码后返回客户方。
+RPC本身没有规范,但基本的工作机制是一样的，即：serialization/deserialization+stub+skeleton，宽泛的讲，只要能实现远程调用，都是RPC，如:rmi .net-remoting ws/soap/rest hessian xmlrpc thrift potocolbuffer。
+在Java里提供了完整的sockets通讯接口，但sockets要求客户端和服务端必须进行应用级协议的编码交换数据，采用sockets是非常麻烦的。一个代替Sockets的协议是RPC(Remote Procedure Call), 它抽象出了通讯接口用于过程调用，使得编程者调用一个远程过程和调用本地过程同样方便。RPC 系统采用XDR来编码远程调用的参数和返回值。但RPC并不支持对象，所以，面向对象的远程调用RMI(Remote Method Invocation)成为必然选择。采用RMI，调用远程对象和调用本地对象同样方便。RMI 采用JRMP(Java Remote Method Protocol)通讯协议，是构建在TCP/IP协议上的一种远程调用方法。
+RPC与HTTP HTTP（HyperText Transfer Protocol）是应用层通信协议，使用标准语义访问指定资源（图片、接口等），网络中的中转服务器能识别协议内容。HTTP 协议是一种资源访问协议，通过 HTTP 协议可以完成远程请求并返回请求结果。</description>
+    </item>
+    
+    <item>
+      <title>系统远程调用</title>
+      <link>https://xue2zeng.github.io/post/architecture/%E7%B3%BB%E7%BB%9F%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (xue.zeng)</author>
+      <guid>https://xue2zeng.github.io/post/architecture/%E7%B3%BB%E7%BB%9F%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/</guid>
+      <description>系统远程调用思想 常规远程调用协议  dubbo thrift protocol buffer hessian  远程框架调用实现 调用端应用服务端暴露出来的接口，通过代理工厂创建代理对象
+spring实现：通过spring的自动注入的方式，在服务容器里面生成代理对象，然后当需要使用的时候，直接使用代理对象，
+就可以调用到另一个系统里面的服务
+远程通讯基本原理 从底层层面去看，网络通信需要做的就是将流从一台计算机传输到另外一台计算 机，基于传输协议和网络IO来实现，
+ 传输协议：主要有 tcp、udp、http等，tcp、udp、http都是在基于Socket概念上为某类应用场景而扩展出的传输协议 网络IO：主要有bio（阻塞）、 nio（非阻塞）、aio（异步，jdk7中新特性）三种方式，所有的分布式应用通讯都基于这个原理而实现，只是为了应用的易用，各种语言通常都会提供一些更为贴近应用易用的应用层协议  应用级协议 远程服务通讯，需要达到的目标是在一台计算机发起请求，另外一台机器在接收到请求后进行相应的处理并将结果返回给请求端，这其中又会有诸如one way request、同步请求、异步请求等等请求方式，按照网络通信原理，需要实现这个需要做的就是将请求转换成流，通过传输协议传输至远端，远端计算机在接 收到请求的流后进行处理，处理完毕后将结果转化为流，并通过传输协议返回给调用端
+原理是这样的，但为了应用的方便，业界推出了很多基于此原理之上的应用级的协议，使得大家可以不用去直接操作这么底层的东西，通常应用级的远程通信协议会 提供：
+ 为了避免直接做流操作这么麻烦，提供一种更加易用或贴合语言的标准传输格式 网络通信机制的实现，就是替你完成了将传输格式转化为流，通过某种传输协议传输至远端计算机，远端计算机在接收到流后转化为传输格式，并进行存储或以某种 方式通知远端计算机。  所以在学习应用级的远程通信协议时，可以带着这几个问题进行学习：
+ 传输的标准格式是什么？ 怎么样将请求转化为传输的流？ 怎么接收和处理流？ 传输协议是？  不过应用级的远程通信协议并不会在传输协议上做什么多大的改进，主要是在流操作方面，让应用层生成流和处理流的这个过程更加的贴合所使用的语言或标 准，至于传输协议则通常都是可选的
+Java领域实现远程调用技术  RMI XML-RPC Binary-RPC MINA ESB Burlap Hessian SOAP CORBA EJB JMS  RMI(Remote Method Invocation) RMI是个典型的为java定制的远程通信协议，在single vm中，可以通过直接调用java object instance来实现通信，那么在远程通信时，如果也能按照这种方式当然是最好了，这种远程通信的机制成为RPC（Remote Procedure Call），RMI正是朝着这个目标而诞生的。
+RMI 采用stubs 和 skeletons 来进行远程对象(remote object)的通讯。stub 充当远程对象的客户端代理，有着和远程对象相同的远程接口，远程对象的调用实际是通过调用该对象的客户端代理对象stub来完成的，通过该机制RMI就好比它是本地工作，采用tcp/ip协议，客户端直接调用服务端上的一些方法。优点是强类型，编译期可检查错误，缺点是只能基于JAVA语言，客户机与服务器紧耦合</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,32 +1,36 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>“language” on Xue.Zeng</title>
+    <title>“language” on 闲人码语</title>
     <link>https://xue2zeng.github.io/categories/language/</link>
-    <description>Recent content in “language” on Xue.Zeng</description>
+    <description>Recent content in “language” on 闲人码语</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Sat, 03 Aug 2019 16:42:15 +0800</lastBuildDate>
-    
-	<atom:link href="https://xue2zeng.github.io/categories/language/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <managingEditor>youremail@domain.com (xue.zeng)</managingEditor>
+    <webMaster>youremail@domain.com (xue.zeng)</webMaster>
+    <lastBuildDate>Sat, 03 Aug 2019 16:42:15 +0800</lastBuildDate><atom:link href="https://xue2zeng.github.io/categories/language/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Go 变量</title>
       <link>https://xue2zeng.github.io/post/language/go/variable/</link>
       <pubDate>Sat, 03 Aug 2019 16:42:15 +0800</pubDate>
-      
+      <author>youremail@domain.com (xue.zeng)</author>
       <guid>https://xue2zeng.github.io/post/language/go/variable/</guid>
-      <description>变量定义 1、使用var关键字(变量类型写在变量名之后) var a, b, c bool var s1, s2 string = &amp;ldquo;hello&amp;rdquo;, &amp;ldquo;world&amp;rdquo; 可定义在函数体内或直接定义在包内 使用var()集中定义变量 var (</description>
+      <description>变量定义 1、使用var关键字(变量类型写在变量名之后)   var a, b, c bool
+  var s1, s2 string = &amp;ldquo;hello&amp;rdquo;, &amp;ldquo;world&amp;rdquo;
+  可定义在函数体内或直接定义在包内
+  使用var()集中定义变量
+var ( a, b, c)   2、编译器自动识别类型  var a, b, i, s1, s2 = true, false, 1, &amp;ldquo;hello&amp;rdquo;, &amp;ldquo;world&amp;rdquo;  3、使用:=定义  a, b, i, s1, s2 := true, false, 1, &amp;ldquo;hello&amp;rdquo;, &amp;ldquo;world&amp;rdquo; 只能在函数体内定义使用  命名规则：一个名字必须以一个字母（Unicode字母）或下划线开头，后面可以跟任意 数量的字母、数字或下划线。大写字母和小写字母是不同的。关键字不能用于自定义名字，只能在特定语法结构中使用。
+Go语言中不存在 未初始化的变量
+类型必须完全匹配，nil可以赋值给任何指针或引用类型的变量
+25个关键字 break default func interface select case defer go map struct chan else goto package switch const fallthrough if range type continue for import return var 内建常量 true, false, iota, nil 内建变量类型 1、bool, string 2、(u)int, (u)int8, (u)int16, (u)int32, (u)int64, uintptr(指针) 3、byte, rune(字符) 4、float32, float64, complex64, complex128 5、error 内建函数 1、make, len, cap, new, append, copy, close, delete 2、complex, real, imag 3、panic, recover 强制类型转换 类型转换是强制的 var a, b int = 3, 4 var c int = int(math.</description>
     </item>
     
     <item>
       <title>GO 概述</title>
       <link>https://xue2zeng.github.io/post/language/go/overview/</link>
       <pubDate>Sat, 03 Aug 2019 10:49:44 +0800</pubDate>
-      
+      <author>youremail@domain.com (xue.zeng)</author>
       <guid>https://xue2zeng.github.io/post/language/go/overview/</guid>
-      <description>区别于其它语言 没有&amp;rdquo; 对象&amp;rdquo;，没有继承、多态，没有泛型，没有try/catch 有接口，函数式编程，CSP并发模型（go</description>
+      <description>区别于其它语言  没有&amp;quot; 对象&amp;quot;，没有继承、多态，没有泛型，没有try/catch 有接口，函数式编程，CSP并发模型（goroutioe + channel）  </description>
     </item>
     
   </channel>

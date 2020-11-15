@@ -1,21 +1,18 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Categories on Xue.Zeng</title>
+    <title>Categories on 闲人码语</title>
     <link>https://xue2zeng.github.io/categories/</link>
-    <description>Recent content in Categories on Xue.Zeng</description>
+    <description>Recent content in Categories on 闲人码语</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Sat, 03 Aug 2019 16:42:15 +0800</lastBuildDate>
-    
-	<atom:link href="https://xue2zeng.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <managingEditor>youremail@domain.com (xue.zeng)</managingEditor>
+    <webMaster>youremail@domain.com (xue.zeng)</webMaster>
+    <lastBuildDate>Sat, 03 Aug 2019 16:42:15 +0800</lastBuildDate><atom:link href="https://xue2zeng.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>“language”</title>
       <link>https://xue2zeng.github.io/categories/language/</link>
       <pubDate>Sat, 03 Aug 2019 16:42:15 +0800</pubDate>
-      
+      <author>youremail@domain.com (xue.zeng)</author>
       <guid>https://xue2zeng.github.io/categories/language/</guid>
       <description></description>
     </item>

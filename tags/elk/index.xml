@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ELK on 闲人码语</title>
+    <link>https://xue2zeng.github.io/tags/elk/</link>
+    <description>Recent content in ELK on 闲人码语</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <managingEditor>youremail@domain.com (xue.zeng)</managingEditor>
+    <webMaster>youremail@domain.com (xue.zeng)</webMaster>
+    <lastBuildDate>Thu, 27 Aug 2020 18:56:09 +0800</lastBuildDate><atom:link href="https://xue2zeng.github.io/tags/elk/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Elastic Stack</title>
+      <link>https://xue2zeng.github.io/post/elastic-stack/elasticsearch%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Thu, 27 Aug 2020 18:56:09 +0800</pubDate>
+      <author>youremail@domain.com (xue.zeng)</author>
+      <guid>https://xue2zeng.github.io/post/elastic-stack/elasticsearch%E9%85%8D%E7%BD%AE/</guid>
+      <description>配置说明 配置相关文件位于${ELASTICSEARCH_HOME}/config目录下
+ elasticsearch.yml es相关配置项 jvm.options jvm相关参数配置 log4j2.properties 日志相关配置  Development与Production模式
+ 以transport的地址是否绑定在localhost为标准判断network.host启用那种模式 Development模式下在启动时会以warning的方式提示配置检查异常 Production模式下在启动时会以error的方式提示配置检查异常并退出  </description>
+    </item>
+    
+    <item>
+      <title>Beats简介</title>
+      <link>https://xue2zeng.github.io/post/elastic-stack/beats/</link>
+      <pubDate>Wed, 26 Aug 2020 18:36:09 +0800</pubDate>
+      <author>youremail@domain.com (xue.zeng)</author>
+      <guid>https://xue2zeng.github.io/post/elastic-stack/beats/</guid>
+      <description>官方定义 Lightweight Data Shipper：轻量级的数据传输者
+ Filebeat 日志文件 Metricbeat 度量数据（CPU，内存，磁盘，常用软件（Nginx，Mysql）） Packectbeat 网络数据 Winlogbeat windows数据 Heartbeat 健康检查  Beats在Elastic Stack中的地位</description>
+    </item>
+    
+  </channel>
+</rss>
